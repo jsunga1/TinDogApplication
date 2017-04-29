@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.Component;
 
-public class settingsFrame extends JFrame{
+public class SettingsFrame extends JFrame{
 	
 	
 	private static final int FRAME_WIDTH = 400;
@@ -31,7 +31,7 @@ public class settingsFrame extends JFrame{
 	private Component glue;
 	private JLabel lblSettings;
 	
-	public settingsFrame(){
+	public SettingsFrame(){
 		class About_Listener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				
