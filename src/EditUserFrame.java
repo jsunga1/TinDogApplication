@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,24 +32,51 @@ public class EditUserFrame extends JFrame{
 	private JButton button_back;
 	private JPanel centerPanel;
 	private JLabel label_name;
-	private JTextField textField;
+	private JTextField nameField;
 	private JLabel lblPassword;
-	private JTextField textField_1;
+	private JTextField passwordField;
 	private JLabel lblRetypePassword;
-	private JTextField textField_2;
+	private JTextField passwordconfField;
 	private JLabel lblPhoneNumber;
-	private JTextField textField_3;
+	private JTextField phoneField;
 	
 	public EditUserFrame(){
 		class cancelListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameSettingsFrame = new SettingsFrame();
+				JFrame frameSettingsFrame = new settingsFrame();
 				frameSettingsFrame.setVisible(true);
 			}
 		}
 		class submitListener implements ActionListener{ //needs to take data
 			public void actionPerformed(ActionEvent e){
-				JFrame frameSettingsFrame = new SettingsFrame();
+				
+				UniversalDogDB userlogin = new UniversalDogDB();
+				String name = nameField.getText();
+				String password = passwordField.getText();
+				String passconf = passwordconfField.getText();
+				String phone = phoneField.getText();
+				String email = User.getEmail();
+				
+				if(password.equals(passconf)){
+					//Jack, update query here if the passwords match
+					String query = " ";
+					userlogin.sendData(query);
+				}
+				
+				try{
+					//dogdb.sendData("INSERT INTO USER (USER_First_Name,USER_Last_Name,USER_Email,USER_Password)" + "VALUES('Jack', 'Fogarty','Jack69@gmail.com','itworksyay')");
+					userlogin.retrieveData("select DOG_Name from DOG_2");
+					ResultSet test = userlogin.getResultSet();
+				 while(test.next()) // Retrieve data from ResultSet
+		         {
+		             System.out.println("Name: "+test.getString(1)); //1st column of Table from database
+
+		         }
+				}catch (Exception d){
+					System.out.println(d);
+				}
+				
+				JFrame frameSettingsFrame = new settingsFrame();
 				frameSettingsFrame.setVisible(true);
 			}
 		}
@@ -99,30 +128,30 @@ public class EditUserFrame extends JFrame{
 		label_name = new JLabel("Name: ");
 		centerPanel.add(label_name);
 		
-		textField = new JTextField();
-		centerPanel.add(textField);
-		textField.setColumns(10);
+		nameField = new JTextField();
+		centerPanel.add(nameField);
+		nameField.setColumns(10);
 		
 		lblPassword = new JLabel("Password:");
 		centerPanel.add(lblPassword);
 		
-		textField_1 = new JTextField();
-		centerPanel.add(textField_1);
-		textField_1.setColumns(10);
+		passwordField = new JTextField();
+		centerPanel.add(passwordField);
+		passwordField.setColumns(10);
 		
 		lblRetypePassword = new JLabel("Re-type Password:");
 		centerPanel.add(lblRetypePassword);
 		
-		textField_2 = new JTextField();
-		centerPanel.add(textField_2);
-		textField_2.setColumns(10);
+		passwordconfField = new JTextField();
+		centerPanel.add(passwordconfField);
+		passwordconfField.setColumns(10);
 		
 		lblPhoneNumber = new JLabel("Phone Number");
 		centerPanel.add(lblPhoneNumber);
 		
-		textField_3 = new JTextField();
-		centerPanel.add(textField_3);
-		textField_3.setColumns(10);
+		phoneField = new JTextField();
+		centerPanel.add(phoneField);
+		phoneField.setColumns(10);
 	}
 	public void close(){
 		this.setVisible(false);
