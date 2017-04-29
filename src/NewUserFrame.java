@@ -43,6 +43,8 @@ public class NewUserFrame extends JFrame{
 		}
 		class submitListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
+				//String q
+				//q = "INSERT INTO USER VALUES(" + nameField.getText() +", "+ emailField.getText() +", "+ passwordField.getText() +", "+ passwordConfirmField.getText() +", "+ phoneField.getText();
 				
 			}
 		}
