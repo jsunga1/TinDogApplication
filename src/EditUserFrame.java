@@ -31,6 +31,7 @@ public class EditUserFrame extends JFrame{
 	private JLabel lblEditAccount;
 	private JButton button_back;
 	private JPanel centerPanel;
+<<<<<<< HEAD
 	private JLabel label_name;
 	private JTextField nameField;
 	private JLabel lblPassword;
@@ -39,6 +40,18 @@ public class EditUserFrame extends JFrame{
 	private JTextField passwordconfField;
 	private JLabel lblPhoneNumber;
 	private JTextField phoneField;
+=======
+	private JLabel lblFirstName;
+	private JTextField textFieldFirstName;
+	private JLabel lblPassword;
+	private JTextField textFieldPassword;
+	private JLabel lblRetypePassword;
+	private JTextField textFieldReTypePassword;
+	private JLabel lblPhoneNumber;
+	private JTextField textFieldPhoneNumber;
+	private JLabel lblLastName;
+	private JTextField textFieldLastName;
+>>>>>>> refs/remotes/origin/master
 	
 	public EditUserFrame(){
 		class cancelListener implements ActionListener{
@@ -123,35 +136,66 @@ public class EditUserFrame extends JFrame{
 		
 		centerPanel = new JPanel();
 		panel.add(centerPanel, BorderLayout.CENTER);
-		centerPanel.setLayout(new GridLayout(8, 1, 0, 0));
+		centerPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		label_name = new JLabel("Name: ");
-		centerPanel.add(label_name);
+		lblFirstName = new JLabel("Name: ");
+		centerPanel.add(lblFirstName);
 		
+<<<<<<< HEAD
 		nameField = new JTextField();
 		centerPanel.add(nameField);
 		nameField.setColumns(10);
+=======
+		textFieldFirstName = new JTextField();
+		centerPanel.add(textFieldFirstName);
+		textFieldFirstName.setColumns(10);
+		
+		lblLastName = new JLabel("Last Name:");
+		centerPanel.add(lblLastName);
+		
+		textFieldLastName = new JTextField();
+		centerPanel.add(textFieldLastName);
+		textFieldLastName.setColumns(10);
+>>>>>>> refs/remotes/origin/master
 		
 		lblPassword = new JLabel("Password:");
 		centerPanel.add(lblPassword);
 		
+<<<<<<< HEAD
 		passwordField = new JTextField();
 		centerPanel.add(passwordField);
 		passwordField.setColumns(10);
+=======
+		textFieldPassword = new JTextField();
+		centerPanel.add(textFieldPassword);
+		textFieldPassword.setColumns(10);
+>>>>>>> refs/remotes/origin/master
 		
 		lblRetypePassword = new JLabel("Re-type Password:");
 		centerPanel.add(lblRetypePassword);
 		
+<<<<<<< HEAD
 		passwordconfField = new JTextField();
 		centerPanel.add(passwordconfField);
 		passwordconfField.setColumns(10);
+=======
+		textFieldReTypePassword = new JTextField();
+		centerPanel.add(textFieldReTypePassword);
+		textFieldReTypePassword.setColumns(10);
+>>>>>>> refs/remotes/origin/master
 		
 		lblPhoneNumber = new JLabel("Phone Number");
 		centerPanel.add(lblPhoneNumber);
 		
+<<<<<<< HEAD
 		phoneField = new JTextField();
 		centerPanel.add(phoneField);
 		phoneField.setColumns(10);
+=======
+		textFieldPhoneNumber = new JTextField();
+		centerPanel.add(textFieldPhoneNumber);
+		textFieldPhoneNumber.setColumns(10);
+>>>>>>> refs/remotes/origin/master
 	}
 	public void close(){
 		this.setVisible(false);
