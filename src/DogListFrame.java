@@ -5,12 +5,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.JButton;
 import java.awt.Component;
+
+import javax.imageio.ImageIO;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class DogListFrame extends JFrame {
@@ -19,7 +26,8 @@ public class DogListFrame extends JFrame {
 	private ActionListener mainMenubtnListener;
 	private ActionListener filterbtnListener;
 	private ActionListener viewInfobtnListener;
-	public DogListFrame() {
+	
+	public DogListFrame() throws IOException {
 		
 		class mainMenuListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -39,7 +47,7 @@ public class DogListFrame extends JFrame {
 		}
 		class viewInfoListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame();
+				JFrame frameViewDogInMainFrameFrame = new ViewDogInMainFrame();
 				close();
 				frameViewDogInMainFrameFrame.setVisible(true);
 				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,73 +63,78 @@ public class DogListFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		JPanel panel_north = new JPanel();
+		contentPane.add(panel_north, BorderLayout.NORTH);
+		panel_north.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel panel_3 = new JPanel();
-		panel.add(panel_3);
+		JPanel panel_north_buttonMainMenu = new JPanel();
+		panel_north.add(panel_north_buttonMainMenu);
+		panel_north_buttonMainMenu.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnMainMenu = new JButton("Main Menu");
-		panel_3.add(btnMainMenu);
+		panel_north_buttonMainMenu.add(btnMainMenu, BorderLayout.WEST);
 		btnMainMenu.addActionListener(mainMenubtnListener);
-		Component horizontalStrut = Box.createHorizontalStrut(110);
-		panel_3.add(horizontalStrut);
 		
-		JPanel panel_4 = new JPanel();
-		panel.add(panel_4);
-		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(120);
-		panel_4.add(horizontalStrut_1);
+		JPanel panel_north_buttonFilter = new JPanel();
+		panel_north.add(panel_north_buttonFilter);
+		panel_north_buttonFilter.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnFilter = new JButton("Filter");
-		panel_4.add(btnFilter);
+		panel_north_buttonFilter.add(btnFilter, BorderLayout.EAST);
 		btnFilter.addActionListener(filterbtnListener);
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.SOUTH);
-		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+		JPanel panel_south = new JPanel();
+		contentPane.add(panel_south, BorderLayout.SOUTH);
+		panel_south.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel panel_5 = new JPanel();
-		panel_1.add(panel_5);
+		JPanel panel_south_Xmark = new JPanel();
+		panel_south.add(panel_south_Xmark);
 		
-		JButton btnNewButton = new JButton("✖");
-		panel_5.add(btnNewButton);
+		JButton button_Xmark = new JButton("✖");
+		panel_south_Xmark.add(button_Xmark);
 		
-		JPanel panel_6 = new JPanel();
-		panel_1.add(panel_6);
+		JPanel panel_south_image = new JPanel();
+		panel_south.add(panel_south_image);
 		
-		JLabel lblNewLabel = new JLabel("New label");//TinDog logo
-		panel_6.add(lblNewLabel);
+		JLabel LabelImageTINDOGLogo = new JLabel(new ImageIcon("C:\\Users\\jde674\\Documents\\GitHub\\Tindog\\TinDog Logo.png"));//TinDog logo
+		panel_south_image.add(LabelImageTINDOGLogo);
 		
-		JPanel panel_7 = new JPanel();
-		panel_1.add(panel_7);
+		JPanel panel_south_checkmark = new JPanel();
+		panel_south.add(panel_south_checkmark);
 		
-		JButton btnNewButton_1 = new JButton("✔");
-		panel_7.add(btnNewButton_1);
+		JButton button_checkmark = new JButton("✔");
+		panel_south_checkmark.add(button_checkmark);
 		
-		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel panel_center = new JPanel();
+		contentPane.add(panel_center, BorderLayout.CENTER);
+		panel_center.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_8 = new JPanel();
-		panel_2.add(panel_8);
+		JPanel panel_center_Image = new JPanel();
+		panel_center.add(panel_center_Image, BorderLayout.CENTER);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		panel_8.add(lblNewLabel_1);
 		
-		JPanel panel_9 = new JPanel();
-		panel_2.add(panel_9);
-		panel_9.setLayout(new GridLayout(0, 1, 0, 0));
+		URL dogPhoto = new URL("https://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/grumpy-dog-11.jpg");
+		Image photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+		panel_center_Image.setLayout(new BorderLayout(0, 0));
 		
-		Component verticalStrut = Box.createVerticalStrut(30);
-		panel_9.add(verticalStrut);
+		JLabel lblNewLabel_1 = new JLabel(new ImageIcon(photo));
+		panel_center_Image.add(lblNewLabel_1);
 		
-		JPanel panel_10 = new JPanel();
-		panel_9.add(panel_10);
+		JPanel panel = new JPanel();
+		panel_center_Image.add(panel, BorderLayout.SOUTH);
+		
+		JLabel lblName = new JLabel("Buddy");
+		panel.add(lblName);
+		
+		JPanel panel_center_tbd = new JPanel();
+		panel_center.add(panel_center_tbd, BorderLayout.SOUTH);
+		panel_center_tbd.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel panel_center_tbd_buttonViewMoreInfo= new JPanel();
+		panel_center_tbd.add(panel_center_tbd_buttonViewMoreInfo);
 		
 		JButton btnViewMoreInformation = new JButton("View More Information");
-		panel_10.add(btnViewMoreInformation);
+		panel_center_tbd_buttonViewMoreInfo.add(btnViewMoreInformation);
 		btnViewMoreInformation.addActionListener(viewInfobtnListener);
 	}
 	public void close(){
