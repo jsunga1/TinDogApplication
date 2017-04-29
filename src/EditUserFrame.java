@@ -17,7 +17,7 @@ public class EditUserFrame extends JFrame{
 	private static final int FIELD_WIDTH = 10;
 	private JButton cancelButton;
 	private JButton submitButton;
-	
+	private User user;
 	private ActionListener cancelButtonListener;
 	private ActionListener submitButtonListener;
 	
@@ -56,12 +56,16 @@ public class EditUserFrame extends JFrame{
 				String password = passwordField.getText();
 				String passconf = passwordConfField.getText();
 				String phone = phoneField.getText();
-				String email = User.getEmail();
+				String email = user.getEmail();
 				
 				if(password.equals(passconf)){
 					//Jack, update query here if the passwords match
 					String query = " ";
 					userlogin.sendData(query);
+				}
+				else if(!password.equals(passconf)){
+					lblPassword.setText("Your passwords did not match! Please try again!");
+					lblRetypePassword.setText("Your passwords did not match! Please try again!");
 				}
 				
 				JFrame frameSettingsFrame = new SettingsFrame();
