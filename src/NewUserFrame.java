@@ -43,7 +43,15 @@ public class NewUserFrame extends JFrame{
 		}
 		class submitListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				
+				try{
+					UniversalDogDB db = new UniversalDogDB();
+					String query = "select * from USER where USER_Email = \"" + emailField.setText(t);;
+					
+					db.sendData(query);
+				}catch (Exception newUserFailed)
+				{
+					System.out.println(newUserFailed);
+				}
 			}
 		}
 		createComponents();
