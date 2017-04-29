@@ -77,20 +77,21 @@ public class StartFrame extends JFrame{
 						}
 						else
 						{
-							while(rs.next())
-							{
+						
 								
-								if(rs.getString("USER_Password").equals(Start_Password.getText()))
-								{
-									JFrame frameDogListFrame = new DogListFrame();
-									close();
-									frameDogListFrame.setVisible(true);
-									frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-								}
+							if(rs.next() && rs.getString("USER_Password").equals(Start_Password.getText()))
+							{
+								JFrame frameDogListFrame = new DogListFrame();
+								close();
+								frameDogListFrame.setVisible(true);
+								frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							}
+							else
+							{
+								lblUserName.setText("Username: ");
+								lblPassword.setText("Incorrect Password. Please try again!");
 							}
 							
-							lblUserName.setText("Username: ");
-							lblPassword.setText("Incorrect Password. Please try again!");
 						}
 					}
 					catch (Exception userFailed)
