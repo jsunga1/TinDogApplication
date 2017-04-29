@@ -2,8 +2,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,32 +29,21 @@ public class EditUserFrame extends JFrame{
 	private JLabel lblEditAccount;
 	private JButton button_back;
 	private JPanel centerPanel;
-<<<<<<< HEAD
-	private JLabel label_name;
-	private JTextField nameField;
+	private JLabel lblFirstName;
+	private JTextField firstNameField;
 	private JLabel lblPassword;
 	private JTextField passwordField;
 	private JLabel lblRetypePassword;
-	private JTextField passwordconfField;
+	private JTextField passwordConfField;
 	private JLabel lblPhoneNumber;
 	private JTextField phoneField;
-=======
-	private JLabel lblFirstName;
-	private JTextField textFieldFirstName;
-	private JLabel lblPassword;
-	private JTextField textFieldPassword;
-	private JLabel lblRetypePassword;
-	private JTextField textFieldReTypePassword;
-	private JLabel lblPhoneNumber;
-	private JTextField textFieldPhoneNumber;
 	private JLabel lblLastName;
-	private JTextField textFieldLastName;
->>>>>>> refs/remotes/origin/master
+	private JTextField lastNameField;
 	
 	public EditUserFrame(){
 		class cancelListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameSettingsFrame = new settingsFrame();
+				JFrame frameSettingsFrame = new SettingsFrame();
 				frameSettingsFrame.setVisible(true);
 			}
 		}
@@ -64,9 +51,10 @@ public class EditUserFrame extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				
 				UniversalDogDB userlogin = new UniversalDogDB();
-				String name = nameField.getText();
+				String fname = firstNameField.getText();
+				String lname = lastNameField.getText();
 				String password = passwordField.getText();
-				String passconf = passwordconfField.getText();
+				String passconf = passwordConfField.getText();
 				String phone = phoneField.getText();
 				String email = User.getEmail();
 				
@@ -76,20 +64,7 @@ public class EditUserFrame extends JFrame{
 					userlogin.sendData(query);
 				}
 				
-				try{
-					//dogdb.sendData("INSERT INTO USER (USER_First_Name,USER_Last_Name,USER_Email,USER_Password)" + "VALUES('Jack', 'Fogarty','Jack69@gmail.com','itworksyay')");
-					userlogin.retrieveData("select DOG_Name from DOG_2");
-					ResultSet test = userlogin.getResultSet();
-				 while(test.next()) // Retrieve data from ResultSet
-		         {
-		             System.out.println("Name: "+test.getString(1)); //1st column of Table from database
-
-		         }
-				}catch (Exception d){
-					System.out.println(d);
-				}
-				
-				JFrame frameSettingsFrame = new settingsFrame();
+				JFrame frameSettingsFrame = new SettingsFrame();
 				frameSettingsFrame.setVisible(true);
 			}
 		}
@@ -138,64 +113,40 @@ public class EditUserFrame extends JFrame{
 		panel.add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		lblFirstName = new JLabel("Name: ");
+		lblFirstName = new JLabel("First Name: ");
 		centerPanel.add(lblFirstName);
 		
-<<<<<<< HEAD
-		nameField = new JTextField();
-		centerPanel.add(nameField);
-		nameField.setColumns(10);
-=======
-		textFieldFirstName = new JTextField();
-		centerPanel.add(textFieldFirstName);
-		textFieldFirstName.setColumns(10);
+		firstNameField = new JTextField();
+		centerPanel.add(firstNameField);
+		firstNameField.setColumns(10);
 		
 		lblLastName = new JLabel("Last Name:");
 		centerPanel.add(lblLastName);
 		
-		textFieldLastName = new JTextField();
-		centerPanel.add(textFieldLastName);
-		textFieldLastName.setColumns(10);
->>>>>>> refs/remotes/origin/master
+		lastNameField = new JTextField();
+		centerPanel.add(lastNameField);
+		lastNameField.setColumns(10);
 		
 		lblPassword = new JLabel("Password:");
 		centerPanel.add(lblPassword);
 		
-<<<<<<< HEAD
 		passwordField = new JTextField();
 		centerPanel.add(passwordField);
 		passwordField.setColumns(10);
-=======
-		textFieldPassword = new JTextField();
-		centerPanel.add(textFieldPassword);
-		textFieldPassword.setColumns(10);
->>>>>>> refs/remotes/origin/master
 		
 		lblRetypePassword = new JLabel("Re-type Password:");
 		centerPanel.add(lblRetypePassword);
 		
-<<<<<<< HEAD
-		passwordconfField = new JTextField();
-		centerPanel.add(passwordconfField);
-		passwordconfField.setColumns(10);
-=======
-		textFieldReTypePassword = new JTextField();
-		centerPanel.add(textFieldReTypePassword);
-		textFieldReTypePassword.setColumns(10);
->>>>>>> refs/remotes/origin/master
+		passwordConfField = new JTextField();
+		centerPanel.add(passwordConfField);
+		passwordConfField.setColumns(10);
 		
 		lblPhoneNumber = new JLabel("Phone Number");
 		centerPanel.add(lblPhoneNumber);
 		
-<<<<<<< HEAD
 		phoneField = new JTextField();
 		centerPanel.add(phoneField);
 		phoneField.setColumns(10);
-=======
-		textFieldPhoneNumber = new JTextField();
-		centerPanel.add(textFieldPhoneNumber);
-		textFieldPhoneNumber.setColumns(10);
->>>>>>> refs/remotes/origin/master
 	}
 	public void close(){
 		this.setVisible(false);
