@@ -18,10 +18,15 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
+				
+				try{
 				JFrame frameDogListFrame = new DogListFrame();
 				close();
 				frameDogListFrame.setVisible(true);
 				frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				}catch(Exception dogListFrame){
+					System.out.println(dogListFrame);
+				}
 			}
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
