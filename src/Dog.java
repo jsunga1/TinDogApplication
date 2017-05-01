@@ -55,14 +55,9 @@ public class Dog
 	{
 		this.gender = gender;
 	}
-	public String getGender()
+	public int getGender()
 	{
-		if(gender == 0)
-		{
-			return "Female";
-		}
-		else
-		return "Male";
+		return gender;
 	}
 	
 	public void setShelter(String shelter)
