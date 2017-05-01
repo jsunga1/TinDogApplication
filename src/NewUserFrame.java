@@ -26,10 +26,7 @@ public class NewUserFrame extends JFrame{
 	private ActionListener cancelButtonListener;
 	private ActionListener submitButtonListener;
 	
-	private JPanel panel;
-	private JPanel westPanel;
-	private JPanel southPanel;
-	
+
 	public NewUserFrame(){
 	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
