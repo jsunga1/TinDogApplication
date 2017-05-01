@@ -13,7 +13,7 @@ import java.awt.FlowLayout;
 import java.awt.Component;
 import javax.swing.Box;
 
-public class loginFrame extends JFrame{
+public class LoginFrame extends JFrame{
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 300;
 	private static final int FIELD_WIDTH = 10;
@@ -40,7 +40,7 @@ public class loginFrame extends JFrame{
 	private JLabel lblPhoneNumber;
 	private JTextField textField_3;
 	
-	public loginFrame(){
+	public LoginFrame(){
 		class cancelListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				
