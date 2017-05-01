@@ -1,12 +1,13 @@
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class NewUserFrame extends JFrame{
 	private static final int FRAME_WIDTH = 400;
@@ -43,9 +44,17 @@ public class NewUserFrame extends JFrame{
 		}
 		class submitListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
+
 				//String q
 				//q = "INSERT INTO USER VALUES(" + nameField.getText() +", "+ emailField.getText() +", "+ passwordField.getText() +", "+ passwordConfirmField.getText() +", "+ phoneField.getText();
-				
+				try{
+					UniversalDogDB db = new UniversalDogDB();
+					String query = "select * from USER where USER_Email = \"" + emailField.setText(t);
+					db.sendData(query);
+				}catch (Exception newUserFailed)
+				{
+					System.out.println(newUserFailed);
+				}
 			}
 		}
 		createComponents();
@@ -95,4 +104,5 @@ public class NewUserFrame extends JFrame{
 	public void close(){
 		this.setVisible(false);
 	}
+
 }
