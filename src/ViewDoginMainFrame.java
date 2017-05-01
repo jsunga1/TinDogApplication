@@ -16,14 +16,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 
-public class ViewDoginMainFrame extends JFrame {
+public class ViewDogInMainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private ActionListener backbtnListener;
 	/**
 	 * Create the frame.
 	 */
-	public ViewDoginMainFrame() {
+	public ViewDogInMainFrame() {
 		class backListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				JFrame frameDogListFrame;

@@ -31,7 +31,13 @@ public class DogPile
 			int dogID = (int)Math.random();
 			Dog d = new Dog();
 			
-			/*
+			/*retrieve data
+			 * String q = "Select * from DOG where DOG_ID = " + dogID + ";";
+			 * d.setName(rs.getString("DOG_NAME"));
+			 * d.setAge(rs.getInt("DOG_AGE"));
+			 * d.setBreed(rs.getString("DOG_BREED"));
+			 * d.setGender(rs.getInt("DOG_GENDER"));
+			 * d.set
 			 * 
 			 */
 			

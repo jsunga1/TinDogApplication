@@ -107,8 +107,30 @@ public class NewUserFrame extends JFrame{
 		}
 		class submitListener implements ActionListener
     {
-			public void actionPerformed(ActionEvent e){
-				try{
+			public void actionPerformed(ActionEvent e)
+			{
+		
+				if(textFieldFirstName.getText().equals("") || textFieldEmail.getText().equals("") || textFieldPassword.getText().equals("") ||
+						textFieldPasswordConfirmation.getText().equals("") || textFieldPhoneNumber.getText().equals("") || textFieldLastName.getText().equals(""))
+				{
+					if(textFieldFirstName.getText().equals(""))
+						lblFirstName.setText("You need to enter this");
+					else if(textFieldEmail.getText().equals(""))
+						lblEmail.setText("You need to enter this");
+					else if(textFieldPassword.getText().equals(""))
+						lblPassword.setText("You need to enter this");
+					else if(textFieldPasswordConfirmation.getText().equals(""))
+						lblPasswordConfirmation.setText("You need to enter this");
+					else if(textFieldPhoneNumber.getText().equals(""))
+						lblPhoneNumber.setText("You need to enter this");
+					else if(textFieldLastName.getText().equals(""))
+						lblLastName.setText("You need to enter this");
+		
+				}
+				else
+				{
+				try
+				{
 					UniversalDogDB db = new UniversalDogDB();
 					String query = "INSERT INTO USER(USER_First_Name, USER_Last_Name,USER_Email, USER_Password,USER_Phone_Number) VALUES(\"" + textFieldFirstName.getText() +"\",\""+ textFieldLastName.getText() +"\", \""+ textFieldEmail.getText() +"\", \""+ textFieldPassword.getText() +"\", "+ Long.parseLong(textFieldPhoneNumber.getText())+ ")";
 					db.sendData(query);
@@ -116,9 +138,11 @@ public class NewUserFrame extends JFrame{
 					close();
 					frameDogListFrame.setVisible(true);
 					frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				}catch (Exception newUserFailed)
+				}
+				catch (Exception newUserFailed)
 				{
 					System.out.println(newUserFailed);
+				}
 				}
 			}
 		}
