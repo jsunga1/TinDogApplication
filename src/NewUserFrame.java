@@ -110,9 +110,12 @@ public class NewUserFrame extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				try{
 					UniversalDogDB db = new UniversalDogDB();
-					String query = "INSERT INTO USER VALUES(" + nameField.getText() +", "+ emailField.getText() +", "+ passwordField.getText() +", "+ passwordConfirmField.getText() +", "+ phoneField.getText();
-
+					String query = "INSERT INTO USER(USER_First_Name, USER_Last_Name,USER_Email, USER_Password,USER_Phone_Number) VALUES(\"" + textFieldFirstName.getText() +"\",\""+ textFieldLastName.getText() +"\", \""+ textFieldEmail.getText() +"\", \""+ textFieldPassword.getText() +"\", "+ Long.parseLong(textFieldPhoneNumber.getText())+ ")";
 					db.sendData(query);
+					JFrame frameDogListFrame = new DogListFrame();
+					close();
+					frameDogListFrame.setVisible(true);
+					frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				}catch (Exception newUserFailed)
 				{
 					System.out.println(newUserFailed);
