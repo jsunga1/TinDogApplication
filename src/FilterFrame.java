@@ -154,9 +154,14 @@ public class FilterFrame extends JFrame{
 		this.setVisible(false);
 	}
 	public void listenerCode(){
+		try{
 		JFrame frameDogListFrame = new DogListFrame();
 		close();
 		frameDogListFrame.setVisible(true);
 		frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		}catch (Exception dogList)
+		{
+			System.out.println(dogList);
+		}
 	}
 }
