@@ -26,7 +26,10 @@ public class DogListFrame extends JFrame {
 	private ActionListener mainMenubtnListener;
 	private ActionListener filterbtnListener;
 	private ActionListener viewInfobtnListener;
-	
+	private ActionListener xMarkListener;
+	private JLabel lblDogImage;
+	private URL dogPhoto;
+	private Image photo;
 	public DogListFrame() throws IOException {
 		
 		class mainMenuListener implements ActionListener{
@@ -53,6 +56,21 @@ public class DogListFrame extends JFrame {
 				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		}
+		class createXMarkListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				try {
+					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
+					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+					lblDogImage.setIcon(new ImageIcon(photo));
+				} catch (MalformedURLException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+		}
+		xMarkListener = new createXMarkListener();
 		mainMenubtnListener = new mainMenuListener();
 		filterbtnListener = new filterListener();
 		viewInfobtnListener = new viewInfoListener();
@@ -92,7 +110,7 @@ public class DogListFrame extends JFrame {
 		
 		JButton button_Xmark = new JButton("✖");
 		panel_south_Xmark.add(button_Xmark);
-		
+		button_Xmark.addActionListener(xMarkListener);
 		JPanel panel_south_image = new JPanel();
 		panel_south.add(panel_south_image);
 		
@@ -113,8 +131,8 @@ public class DogListFrame extends JFrame {
 		panel_center.add(panel_center_Image, BorderLayout.CENTER);
 		
 		
-		URL dogPhoto = new URL("https://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/grumpy-dog-11.jpg");
-		Image photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+		dogPhoto = new URL("https://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/grumpy-dog-11.jpg");
+		photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		panel_center_Image.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_1 = new JLabel(new ImageIcon(photo));
