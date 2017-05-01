@@ -31,11 +31,22 @@ public class DogPile
 			int dogID = (int)Math.random();
 			Dog d = new Dog();
 			
+			/*
+			 * 
+			 */
+			
 			dogPile.add(d);
 			
 			if(filter)
 			{
-				//if any of the dog's values do not fit the filter it is removed
+				if(d.getAge() < age1 || d.getAge() > age2)
+					dogPile.remove(d);
+				else if(!d.getBreed().equals(breed))
+					dogPile.remove(d);
+				else if(d.getGender() != gender)
+					dogPile.remove(d);
+				else if(!d.getShelter().equals(shelter))
+					dogPile.remove(d);
 			}
 			
 		}
@@ -54,5 +65,26 @@ public class DogPile
 			filter = true;
 		else if(!shelter.isEmpty())
 			filter = true;
+	}
+	
+	public void setAge1(int a)
+	{
+		age1 = a;
+	}
+	public void setAge2(int a)
+	{
+		age2 = a;
+	}
+	public void setBreed(String b)
+	{
+		breed = b;
+	}
+	public void setGender(int g)
+	{
+		gender = g;
+	}
+	public void setShelter(String s)
+	{
+		shelter = s;
 	}
 }

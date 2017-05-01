@@ -14,16 +14,6 @@ public class NewUserFrame extends JFrame{
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 300;
 	private static final int FIELD_WIDTH = 10;
-	/*private JLabel emailLabel;
-	private JTextField emailField;
-	private JLabel passwordLabel;
-	private JTextField passwordField;
-	private JLabel passwordConfirmLabel;
-	private JTextField passwordConfirmField;
-	private JLabel phoneLabel;
-	private JTextField phoneField;
-	private JButton cancelButton;
-	private JButton submitButton;*/
 	
 	private JPanel contentPane;
 	private JTextField textFieldFirstName;
@@ -118,18 +108,18 @@ public class NewUserFrame extends JFrame{
 				frameStartFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		}
-		class submitListener implements ActionListener{
+		class submitListener implements ActionListener
+    {
 			public void actionPerformed(ActionEvent e){
-				/*try{
+				try{
 					UniversalDogDB db = new UniversalDogDB();
-					String query = "select * from USER where USER_Email = \"" + emailField.getText();
-					
+					String query = "INSERT INTO USER VALUES(" + nameField.getText() +", "+ emailField.getText() +", "+ passwordField.getText() +", "+ passwordConfirmField.getText() +", "+ phoneField.getText();
+
 					db.sendData(query);
 				}catch (Exception newUserFailed)
 				{
 					System.out.println(newUserFailed);
-				}*/
-				textFieldEmail.setText("This works");
+				}
 			}
 		}
 		cancelButtonListener = new cancelListener();
@@ -138,40 +128,9 @@ public class NewUserFrame extends JFrame{
 		btnSubmit.addActionListener(submitButtonListener);
 	
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
+
 	}
-	/*public void createComponents(){
-		
-		emailLabel = new JLabel("Email:");
-		emailField = new JTextField(FIELD_WIDTH);
-		passwordLabel = new JLabel("Password:");
-		passwordField = new JTextField(FIELD_WIDTH);
-		passwordConfirmLabel = new JLabel("Password Confirmation:");
-		passwordConfirmField = new JTextField(FIELD_WIDTH);
-		phoneLabel = new JLabel("Phone Number:");
-		phoneField = new JTextField(FIELD_WIDTH);
-		cancelButton = new JButton("Cancel");
-		submitButton = new JButton("Submit");
-	}
-	public void createPanel(){
-		panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		westPanel = new JPanel();
-		westPanel.setLayout(new GridLayout(10,1));
-		southPanel = new JPanel();
-		westPanel.add(emailLabel);
-		westPanel.add(emailField);
-		westPanel.add(passwordLabel);
-		westPanel.add(passwordField);
-		westPanel.add(passwordConfirmLabel);
-		westPanel.add(passwordConfirmField);
-		westPanel.add(phoneLabel);
-		westPanel.add(phoneField);
-		panel.add(westPanel, BorderLayout.CENTER);
-		southPanel.add(cancelButton);
-		southPanel.add(submitButton);
-		panel.add(southPanel, BorderLayout.SOUTH);
-		add(panel);
-	}*/
+
 	public void close(){
 		this.setVisible(false);
 	}

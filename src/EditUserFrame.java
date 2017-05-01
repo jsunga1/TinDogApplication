@@ -17,7 +17,7 @@ public class EditUserFrame extends JFrame{
 	private static final int FIELD_WIDTH = 10;
 	private JButton cancelButton;
 	private JButton submitButton;
-	
+	private User user;
 	private ActionListener cancelButtonListener;
 	private ActionListener submitButtonListener;
 	
@@ -30,15 +30,15 @@ public class EditUserFrame extends JFrame{
 	private JButton button_back;
 	private JPanel centerPanel;
 	private JLabel lblFirstName;
-	private JTextField textFieldFirstName;
+	private JTextField firstNameField;
 	private JLabel lblPassword;
-	private JTextField textFieldPassword;
+	private JTextField passwordField;
 	private JLabel lblRetypePassword;
-	private JTextField textFieldReTypePassword;
+	private JTextField passwordConfField;
 	private JLabel lblPhoneNumber;
-	private JTextField textFieldPhoneNumber;
+	private JTextField phoneField;
 	private JLabel lblLastName;
-	private JTextField textFieldLastName;
+	private JTextField lastNameField;
 	
 	public EditUserFrame(){
 		class cancelListener implements ActionListener{
@@ -49,6 +49,25 @@ public class EditUserFrame extends JFrame{
 		}
 		class submitListener implements ActionListener{ //needs to take data
 			public void actionPerformed(ActionEvent e){
+				
+				UniversalDogDB userlogin = new UniversalDogDB();
+				String fname = firstNameField.getText();
+				String lname = lastNameField.getText();
+				String password = passwordField.getText();
+				String passconf = passwordConfField.getText();
+				String phone = phoneField.getText();
+				String email = user.getEmail();
+				
+				if(password.equals(passconf)){
+					//Jack, update query here if the passwords match
+					String query = " ";
+					userlogin.sendData(query);
+				}
+				else if(!password.equals(passconf)){
+					lblPassword.setText("Your passwords did not match! Please try again!");
+					lblRetypePassword.setText("Your passwords did not match! Please try again!");
+				}
+				
 				JFrame frameSettingsFrame = new SettingsFrame();
 				frameSettingsFrame.setVisible(true);
 			}
@@ -98,40 +117,40 @@ public class EditUserFrame extends JFrame{
 		panel.add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		lblFirstName = new JLabel("Name: ");
+		lblFirstName = new JLabel("First Name: ");
 		centerPanel.add(lblFirstName);
 		
-		textFieldFirstName = new JTextField();
-		centerPanel.add(textFieldFirstName);
-		textFieldFirstName.setColumns(10);
+		firstNameField = new JTextField();
+		centerPanel.add(firstNameField);
+		firstNameField.setColumns(10);
 		
 		lblLastName = new JLabel("Last Name:");
 		centerPanel.add(lblLastName);
 		
-		textFieldLastName = new JTextField();
-		centerPanel.add(textFieldLastName);
-		textFieldLastName.setColumns(10);
+		lastNameField = new JTextField();
+		centerPanel.add(lastNameField);
+		lastNameField.setColumns(10);
 		
 		lblPassword = new JLabel("Password:");
 		centerPanel.add(lblPassword);
 		
-		textFieldPassword = new JTextField();
-		centerPanel.add(textFieldPassword);
-		textFieldPassword.setColumns(10);
+		passwordField = new JTextField();
+		centerPanel.add(passwordField);
+		passwordField.setColumns(10);
 		
 		lblRetypePassword = new JLabel("Re-type Password:");
 		centerPanel.add(lblRetypePassword);
 		
-		textFieldReTypePassword = new JTextField();
-		centerPanel.add(textFieldReTypePassword);
-		textFieldReTypePassword.setColumns(10);
+		passwordConfField = new JTextField();
+		centerPanel.add(passwordConfField);
+		passwordConfField.setColumns(10);
 		
 		lblPhoneNumber = new JLabel("Phone Number");
 		centerPanel.add(lblPhoneNumber);
 		
-		textFieldPhoneNumber = new JTextField();
-		centerPanel.add(textFieldPhoneNumber);
-		textFieldPhoneNumber.setColumns(10);
+		phoneField = new JTextField();
+		centerPanel.add(phoneField);
+		phoneField.setColumns(10);
 	}
 	public void close(){
 		this.setVisible(false);
