@@ -62,5 +62,5 @@ public class SettingsFrame extends JFrame {
 	}
 	public void close() {
 		this.setVisible(false);
-	}
+	} 
 }
