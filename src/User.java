@@ -1,4 +1,5 @@
-
+import java.sql.*;
+import java.sql.ResultSet;
 import java.util.*;
 
 public class User
@@ -9,6 +10,7 @@ public class User
 	private String phone;
 	private String password;
 	private int id;
+	private UniversalDogDB udb;
 	
 	public User()
 	{
@@ -18,6 +20,31 @@ public class User
 		phone = "User";
 		password = "User";
 		
+	}
+	
+	public void setDogInfo(String UserName)
+	{
+		try{
+			udb = new UniversalDogDB();
+			String q = "select * from USER where USER_Email = " + UserName;
+			udb.retrieveData(q);
+			ResultSet rs = udb.getResultSet();
+			
+			if (rs.next())
+			{
+				email = UserName;
+				name = rs.getString("USER_Name");
+				phone = rs.getString("USER_Phone");
+				password = rs.getString("USER_Password");
+				id = rs.getInt("USER_ID");
+				//db = rs.getString("DOG_Description");
+				//dogPic = rs.getString("DOG_Picture");
+			}
+			
+		}catch(Exception dogFail)
+		{
+			System.out.println(dogFail);
+		}
 	}
 	
 	public void setName(String name)
