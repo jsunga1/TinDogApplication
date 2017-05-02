@@ -13,7 +13,7 @@ import java.awt.FlowLayout;
 import java.awt.Component;
 import javax.swing.Box;
 
-public class loginFrame extends JFrame{
+public class LoginFrame extends JFrame{
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 300;
 	private static final int FIELD_WIDTH = 10;
@@ -32,15 +32,15 @@ public class loginFrame extends JFrame{
 	private JButton btnNewButton;
 	private JPanel centerPanel;
 	private JLabel lblNewLabel;
-	private JTextField textField;
+	private JTextField nameField;
 	private JLabel lblPassword;
-	private JTextField textField_1;
+	private JTextField passwordField;
 	private JLabel lblRetypePassword;
-	private JTextField textField_2;
+	private JTextField passwordconfirmField;
 	private JLabel lblPhoneNumber;
-	private JTextField textField_3;
+	private JTextField phoneField;
 	
-	public loginFrame(){
+	public LoginFrame(){
 		class cancelListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				
@@ -48,11 +48,11 @@ public class loginFrame extends JFrame{
 		}
 		class submitListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				UniversalDogDB dogdb = new UniversalDogDB();
+				UniversalDogDB userlogin = new UniversalDogDB();
 				try{
 					//dogdb.sendData("INSERT INTO USER (USER_First_Name,USER_Last_Name,USER_Email,USER_Password)" + "VALUES('Jack', 'Fogarty','Jack69@gmail.com','itworksyay')");
-					dogdb.retrieveData("select DOG_Name from DOG_2");
-					ResultSet test = dogdb.getResultSet();
+					userlogin.retrieveData("select DOG_Name from DOG_2");
+					ResultSet test = userlogin.getResultSet();
 				 while(test.next()) // Retrieve data from ResultSet
 		         {
 		             System.out.println("Name: "+test.getString(1)); //1st column of Table from database
@@ -113,29 +113,29 @@ public class loginFrame extends JFrame{
 		lblNewLabel = new JLabel("Name: ");
 		centerPanel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		centerPanel.add(textField);
-		textField.setColumns(10);
+		nameField = new JTextField();
+		centerPanel.add(nameField);
+		nameField.setColumns(10);
 		
 		lblPassword = new JLabel("Password:");
 		centerPanel.add(lblPassword);
 		
-		textField_1 = new JTextField();
-		centerPanel.add(textField_1);
-		textField_1.setColumns(10);
+		passwordField = new JTextField();
+		centerPanel.add(passwordField);
+		passwordField.setColumns(10);
 		
 		lblRetypePassword = new JLabel("Re-type Password:");
 		centerPanel.add(lblRetypePassword);
 		
-		textField_2 = new JTextField();
-		centerPanel.add(textField_2);
-		textField_2.setColumns(10);
+		passwordconfirmField = new JTextField();
+		centerPanel.add(passwordconfirmField);
+		passwordconfirmField.setColumns(10);
 		
 		lblPhoneNumber = new JLabel("Phone Number");
 		centerPanel.add(lblPhoneNumber);
 		
-		textField_3 = new JTextField();
-		centerPanel.add(textField_3);
-		textField_3.setColumns(10);
+		phoneField = new JTextField();
+		centerPanel.add(phoneField);
+		phoneField.setColumns(10);
 	}
 }
