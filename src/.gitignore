@@ -68,3 +68,9 @@
 /DoggieBagFrame$1Back_Listener.class
 /MainFrame$1createDoggieBagListener.class
 /MainFrame$1createSettingsListener.class
+/FilterFrame$1createBackListener.class
+/FilterFrame$1createSubmitListener.class
+/FilterFrame1$1createBackListener.class
+/FilterFrame1$1createSubmitListener.class
+/FilterFrame1.class
+/SettingsFrame$1createBackListener.class
