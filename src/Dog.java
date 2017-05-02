@@ -24,7 +24,7 @@ public class Dog
 		dogDescription = "dog";
 		dogPic = "dog";
 	}
-	public void setdogID(int id)
+	public void setDogID(int id)
 	{
 		dogID = id;
 	}
@@ -52,17 +52,23 @@ public class Dog
 			System.out.println(dogFail);
 		}
 	}
+	
+	public void addDogToDoggieBag(String user)
+	{
+		db = new UniversalDogDB();
+		String q = "Insert into DOGGIEBAG Values(" + user + ", " + dogID + ")";
+		db.sendData(q);
+	}
+	
 	public String getName()
 	{
 		return dogName;
 	}
 	
-	
 	public int getAge()
 	{
 		return dogAge;
 	}
-	
 	
 	public String getBreed()
 	{
