@@ -5,7 +5,8 @@ import java.util.*;
 public class User
 {
 	private DoggieBag db;
-	private String name;
+	private String fname;
+	private String lname;
 	private String email;
 	private String phone;
 	private String password;
@@ -15,7 +16,8 @@ public class User
 	public User()
 	{
 		db = new DoggieBag();
-		name = "User";
+		fname = "User";
+		lname = "User";
 		email = "User";
 		phone = "User";
 		password = "User";
@@ -26,19 +28,18 @@ public class User
 	{
 		try{
 			udb = new UniversalDogDB();
-			String q = "select * from USER where USER_Email = " + UserName;
+			String q = "select * from USER where USER_Email = \"" + UserName + "\"";
 			udb.retrieveData(q);
 			ResultSet rs = udb.getResultSet();
 			
 			if (rs.next())
 			{
 				email = UserName;
-				name = rs.getString("USER_Name");
+				fname = rs.getString("USER_First_Name");
+				lname = rs.getString("USER_Last_Name");
 				phone = rs.getString("USER_Phone");
 				password = rs.getString("USER_Password");
-				id = rs.getInt("USER_ID");
-				//db = rs.getString("DOG_Description");
-				//dogPic = rs.getString("DOG_Picture");
+	
 			}
 			
 		}catch(Exception dogFail)
@@ -49,11 +50,11 @@ public class User
 	
 	public void setName(String name)
 	{
-		this.name = name;
+		this.fname = name;
 	}
 	public String getName()
 	{
-		return name;
+		return fname;
 	}
 	
 	public void setEmail(String email)
@@ -91,8 +92,5 @@ public class User
 		return id;
 	}
 	
-	public void addDog(Dog d)
-	{
-		db.addDog(d);
-	}
+
 }
