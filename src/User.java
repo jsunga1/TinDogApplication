@@ -4,18 +4,18 @@ import java.util.*;
 
 public class User
 {
-	private DoggieBag db;
+	private DoggieBag DogBag;
 	private String fname;
 	private String lname;
 	private String email;
 	private String phone;
 	private String password;
 	private int id;
-	private UniversalDogDB udb;
+	private UniversalDogDB db;
 	
 	public User()
 	{
-		db = new DoggieBag();
+		DogBag = new DoggieBag();
 		fname = "User";
 		lname = "User";
 		email = "User";
@@ -27,10 +27,10 @@ public class User
 	public void setDogInfo(String UserName)
 	{
 		try{
-			udb = new UniversalDogDB();
+			db = new UniversalDogDB();
 			String q = "select * from USER where USER_Email = \"" + UserName + "\"";
-			udb.retrieveData(q);
-			ResultSet rs = udb.getResultSet();
+			db.retrieveData(q);
+			ResultSet rs = db.getResultSet();
 			
 			if (rs.next())
 			{

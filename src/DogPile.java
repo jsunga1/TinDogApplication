@@ -79,6 +79,10 @@ public class DogPile
 			
 	}
 	
+	public int getHeadDog()
+	{
+		return dogPile.get(0);
+	}
 	
 	public void removeHeadDog()
 	{
