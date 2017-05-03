@@ -1,9 +1,9 @@
-
+import java.sql.*;
 import java.util.*;
 
 public class DogPile
 {
-	private Queue<Dog> dogPile;
+	private ArrayList<Integer> dogPile;
 	private int age1;
 	private int age2;
 	private String breed;
@@ -13,7 +13,7 @@ public class DogPile
 	
 	public DogPile()
 	{
-		dogPile = new LinkedList<Dog>();
+		dogPile = new ArrayList<Integer>();
 		age1 = 0;
 		age2 = 100;
 		breed = "";
@@ -22,7 +22,7 @@ public class DogPile
 		filter = false;
 	}
 	
-	public Queue<Dog> createPile()
+	public ArrayList<Integer> createPile()
 	{
 		for(int i = 0; i < 50; i++)
 		{
@@ -30,12 +30,6 @@ public class DogPile
 			
 			int dogID = (int)Math.random();
 			Dog d = new Dog();
-			
-			/*
-			 * 
-			 */
-			
-			dogPile.add(d);
 			
 			if(filter)
 			{
@@ -51,6 +45,48 @@ public class DogPile
 			
 		}
 		return dogPile;
+	}
+	
+	public void generateDogPile()
+	{
+		//connection to db
+		//grab ids
+		//save to arraylist
+		//needs to added to filterframe
+		//create with start frame w/user
+		
+		String query;
+		UniversalDogDB db = new UniversalDogDB();
+		checkFilter();
+		if(filter)
+			query = "Select DOG_ID from DOG Where DOG_Age > " + age1 +" AND DOG_AGE < "+ age2 + 
+			", DOG_Breed = \"" + breed + "\", DOG_Gender = " + gender;
+		else
+			query = "Select DOG_ID from DOG";
+			
+		db.retrieveData(query);
+		ResultSet rs = db.getResultSet();
+		
+		try {
+			while(rs.next())
+			{
+				dogPile.add(rs.getInt("DOG_ID"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+	}
+	
+	public int getHeadDog()
+	{
+		return dogPile.get(0);
+	}
+	
+	public void removeHeadDog()
+	{
+		dogPile.remove(0);
 	}
 	
 	public void checkFilter()

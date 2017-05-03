@@ -40,10 +40,11 @@ public class EditUserFrame extends JFrame{
 	private JLabel lblLastName;
 	private JTextField lastNameField;
 	
-	public EditUserFrame(){
+	public EditUserFrame(User u){
+		
 		class cancelListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameSettingsFrame = new SettingsFrame();
+				JFrame frameSettingsFrame = new SettingsFrame(sendUserData());
 				frameSettingsFrame.setVisible(true);
 			}
 		}
@@ -68,7 +69,7 @@ public class EditUserFrame extends JFrame{
 					lblRetypePassword.setText("Your passwords did not match! Please try again!");
 				}
 				
-				JFrame frameSettingsFrame = new SettingsFrame();
+				JFrame frameSettingsFrame = new SettingsFrame(sendUserData());
 				frameSettingsFrame.setVisible(true);
 			}
 		}
@@ -154,5 +155,8 @@ public class EditUserFrame extends JFrame{
 	}
 	public void close(){
 		this.setVisible(false);
+	}
+	public User sendUserData(){
+		return this.user;
 	}
 }

@@ -1,82 +1,59 @@
-import javax.swing.*;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.*;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class HelpFrame extends JFrame{
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
-	private static final int FRAME_WIDTH = 400;
-	private static final int FRAME_HEIGHT = 300;
-	
-	private JLabel Help;
-	private JLabel HM;
-	private JButton Back;
-	
-	private ActionListener backlistener;
-	
-	private JPanel panel;
-	private JPanel panel_center;
-	private JPanel panel_north;
-	private JPanel panel_north_west;
-	private JPanel panel_north_center;
-	
-	
-	
-	
-	public HelpFrame(){
-		
-		class Back_Listener implements ActionListener{
-			public void actionPerformed(ActionEvent e){
-				//JFrame frameMainFrame = new MainFrame();
-				//close();
-				//frameMainFrame.setVisible(true);
-				//frameMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				
+public class HelpFrame extends JFrame {
+
+	private JPanel contentPane;
+	private User user;
+	private ActionListener backListener;
+	public HelpFrame(User u) {
+		user = u;
+		class createBackListener implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				JFrame frameMainFrame = new MainFrame(sendUserData());
+				close();
+				frameMainFrame.setVisible(true);
 			}
 		}
-
-		backlistener = new Back_Listener();
-
+		backListener = new createBackListener();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 		
-		createcosa();
-		Back.addActionListener(backlistener);
+		JPanel northPanel = new JPanel();
+		contentPane.add(northPanel, BorderLayout.NORTH);
+		northPanel.setLayout(new BorderLayout(0, 0));
 		
-		createpanel();
-		setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		JButton backButton = new JButton("<--");
+		northPanel.add(backButton, BorderLayout.WEST);
+		backButton.addActionListener(backListener);
+		JPanel panel = new JPanel();
+		northPanel.add(panel, BorderLayout.CENTER);
 		
+		JLabel helpTitleLabel = new JLabel("Help");
+		panel.add(helpTitleLabel);
+		
+		JPanel centerPanel = new JPanel();
+		contentPane.add(centerPanel, BorderLayout.CENTER);
+		
+		JLabel helpTextLabel = new JLabel("New label");
+		centerPanel.add(helpTextLabel);
 	}
-	public void createcosa(){
-		Help = new JLabel("HELP");
-		HM = new JLabel("You want help\n"
-				+ "you came to the right place\n"
-				+ "if you see a word on a button, that's what the button is for\n"
-				+ "if you see a word next to a box, the box is for that word, you need to put infomation in th box.\n"
-				+ "you dont want that dog click the red X\n"
-				+ "you want that dog click the check\n"
-				+ "you wanna adopt dog go to viewadoption information, they will tell you\n");
-		Back = new JButton("<--");
-	}
-	public void createpanel(){
-		
-		panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		panel_center = new JPanel();
-		panel_center.add(HM);
-		panel_north = new JPanel();
-		panel_north.setLayout(new BorderLayout());
-		panel_north_west = new JPanel();
-		panel_north_west.add(Back);
-		panel_north_center = new JPanel();
-		panel_north_center.add(Help);
-		panel_north.add(panel_north_west, BorderLayout.WEST);
-		panel_north.add(panel_north_center, BorderLayout.CENTER);
-		panel.add(panel_north, BorderLayout.NORTH);
-		panel.add(panel_center, BorderLayout.CENTER);
-		add(panel);
-		
-	}
-	public void close(){
+	public void close() {
 		this.setVisible(false);
 	}
-	
+	private User sendUserData(){
+		return this.user;
+	}
 }
