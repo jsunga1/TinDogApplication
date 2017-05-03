@@ -26,9 +26,11 @@ public class NewUserFrame extends JFrame{
 	private ActionListener cancelButtonListener;
 	private ActionListener submitButtonListener;
 
-	private User user;
+	
+	private User newUser;
+	
 
-	public NewUserFrame(User u){
+	public NewUserFrame(){
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -130,20 +132,23 @@ public class NewUserFrame extends JFrame{
 				}
 				else
 				{
-					try
-					{
-						UniversalDogDB db = new UniversalDogDB();
-						String query = "INSERT INTO USER(USER_First_Name, USER_Last_Name,USER_Email, USER_Password,USER_Phone_Number) VALUES(\"" + textFieldFirstName.getText() +"\",\""+ textFieldLastName.getText() +"\", \""+ textFieldEmail.getText() +"\", \""+ textFieldPassword.getText() +"\", "+ Long.parseLong(textFieldPhoneNumber.getText())+ ")";
-						db.sendData(query);
-						JFrame frameDogListFrame = new DogListFrame(sendUserData());
-						close();
-						frameDogListFrame.setVisible(true);
-						frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					}
-					catch (Exception newUserFailed)
-					{
-						System.out.println(newUserFailed);
-					}
+
+				try
+				{
+					UniversalDogDB db = new UniversalDogDB();
+					String query = "INSERT INTO USER(USER_First_Name, USER_Last_Name,USER_Email, USER_Password,USER_Phone_Number) VALUES(\"" + textFieldFirstName.getText() +"\",\""+ textFieldLastName.getText() +"\", \""+ textFieldEmail.getText() +"\", \""+ textFieldPassword.getText() +"\", "+ Long.parseLong(textFieldPhoneNumber.getText())+ ")";
+					db.sendData(query);
+          newUser = new User();
+					newUser.setUserInfo(textFieldEmail.getText());
+					JFrame frameDogListFrame = new DogListFrame(sendUserData());
+					close();
+					frameDogListFrame.setVisible(true);
+					frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				}
+				catch (Exception newUserFailed)
+				{
+					System.out.println(newUserFailed);
+				}
 				}
 			}
 		}
@@ -160,6 +165,6 @@ public class NewUserFrame extends JFrame{
 		this.setVisible(false);
 	}
 	private User sendUserData(){
-		return this.user;
+		return this.newUser;
 	}
 }

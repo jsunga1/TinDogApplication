@@ -20,6 +20,8 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import java.sql.*;
+
 public class DogListFrame extends JFrame {
 
 	private JPanel contentPane;
@@ -31,7 +33,12 @@ public class DogListFrame extends JFrame {
 	private ActionListener xMarkListener;
 	private URL dogPhoto;
 	private Image photo;
+  private Dog dog;
+	private DogPile dp;
 	private User user;
+  private ActionListener checkListener;
+	private JLabel lblDogImage;
+  
 	public DogListFrame(User u) throws IOException {
 		user = u;
 		class mainMenuListener implements ActionListener{
@@ -58,10 +65,20 @@ public class DogListFrame extends JFrame {
 				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		}
-		class createXMarkListener implements ActionListener{//this listener is for the x button
-			public void actionPerformed(ActionEvent e){
+
+		class createXMarkListener implements ActionListener{
+			public void actionPerformed(ActionEvent e)
+			{
+				UniversalDogDB db = new UniversalDogDB();
+				dp.removeHeadDog();
+				int d = dp.getHeadDog();
+				
+				dog.setDogID(d);
+				dog.setDogInfo(d);
+				
 				try {
-					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg"); //change this for next dog
+					//dogPhoto = new URL(dog.getPicture());
+					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
 					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 					dogImageLabel.setIcon(new ImageIcon(photo));
 					dogNameLabel.setText("Friend"); //change this for next dog
@@ -73,7 +90,42 @@ public class DogListFrame extends JFrame {
 				
 			}
 		}
+		class createCheckListener implements ActionListener{
+			public void actionPerformed(ActionEvent e)
+			{
+				UniversalDogDB db = new UniversalDogDB();
+				
+				dog.addDogToDoggieBag(u.getEmail());
+				
+				dp.removeHeadDog();
+				int d = dp.getHeadDog();
+				
+				dog.setDogID(d);
+				dog.setDogInfo(d);
+				
+				try {
+					//dogPhoto = new URL(dog.getPicture());
+					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
+					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+					lblDogImage.setIcon(new ImageIcon(photo));
+				} catch (MalformedURLException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+		
+		dp = new DogPile();
+		dp.generateDogPile();
+		int i = dp.getHeadDog();
+		dog = new Dog();
+		dog.setDogID(i);
+		dog.setDogInfo(i);
+		u = new User();
+		
 		xMarkListener = new createXMarkListener();
+		checkListener = new createCheckListener();
 		mainMenubtnListener = new mainMenuListener();
 		filterbtnListener = new filterListener();
 		viewInfobtnListener = new viewInfoListener();
@@ -123,8 +175,9 @@ public class DogListFrame extends JFrame {
 		JPanel southPanelPanel3 = new JPanel();
 		southPanel.add(southPanelPanel3);
 		
-		JButton checkButton = new JButton("✔");
-		southPanelPanel3.add(checkButton);
+		JButton button_checkmark = new JButton("✔");
+		panel_south_checkmark.add(button_checkmark);
+		button_checkmark.addActionListener(checkListener);
 		
 		JPanel centerPanel = new JPanel();
 		contentPane.add(centerPanel, BorderLayout.CENTER);
