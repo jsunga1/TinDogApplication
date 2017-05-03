@@ -7,6 +7,7 @@ public class User
 	private DoggieBag db;
 	private String firstName;
 	private String lastName;
+
 	private String email;
 	private String phone;
 	private String password;
@@ -15,6 +16,7 @@ public class User
 	public User()
 	{
 		db = new DoggieBag();
+
 		firstName = "User";
 		lastName = "User";
 		email = "User";
@@ -28,16 +30,19 @@ public class User
 		try{
 			udb = new UniversalDogDB();
 			String q = "select * from USER where USER_Email = \"" + UserName + "\";";
+
 			udb.retrieveData(q);
 			ResultSet rs = udb.getResultSet();
 			
 			if (rs.next())
 			{
 				email = UserName;
+
 				firstName = rs.getString("USER_First_Name");
 				lastName = rs.getString("USER_Last_Name");
 				phone = rs.getString("USER_Phone_Number");
 				password = rs.getString("USER_Password");
+
 			}
 			
 		}catch(Exception userFail)
@@ -47,9 +52,11 @@ public class User
 	}
 	
 
+
 	public String getFirstName()
 	{
 		return firstName;
+
 	}
 	public String getLastName()
 	{

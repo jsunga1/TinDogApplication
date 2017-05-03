@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class SettingsFrame extends JFrame {
 
-	private JPanel contentPane;
+	private JPanel contentPane; 
 	private ActionListener backListener;
 	private ActionListener doggieBagListener;
 	public SettingsFrame() {
@@ -62,5 +62,5 @@ public class SettingsFrame extends JFrame {
 	}
 	public void close() {
 		this.setVisible(false);
-	}
+	} 
 }
