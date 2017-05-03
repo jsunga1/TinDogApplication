@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,7 +12,18 @@ import javax.swing.JLabel;
 public class HelpFrame extends JFrame {
 
 	private JPanel contentPane;
-	public HelpFrame() {
+	private User user;
+	private ActionListener backListener;
+	public HelpFrame(User u) {
+		user = u;
+		class createBackListener implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				JFrame frameMainFrame = new MainFrame(sendUserData());
+				close();
+				frameMainFrame.setVisible(true);
+			}
+		}
+		backListener = new createBackListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -24,7 +37,7 @@ public class HelpFrame extends JFrame {
 		
 		JButton backButton = new JButton("<--");
 		northPanel.add(backButton, BorderLayout.WEST);
-		
+		backButton.addActionListener(backListener);
 		JPanel panel = new JPanel();
 		northPanel.add(panel, BorderLayout.CENTER);
 		
@@ -37,5 +50,10 @@ public class HelpFrame extends JFrame {
 		JLabel helpTextLabel = new JLabel("New label");
 		centerPanel.add(helpTextLabel);
 	}
-
+	public void close() {
+		this.setVisible(false);
+	}
+	private User sendUserData(){
+		return this.user;
+	}
 }

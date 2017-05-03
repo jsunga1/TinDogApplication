@@ -27,11 +27,12 @@ public class StartFrame extends JFrame{
 	private JPanel panel_1;
 	private JLabel lblWelcomeToTindog;
 	
+	private User user;
 	
 	public StartFrame(){
 		class CreateAccount_Listener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameNewUserFrame = new NewUserFrame();
+				JFrame frameNewUserFrame = new NewUserFrame(sendUserData());
 				close();
 				frameNewUserFrame.setVisible(true);
 				frameNewUserFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,7 +82,7 @@ public class StartFrame extends JFrame{
 								
 							if(rs.next() && rs.getString("USER_Password").equals(Start_Password.getText()))
 							{
-								JFrame frameDogListFrame = new DogListFrame();
+								JFrame frameDogListFrame = new DogListFrame(sendUserData());
 								close();
 								frameDogListFrame.setVisible(true);
 								frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -145,7 +146,10 @@ public class StartFrame extends JFrame{
 		lblWelcomeToTindog = new JLabel("Welcome to TinDog");
 		panel_1.add(lblWelcomeToTindog);
 	}
-	public void close(){
+	public void close() {
 		this.setVisible(false);
+	}
+	private User sendUserData(){
+		return this.user;
 	}
 }

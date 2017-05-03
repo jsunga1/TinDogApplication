@@ -26,11 +26,12 @@ public class FilterFrame1 extends JFrame {
 	private JComboBox shelterComboBox;
 	private JRadioButton maleButton;
 	private JRadioButton femaleButton;
+	private User user;
 	public FilterFrame1() {
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				try {
-					JFrame frameDogListFrame = new DogListFrame();
+					JFrame frameDogListFrame = new DogListFrame(sendUserData());
 					close();
 					frameDogListFrame.setVisible(true);
 				} catch (IOException e1) {
@@ -55,7 +56,7 @@ public class FilterFrame1 extends JFrame {
 
 				}
 				try {
-					JFrame frameDogListFrame = new DogListFrame();
+					JFrame frameDogListFrame = new DogListFrame(sendUserData());
 					close();
 					frameDogListFrame.setVisible(true);
 				} catch (IOException e1) {
@@ -190,5 +191,7 @@ public class FilterFrame1 extends JFrame {
 	public void close() {
 		this.setVisible(false);
 	}
-
+	private User sendUserData(){
+		return this.user;
+	}
 }
