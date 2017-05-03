@@ -38,6 +38,7 @@ public class Dog
 			
 			if (rs.next())
 			{
+				dogID = rs.getInt("DOG_ID");
 				dogName = rs.getString("DOG_Name");
 				dogAge = rs.getInt("DOG_Age");
 				dogBreed = rs.getString("DOG_Breed");
@@ -100,5 +101,8 @@ public class Dog
 	public boolean getStatus()
 	{
 		return dogStatus;
+	}
+	public int getDogID(){
+		return dogID;
 	}
 }

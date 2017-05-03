@@ -18,24 +18,42 @@ public class DoggieBagFrame extends JFrame {
 
 
 	private ActionListener backlistener;
+	private ActionListener dogImageListener;
 	private JPanel dogPanel;
-
-	public DoggieBagFrame() {
-
-
+	private User user;
+	private DoggieBag dogBagTemp;
+	private ArrayList <Integer> dogTemp;
+	public DoggieBagFrame(User u) {
+		user = u;
 		class Back_Listener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameMainFrame = new MainFrame();
+				JFrame frameMainFrame = new MainFrame(sendUserData());
 				close();
 				frameMainFrame.setVisible(true);
 				frameMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+			}
+		}
+		createDogImages();
+		class createDogImageListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				/*for(Integer i: dogTemp){
+					if(i.toString().equals(e.getActionCommand())){
+						JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame();
+					}
+				}*/
+				//rs.get(e.getActionCommand())
+				//JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame();
+				//^^ send the integer to view dog in doggie frame
+				//then open doggie frame
+				
 			}
 		}
 
-
 		backlistener = new Back_Listener();
-
+		dogImageListener = new createDogImageListener();
+		for(Integer i: dogTemp){
+			
+		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -73,16 +91,17 @@ public class DoggieBagFrame extends JFrame {
 		northPanel_south.add(btnFilter);
 
 		panel_center = new JPanel();
-		createDogImages();
 		panel_center.add(dogPanel);
 		contentPane.add(panel_center, BorderLayout.CENTER);
 	}
 	public void createDogImages(){
-		ArrayList <Dog> dogTemp = new ArrayList<Dog>();
-		for(Dog i: dogTemp){
+		dogBagTemp = new DoggieBag(user.getEmail());
+		dogTemp = dogBagTemp.getDoggieBag();
+		for(Integer i: dogTemp){
 			dogPanel = new JPanel();
 			dogPanel.setLayout(new GridLayout(0,0,2,0));
-			JLabel dogImage = new JLabel();//dog image
+			JButton dogImage = new JButton();//dog image
+			dogImage.setActionCommand(i.toString());
 			JLabel dogName = new JLabel();//dog name
 			dogPanel.add(dogImage);
 			dogPanel.add(dogName);
@@ -93,5 +112,7 @@ public class DoggieBagFrame extends JFrame {
 	public void close(){
 		this.setVisible(false);
 	}
-
+	public User sendUserData(){
+		return this.user;
+	}
 }
