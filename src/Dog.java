@@ -24,7 +24,7 @@ public class Dog
 		dogDescription = "dog";
 		dogPic = "dog";
 	}
-	public void setdogID(int id)
+	public void setDogID(int id)
 	{
 		dogID = id;
 	}
@@ -38,6 +38,7 @@ public class Dog
 			
 			if (rs.next())
 			{
+				dogID = rs.getInt("DOG_ID");
 				dogName = rs.getString("DOG_Name");
 				dogAge = rs.getInt("DOG_Age");
 				dogBreed = rs.getString("DOG_Breed");
@@ -52,17 +53,23 @@ public class Dog
 			System.out.println(dogFail);
 		}
 	}
+	
+	public void addDogToDoggieBag(String user)
+	{
+		db = new UniversalDogDB();
+		String q = "Insert into DOGGIEBAG Values(\"" + user + "\", " + dogID + ")";
+		db.sendData(q);
+	}
+	
 	public String getName()
 	{
 		return dogName;
 	}
 	
-	
 	public int getAge()
 	{
 		return dogAge;
 	}
-	
 	
 	public String getBreed()
 	{
@@ -94,5 +101,8 @@ public class Dog
 	public boolean getStatus()
 	{
 		return dogStatus;
+	}
+	public int getDogID(){
+		return dogID;
 	}
 }

@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import java.awt.Component;
@@ -20,10 +23,18 @@ import java.awt.FlowLayout;
 public class ViewDogInDoggieBagFrame extends JFrame {
 
 	private JPanel contentPane;
-	/**
-	 * Create the frame.
-	 */
-	public ViewDogInDoggieBagFrame() {
+	private User user;
+	private ActionListener backListener;
+	public ViewDogInDoggieBagFrame(User u) {
+		user = u;
+		class createBackListener implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				JFrame frameDoggieBagFrame = new DoggieBagFrame(sendUserData());
+				close();
+				frameDoggieBagFrame.setVisible(true);
+			}
+		}
+		backListener = new createBackListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -97,9 +108,15 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panel_6.add(panel_8);
 		
-		JButton button = new JButton("<--");
-		panel_8.add(button);
+		JButton backButton = new JButton("<--");
+		panel_8.add(backButton);
+		backButton.addActionListener(backListener);
 	}
-
+	public void close() {
+		this.setVisible(false);
+	}
+	private User sendUserData(){
+		return this.user;
+	}
 
 }

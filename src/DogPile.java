@@ -1,4 +1,4 @@
-
+import java.sql.*;
 import java.util.*;
 
 public class DogPile
@@ -31,18 +31,6 @@ public class DogPile
 			int dogID = (int)Math.random();
 			Dog d = new Dog();
 			
-			/*retrieve data
-			 * String q = "Select * from DOG where DOG_ID = " + dogID + ";";
-			 * d.setName(rs.getString("DOG_NAME"));
-			 * d.setAge(rs.getInt("DOG_AGE"));
-			 * d.setBreed(rs.getString("DOG_BREED"));
-			 * d.setGender(rs.getInt("DOG_GENDER"));
-			 * d.set
-			 * 
-			 */
-			
-			//dogPile.add(d);
-			
 			if(filter)
 			{
 				if(d.getAge() < age1 || d.getAge() > age2)
@@ -72,23 +60,28 @@ public class DogPile
 		checkFilter();
 		if(filter)
 			query = "Select DOG_ID from DOG Where DOG_Age > " + age1 +" AND DOG_AGE < "+ age2 + 
-			", DOG_Breed = " + breed + ", DOG_Gender = " + gender;
+			", DOG_Breed = \"" + breed + "\", DOG_Gender = " + gender;
 		else
 			query = "Select DOG_ID from DOG";
 			
-		db.sendData(query);
+		db.retrieveData(query);
+		ResultSet rs = db.getResultSet();
 		
-		
+		try {
+			while(rs.next())
+			{
+				dogPile.add(rs.getInt("DOG_ID"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
 	}
 	
-	public Dog createDog(int i)
+	public int getHeadDog()
 	{
-		Dog d = new Dog();
-		UniversalDogDB db = new UniversalDogDB();
-		String query = "Select * from DOG where DOG_ID = " + i;
-		db.sendData(query);
-		
-		return d;
+		return dogPile.get(0);
 	}
 	
 	public void removeHeadDog()

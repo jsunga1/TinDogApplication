@@ -11,13 +11,15 @@ import java.awt.event.ActionListener;
 
 public class SettingsFrame extends JFrame {
 
-	private JPanel contentPane;
+	private JPanel contentPane; 
 	private ActionListener backListener;
 	private ActionListener doggieBagListener;
-	public SettingsFrame() {
+	private User user;
+	public SettingsFrame(User u) {
+		user = u;
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameMainFrame = new MainFrame();
+				JFrame frameMainFrame = new MainFrame(sendUserData());
 				close();
 				frameMainFrame.setVisible(true);
 				frameMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,5 +64,8 @@ public class SettingsFrame extends JFrame {
 	}
 	public void close() {
 		this.setVisible(false);
+	} 
+	public User sendUserData(){
+		return this.user;
 	}
 }

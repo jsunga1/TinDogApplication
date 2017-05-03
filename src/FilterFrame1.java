@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 
-public class FilterFrame extends JFrame {
+public class FilterFrame1 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField bAgeField;
@@ -27,8 +27,7 @@ public class FilterFrame extends JFrame {
 	private JRadioButton maleButton;
 	private JRadioButton femaleButton;
 	private User user;
-	public FilterFrame(User u) {
-		user = u;
+	public FilterFrame1() {
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				try {

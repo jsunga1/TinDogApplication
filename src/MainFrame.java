@@ -17,13 +17,14 @@ public class MainFrame extends JFrame {
 	private ActionListener backListener;
 	private ActionListener settingsListener;
 	private ActionListener doggieBagListener;
-	
-	public MainFrame() {
+	private User user;
+	public MainFrame(User u) {
+		user = u;
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				JFrame frameDogListFrame;
 				try {
-					frameDogListFrame = new DogListFrame();
+					frameDogListFrame = new DogListFrame(sendUserData());
 					close();
 					frameDogListFrame.setVisible(true);
 					frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,7 +36,7 @@ public class MainFrame extends JFrame {
 		}
 		class createSettingsListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameSettingsFrame = new SettingsFrame();
+				JFrame frameSettingsFrame = new SettingsFrame(sendUserData());
 				close();
 				frameSettingsFrame.setVisible(true);
 				frameSettingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,7 +44,7 @@ public class MainFrame extends JFrame {
 		}
 		class createDoggieBagListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameDoggieBagFrame = new DoggieBagFrame();
+				JFrame frameDoggieBagFrame = new DoggieBagFrame(sendUserData());
 				close();
 				frameDoggieBagFrame.setVisible(true);
 			}
@@ -86,5 +87,8 @@ public class MainFrame extends JFrame {
 	}
 	public void close(){
 		this.setVisible(false);
+	}
+	public User sendUserData(){
+		return this.user;
 	}
 }
