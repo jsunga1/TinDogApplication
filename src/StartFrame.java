@@ -26,6 +26,7 @@ public class StartFrame extends JFrame{
 	private JLabel lblPassword;
 	private JPanel panel_1;
 	private JLabel lblWelcomeToTindog;
+	private User user;
 	
 	
 	public StartFrame(){
@@ -81,6 +82,9 @@ public class StartFrame extends JFrame{
 								
 							if(rs.next() && rs.getString("USER_Password").equals(Start_Password.getText()))
 							{
+								
+								user = new User();
+								user.setUserInfo(Start_Username.getText());
 								JFrame frameDogListFrame = new DogListFrame();
 								close();
 								frameDogListFrame.setVisible(true);
