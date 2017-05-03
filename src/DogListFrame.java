@@ -25,23 +25,25 @@ import java.sql.*;
 public class DogListFrame extends JFrame {
 
 	private JPanel contentPane;
+	private JLabel dogImageLabel;
+	private JLabel dogNameLabel;
 	private ActionListener mainMenubtnListener;
 	private ActionListener filterbtnListener;
 	private ActionListener viewInfobtnListener;
 	private ActionListener xMarkListener;
-	private ActionListener checkListener;
-	private JLabel lblDogImage;
 	private URL dogPhoto;
 	private Image photo;
-	private Dog dog;
+  private Dog dog;
 	private DogPile dp;
-	private User u;
-	
-	public DogListFrame() throws IOException {
-		
+	private User user;
+  private ActionListener checkListener;
+	private JLabel lblDogImage;
+  
+	public DogListFrame(User u) throws IOException {
+		user = u;
 		class mainMenuListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameMainMenuFrame = new MainFrame();
+				JFrame frameMainMenuFrame = new MainFrame(sendUserData());
 				close();
 				frameMainMenuFrame.setVisible(true);
 				frameMainMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,12 +59,13 @@ public class DogListFrame extends JFrame {
 		}
 		class viewInfoListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame();
+				JFrame frameViewDogInMainFrameFrame = new ViewDogInMainFrame();
 				close();
 				frameViewDogInMainFrameFrame.setVisible(true);
 				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		}
+
 		class createXMarkListener implements ActionListener{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -77,7 +80,8 @@ public class DogListFrame extends JFrame {
 					//dogPhoto = new URL(dog.getPicture());
 					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
 					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-					lblDogImage.setIcon(new ImageIcon(photo));
+					dogImageLabel.setIcon(new ImageIcon(photo));
+					dogNameLabel.setText("Friend"); //change this for next dog
 				} catch (MalformedURLException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
@@ -132,83 +136,85 @@ public class DogListFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_north = new JPanel();
-		contentPane.add(panel_north, BorderLayout.NORTH);
-		panel_north.setLayout(new GridLayout(1, 0, 0, 0));
+		JPanel northPanel = new JPanel();
+		contentPane.add(northPanel, BorderLayout.NORTH);
+		northPanel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel panel_north_buttonMainMenu = new JPanel();
-		panel_north.add(panel_north_buttonMainMenu);
-		panel_north_buttonMainMenu.setLayout(new BorderLayout(0, 0));
+		JPanel northPanelPanel1 = new JPanel();
+		northPanel.add(northPanelPanel1);
+		northPanelPanel1.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnMainMenu = new JButton("Main Menu");
-		panel_north_buttonMainMenu.add(btnMainMenu, BorderLayout.WEST);
-		btnMainMenu.addActionListener(mainMenubtnListener);
+		JButton mainMenuButton = new JButton("Main Menu");
+		northPanelPanel1.add(mainMenuButton, BorderLayout.WEST);
+		mainMenuButton.addActionListener(mainMenubtnListener);
 		
-		JPanel panel_north_buttonFilter = new JPanel();
-		panel_north.add(panel_north_buttonFilter);
-		panel_north_buttonFilter.setLayout(new BorderLayout(0, 0));
+		JPanel northPanelPanel2 = new JPanel();
+		northPanel.add(northPanelPanel2);
+		northPanelPanel2.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnFilter = new JButton("Filter");
-		panel_north_buttonFilter.add(btnFilter, BorderLayout.EAST);
-		btnFilter.addActionListener(filterbtnListener);
+		JButton FilterButton = new JButton("Filter");
+		northPanelPanel2.add(FilterButton, BorderLayout.EAST);
+		FilterButton.addActionListener(filterbtnListener);
 		
-		JPanel panel_south = new JPanel();
-		contentPane.add(panel_south, BorderLayout.SOUTH);
-		panel_south.setLayout(new GridLayout(1, 0, 0, 0));
+		JPanel southPanel = new JPanel();
+		contentPane.add(southPanel, BorderLayout.SOUTH);
+		southPanel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel panel_south_Xmark = new JPanel();
-		panel_south.add(panel_south_Xmark);
+		JPanel southPanelPanel1 = new JPanel();
+		southPanel.add(southPanelPanel1);
 		
-		JButton button_Xmark = new JButton("✖");
-		panel_south_Xmark.add(button_Xmark);
-		button_Xmark.addActionListener(xMarkListener);
-		JPanel panel_south_image = new JPanel();
-		panel_south.add(panel_south_image);
+		JButton xButton = new JButton("✖");
+		southPanelPanel1.add(xButton);
+		xButton.addActionListener(xMarkListener);
+		JPanel southPanelPanel2 = new JPanel();
+		southPanel.add(southPanelPanel2);
 		
-		JLabel LabelImageTINDOGLogo = new JLabel(new ImageIcon("C:\\Users\\jde674\\Documents\\GitHub\\Tindog\\TinDog Logo.png"));//TinDog logo
-		panel_south_image.add(LabelImageTINDOGLogo);
+		JLabel tinDogLogLabel = new JLabel(new ImageIcon("C:\\Users\\jde674\\Documents\\GitHub\\Tindog\\TinDog Logo.png"));//TinDog logo
+		southPanelPanel2.add(tinDogLogLabel);
 		
-		JPanel panel_south_checkmark = new JPanel();
-		panel_south.add(panel_south_checkmark);
+		JPanel southPanelPanel3 = new JPanel();
+		southPanel.add(southPanelPanel3);
 		
 		JButton button_checkmark = new JButton("✔");
 		panel_south_checkmark.add(button_checkmark);
 		button_checkmark.addActionListener(checkListener);
 		
+		JPanel centerPanel = new JPanel();
+		contentPane.add(centerPanel, BorderLayout.CENTER);
+		centerPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_center = new JPanel();
-		contentPane.add(panel_center, BorderLayout.CENTER);
-		panel_center.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel_center_Image = new JPanel();
-		panel_center.add(panel_center_Image, BorderLayout.CENTER);
+		JPanel centerCenterPanel = new JPanel();
+		centerPanel.add(centerCenterPanel, BorderLayout.CENTER);
 		
 		
-		dogPhoto = new URL("https://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/grumpy-dog-11.jpg");
+		dogPhoto = new URL("https://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/grumpy-dog-11.jpg"); //change this for first dog
 		photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-		panel_center_Image.setLayout(new BorderLayout(0, 0));
+		centerCenterPanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel(new ImageIcon(photo));
-		panel_center_Image.add(lblNewLabel_1);
+		dogImageLabel = new JLabel(new ImageIcon(photo));
+		centerCenterPanel.add(dogImageLabel);
 		
-		JPanel panel = new JPanel();
-		panel_center_Image.add(panel, BorderLayout.SOUTH);
+		JPanel centerCenterSouthPanel = new JPanel();
+		centerCenterPanel.add(centerCenterSouthPanel, BorderLayout.SOUTH);
 		
-		JLabel lblName = new JLabel("Buddy");
-		panel.add(lblName);
+		dogNameLabel = new JLabel("Buddy");
+		centerCenterSouthPanel.add(dogNameLabel);
 		
-		JPanel panel_center_tbd = new JPanel();
-		panel_center.add(panel_center_tbd, BorderLayout.SOUTH);
-		panel_center_tbd.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel centerSouthPanel = new JPanel();
+		centerPanel.add(centerSouthPanel, BorderLayout.SOUTH);
+		centerSouthPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel panel_center_tbd_buttonViewMoreInfo= new JPanel();
-		panel_center_tbd.add(panel_center_tbd_buttonViewMoreInfo);
+		JPanel centerSouthPanelPanel1= new JPanel();
+		centerSouthPanel.add(centerSouthPanelPanel1);
 		
-		JButton btnViewMoreInformation = new JButton("View More Information");
-		panel_center_tbd_buttonViewMoreInfo.add(btnViewMoreInformation);
-		btnViewMoreInformation.addActionListener(viewInfobtnListener);
+		JButton viewMoreInformationButton = new JButton("View More Information");
+		centerSouthPanelPanel1.add(viewMoreInformationButton);
+		viewMoreInformationButton.addActionListener(viewInfobtnListener);
 	}
 	public void close(){
 		this.setVisible(false);
+	}
+	private User sendUserData(){
+		return this.user;
 	}
 }

@@ -8,26 +8,25 @@ public class AboutFrame extends JFrame{
 	private static final int FRAME_WIDTH = 400;
 	private static final int FRAME_HEIGHT = 300;
 	
-	private JLabel About;
-	private JLabel AM;
-	private JButton Back;
+	private JLabel aboutTitleLabel;
+	private JLabel aboutInfoLabel;
+	private JButton backButton;
 	
 	private ActionListener backlistener;
 	
 	private JPanel panel;
-	private JPanel panel_center;
-	private JPanel panel_north;
-	private JPanel panel_north_west;
-	private JPanel panel_north_center;
+	private JPanel centerPanel;
+	private JPanel northPanel;
+	private JPanel northCenterPanel;
+	private User user;
 	
 	
 	
-	
-	public AboutFrame(){
-		
+	public AboutFrame(User u){
+		user = u;
 		class Back_Listener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameSettingsFrame = new SettingsFrame();
+				JFrame frameSettingsFrame = new SettingsFrame(sendUserData());
 				close();
 				frameSettingsFrame.setVisible(true);
 				frameSettingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,42 +38,38 @@ public class AboutFrame extends JFrame{
 
 		
 		createcosa();
-		Back.addActionListener(backlistener);
+		backButton.addActionListener(backlistener);
 		
 		createpanel();
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		
 	}
 	public void createcosa(){
-		About = new JLabel("ABOUT");
-		AM = new JLabel("YOu want dog, we give them to you\n"
-				+ "we got all kinds of dogs\n"
-				+ "dog places give us dogs to sell\n"
-				+ "you but them\n"
-				+ "doggie doggie doggie");
-		Back = new JButton("<--");
+		aboutTitleLabel = new JLabel("About");
+		aboutInfoLabel = new JLabel("");
 	}
 	public void createpanel(){
 		
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel_center = new JPanel();
-		panel_center.add(AM);
-		panel_north = new JPanel();
-		panel_north.setLayout(new BorderLayout());
-		panel_north_west = new JPanel();
-		panel_north_west.add(Back);
-		panel_north_center = new JPanel();
-		panel_north_center.add(About);
-		panel_north.add(panel_north_west, BorderLayout.WEST);
-		panel_north.add(panel_north_center, BorderLayout.CENTER);
-		panel.add(panel_north, BorderLayout.NORTH);
-		panel.add(panel_center, BorderLayout.CENTER);
-		add(panel);
+		centerPanel = new JPanel();
+		centerPanel.add(aboutInfoLabel);
+		northPanel = new JPanel();
+		northPanel.setLayout(new BorderLayout());
+		northCenterPanel = new JPanel();
+		northCenterPanel.add(aboutTitleLabel);
+		backButton = new JButton("<--");
+		northPanel.add(backButton, BorderLayout.WEST);
+		northPanel.add(northCenterPanel, BorderLayout.CENTER);
+		panel.add(northPanel, BorderLayout.NORTH);
+		panel.add(centerPanel, BorderLayout.CENTER);
+		getContentPane().add(panel);
 		
 	}
 	public void close(){
 		this.setVisible(false);
 	}
-		
+	private User sendUserData(){
+		return this.user;
+	}
 }
