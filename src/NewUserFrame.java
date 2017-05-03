@@ -26,6 +26,9 @@ public class NewUserFrame extends JFrame{
 	private ActionListener cancelButtonListener;
 	private ActionListener submitButtonListener;
 	
+	private User newUser;
+	
+	
 
 	public NewUserFrame(){
 	
@@ -134,6 +137,7 @@ public class NewUserFrame extends JFrame{
 					UniversalDogDB db = new UniversalDogDB();
 					String query = "INSERT INTO USER(USER_First_Name, USER_Last_Name,USER_Email, USER_Password,USER_Phone_Number) VALUES(\"" + textFieldFirstName.getText() +"\",\""+ textFieldLastName.getText() +"\", \""+ textFieldEmail.getText() +"\", \""+ textFieldPassword.getText() +"\", "+ Long.parseLong(textFieldPhoneNumber.getText())+ ")";
 					db.sendData(query);
+					//newUser.setUserInfo(textFieldEmail.getText());
 					JFrame frameDogListFrame = new DogListFrame();
 					close();
 					frameDogListFrame.setVisible(true);

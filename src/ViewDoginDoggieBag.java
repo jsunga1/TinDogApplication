@@ -14,13 +14,13 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 
-public class ViewDogInDoggieBag extends JFrame {
+public class ViewDoginDoggieBag extends JFrame {
 
 	private JPanel contentPane;
 	/**
 	 * Create the frame.
 	 */
-	public ViewDogInDoggieBag() {
+	public ViewDoginDoggieBag() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
