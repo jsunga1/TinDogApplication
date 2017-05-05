@@ -16,7 +16,7 @@ public class User
 	public User()
 	{
 		db = new DoggieBag();
-
+		
 		firstName = "User";
 		lastName = "User";
 		email = "User";
