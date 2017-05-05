@@ -9,6 +9,11 @@ public class DogPile
 	private String breed;
 	private int gender;
 	private String shelter;
+	private boolean ageFilter1;
+	private boolean ageFilter2;
+	private boolean breedFilter;
+	private boolean genderFilter;
+	private boolean shelterFilter;
 	private boolean filter;
 	
 	public DogPile()
@@ -19,33 +24,13 @@ public class DogPile
 		breed = "";
 		gender = 2;
 		shelter = "";
-		filter = false;
+		ageFilter1 = false;
+		ageFilter2 = false;
+		breedFilter = false;
+		genderFilter = false;
+		shelterFilter = false;
 	}
-	
-	public ArrayList<Integer> createPile()
-	{
-		for(int i = 0; i < 50; i++)
-		{
-			checkFilter();
-			
-			int dogID = (int)Math.random();
-			Dog d = new Dog();
-			
-			if(filter)
-			{
-				if(d.getAge() < age1 || d.getAge() > age2)
-					dogPile.remove(d);
-				else if(!d.getBreed().equals(breed))
-					dogPile.remove(d);
-				else if(d.getGender() != gender)
-					dogPile.remove(d);
-				else if(!d.getShelter().equals(shelter))
-					dogPile.remove(d);
-			}
-			
-		}
-		return dogPile;
-	}
+
 	
 	public void generateDogPile()
 	{
@@ -57,26 +42,60 @@ public class DogPile
 		
 		String query;
 		UniversalDogDB db = new UniversalDogDB();
+		
+		
 		checkFilter();
+		query = "Select DOG_ID from DOG";
+		
 		if(filter)
-			query = "Select DOG_ID from DOG Where DOG_Age > " + age1 +" AND DOG_AGE < "+ age2 + 
-			", DOG_Breed = \"" + breed + "\", DOG_Gender = " + gender;
-		else
-			query = "Select DOG_ID from DOG";
+			query = query + " Where ";
+		if(ageFilter1)
+			query = query + " DOG_Age > " + age1;
+		if(ageFilter2)
+		{
+			if(ageFilter1)
+				query = query + ", AND DOG_AGE < "+ age2;
+			else
+				query = query + "DOG_AGE < "+ age2;
+		}
+		if(breedFilter)
+		{
+			if(ageFilter1 || ageFilter2)
+				query = query + ", AND DOG_Breed = \"" + breed + "\"";
+			else
+				query = query + "DOG_Breed = \"" + breed + "\"";
+		}
+		if(genderFilter)
+		{
+			if(ageFilter1 || ageFilter2 || breedFilter)
+				query = query + ", AND DOG_Gender = " + gender;
+			else
+				query = query + "DOG_Gender = " + gender;
+		if(shelterFilter)
+		{
+			if(ageFilter1 || ageFilter2 || breedFilter || genderFilter)
+				query = query + ", AND DOG_Shelter = \"" + shelter + "\"";
+			else
+				query = query + "DOG_Shelter = \"" + shelter + "\"";
+		}
+		query = query + ";";	
 			
 		db.retrieveData(query);
 		ResultSet rs = db.getResultSet();
 		
-		try {
+		try
+		{
 			while(rs.next())
 			{
 				dogPile.add(rs.getInt("DOG_ID"));
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
+		}
 	}
 	
 	public int getHeadDog()
@@ -92,15 +111,31 @@ public class DogPile
 	public void checkFilter()
 	{
 		if(age1 != 0)
+		{
+			ageFilter1 = true;
 			filter = true;
-		else if(age2 != 100)
+		}
+		if(age2 != 100)
+		{
+			ageFilter2 = true;
 			filter = true;
-		else if(!breed.isEmpty())
+		}
+		if(!breed.isEmpty())
+		{
+		
+			breedFilter = true;
 			filter = true;
-		else if(gender != 2)
+		}
+		if(gender != 2)
+		{
+			genderFilter = true;
 			filter = true;
-		else if(!shelter.isEmpty())
+		}
+		if(!shelter.isEmpty())
+		{
+			shelterFilter = true;
 			filter = true;
+		}
 	}
 	
 	public void setAge1(int a)
