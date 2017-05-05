@@ -20,15 +20,16 @@ public class ViewDoginMainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private ActionListener backbtnListener;
+	private User user;
 	/**
 	 * Create the frame.
 	 */
-	public ViewDoginMainFrame() {
+	public ViewDoginMainFrame(User u) {
 		class backListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				JFrame frameDogListFrame;
 				try {
-					frameDogListFrame = new DogListFrame();
+					frameDogListFrame = new DogListFrame(sendUserData());
 					frameDogListFrame.setVisible(true);
 					frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				} catch (IOException e1) {
@@ -131,5 +132,8 @@ public class ViewDoginMainFrame extends JFrame {
 	}
 	public void close(){
 		this.setVisible(false);
+	}
+	private User sendUserData(){
+		return this.user;
 	}
 }
