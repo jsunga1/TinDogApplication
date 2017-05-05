@@ -28,7 +28,7 @@ public class StartFrame extends JFrame{
 	private JLabel lblWelcomeToTindog;
 	private User user;
 	
-	private User user;
+
 	
 	public StartFrame(){
 		class CreateAccount_Listener implements ActionListener{
