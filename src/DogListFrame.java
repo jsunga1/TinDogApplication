@@ -33,12 +33,12 @@ public class DogListFrame extends JFrame {
 	private ActionListener xMarkListener;
 	private URL dogPhoto;
 	private Image photo;
-  private Dog dog;
+	private Dog dog;
 	private DogPile dp;
 	private User user;
-  private ActionListener checkListener;
+	private ActionListener checkListener;
 	private JLabel lblDogImage;
-  
+
 	public DogListFrame(User u) throws IOException {
 		user = u;
 		class mainMenuListener implements ActionListener{
@@ -51,7 +51,7 @@ public class DogListFrame extends JFrame {
 		}
 		class filterListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameFilterFrame = new FilterFrame();
+				JFrame frameFilterFrame = new FilterFrame(sendUserData());
 				close();
 				frameFilterFrame.setVisible(true);
 				frameFilterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,7 +59,7 @@ public class DogListFrame extends JFrame {
 		}
 		class viewInfoListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameViewDogInMainFrameFrame = new ViewDogInMainFrame();
+				JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame(sendUserData());
 				close();
 				frameViewDogInMainFrameFrame.setVisible(true);
 				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,10 +72,10 @@ public class DogListFrame extends JFrame {
 				UniversalDogDB db = new UniversalDogDB();
 				dp.removeHeadDog();
 				int d = dp.getHeadDog();
-				
+
 				dog.setDogID(d);
 				dog.setDogInfo(d);
-				
+
 				try {
 					//dogPhoto = new URL(dog.getPicture());
 					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
@@ -87,22 +87,22 @@ public class DogListFrame extends JFrame {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 		}
 		class createCheckListener implements ActionListener{
 			public void actionPerformed(ActionEvent e)
 			{
 				UniversalDogDB db = new UniversalDogDB();
-				
-				dog.addDogToDoggieBag(u.getEmail());
-				
+
+				dog.addDogToDoggieBag(user.getEmail());
+
 				dp.removeHeadDog();
 				int d = dp.getHeadDog();
-				
+
 				dog.setDogID(d);
 				dog.setDogInfo(d);
-				
+
 				try {
 					//dogPhoto = new URL(dog.getPicture());
 					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
@@ -115,7 +115,7 @@ public class DogListFrame extends JFrame {
 				}
 			}
 		}
-		
+
 		dp = new DogPile();
 		dp.generateDogPile();
 		int i = dp.getHeadDog();
@@ -123,7 +123,7 @@ public class DogListFrame extends JFrame {
 		dog.setDogID(i);
 		dog.setDogInfo(i);
 		u = new User();
-		
+
 		xMarkListener = new createXMarkListener();
 		checkListener = new createCheckListener();
 		mainMenubtnListener = new mainMenuListener();
@@ -135,78 +135,78 @@ public class DogListFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel northPanel = new JPanel();
 		contentPane.add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JPanel northPanelPanel1 = new JPanel();
 		northPanel.add(northPanelPanel1);
 		northPanelPanel1.setLayout(new BorderLayout(0, 0));
-		
+
 		JButton mainMenuButton = new JButton("Main Menu");
 		northPanelPanel1.add(mainMenuButton, BorderLayout.WEST);
 		mainMenuButton.addActionListener(mainMenubtnListener);
-		
+
 		JPanel northPanelPanel2 = new JPanel();
 		northPanel.add(northPanelPanel2);
 		northPanelPanel2.setLayout(new BorderLayout(0, 0));
-		
+
 		JButton FilterButton = new JButton("Filter");
 		northPanelPanel2.add(FilterButton, BorderLayout.EAST);
 		FilterButton.addActionListener(filterbtnListener);
-		
+
 		JPanel southPanel = new JPanel();
 		contentPane.add(southPanel, BorderLayout.SOUTH);
 		southPanel.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JPanel southPanelPanel1 = new JPanel();
 		southPanel.add(southPanelPanel1);
-		
+
 		JButton xButton = new JButton("✖");
 		southPanelPanel1.add(xButton);
 		xButton.addActionListener(xMarkListener);
 		JPanel southPanelPanel2 = new JPanel();
 		southPanel.add(southPanelPanel2);
-		
+
 		JLabel tinDogLogLabel = new JLabel(new ImageIcon("C:\\Users\\jde674\\Documents\\GitHub\\Tindog\\TinDog Logo.png"));//TinDog logo
 		southPanelPanel2.add(tinDogLogLabel);
-		
+
 		JPanel southPanelPanel3 = new JPanel();
 		southPanel.add(southPanelPanel3);
-		
+
 		JButton button_checkmark = new JButton("✔");
-		panel_south_checkmark.add(button_checkmark);
+		southPanelPanel3.add(button_checkmark);
 		button_checkmark.addActionListener(checkListener);
-		
+
 		JPanel centerPanel = new JPanel();
 		contentPane.add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel centerCenterPanel = new JPanel();
 		centerPanel.add(centerCenterPanel, BorderLayout.CENTER);
-		
-		
+
+
 		dogPhoto = new URL("https://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/grumpy-dog-11.jpg"); //change this for first dog
 		photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		centerCenterPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		dogImageLabel = new JLabel(new ImageIcon(photo));
 		centerCenterPanel.add(dogImageLabel);
-		
+
 		JPanel centerCenterSouthPanel = new JPanel();
 		centerCenterPanel.add(centerCenterSouthPanel, BorderLayout.SOUTH);
-		
+
 		dogNameLabel = new JLabel("Buddy");
 		centerCenterSouthPanel.add(dogNameLabel);
-		
+
 		JPanel centerSouthPanel = new JPanel();
 		centerPanel.add(centerSouthPanel, BorderLayout.SOUTH);
 		centerSouthPanel.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		JPanel centerSouthPanelPanel1= new JPanel();
 		centerSouthPanel.add(centerSouthPanelPanel1);
-		
+
 		JButton viewMoreInformationButton = new JButton("View More Information");
 		centerSouthPanelPanel1.add(viewMoreInformationButton);
 		viewMoreInformationButton.addActionListener(viewInfobtnListener);
