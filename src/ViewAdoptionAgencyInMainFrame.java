@@ -23,7 +23,8 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 	private User user;
 	private ActionListener backListener;
 	private Dog dog;
-	public ViewAdoptionAgencyInMainFrame(Dog d) {
+	public ViewAdoptionAgencyInMainFrame(Dog d, User u) {
+		user = u;
 		class createBackListener implements ActionListener{
 
 			public void actionPerformed(ActionEvent e){
@@ -56,8 +57,9 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 		Panel northPanel_West = new Panel();
 		northPanel.add(northPanel_West, BorderLayout.WEST);
 		
-		JButton button = new JButton("<--");
-		northPanel_West.add(button);
+		JButton backButton = new JButton("<--");
+		northPanel_West.add(backButton);
+		backButton.addActionListener(backListener);
 		
 		Panel northPanel_Center = new Panel();
 		northPanel.add(northPanel_Center, BorderLayout.CENTER);
