@@ -33,10 +33,10 @@ public class DogListFrame extends JFrame {
 	private ActionListener xMarkListener;
 	private URL dogPhoto;
 	private Image photo;
-  private Dog dog;
+	private Dog dog;
 	private DogPile dp;
 	private User user;
-  private ActionListener checkListener;
+	private ActionListener checkListener;
 	private JLabel lblDogImage;
   
 	public DogListFrame(User u) throws IOException {
@@ -51,7 +51,7 @@ public class DogListFrame extends JFrame {
 		}
 		class filterListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameFilterFrame = new FilterFrame();
+				JFrame frameFilterFrame = new FilterFrame(user);
 				close();
 				frameFilterFrame.setVisible(true);
 				frameFilterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,7 +59,7 @@ public class DogListFrame extends JFrame {
 		}
 		class viewInfoListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame();
+				JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame(user);
 				close();
 				frameViewDogInMainFrameFrame.setVisible(true);
 				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,7 +95,7 @@ public class DogListFrame extends JFrame {
 			{
 				UniversalDogDB db = new UniversalDogDB();
 				
-				dog.addDogToDoggieBag(u.getEmail());
+				dog.addDogToDoggieBag(user.getEmail());
 				
 				dp.removeHeadDog();
 				int d = dp.getHeadDog();
@@ -176,8 +176,11 @@ public class DogListFrame extends JFrame {
 		southPanel.add(southPanelPanel3);
 		
 		JButton button_checkmark = new JButton("✔");
+		JPanel panel_south_checkmark = new JPanel();
 		panel_south_checkmark.add(button_checkmark);
 		button_checkmark.addActionListener(checkListener);
+		southPanel.add(panel_south_checkmark);
+		
 		
 		JPanel centerPanel = new JPanel();
 		contentPane.add(centerPanel, BorderLayout.CENTER);
