@@ -18,13 +18,11 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private User user;
-	private ActionListener backlistner;
+	private ActionListener backListener;
 	private Dog dog;
-	
-	
-
 	public ViewAdoptionAgencyInMainFrame(Dog d) {
-		class Back_Listener implements ActionListener{
+		class createBackListener implements ActionListener{
+
 			public void actionPerformed(ActionEvent e){
 				JFrame frameMainFrame = new ViewDoginMainFrame(sendUserData());
 				close();
@@ -33,14 +31,13 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 			}
 		}
 
-		backlistner= new Back_Listener();
-
-		
+		backListener = new createBackListener();
 		dog = d;
 		UniversalDogDB db = new UniversalDogDB();
 		String q = "";
 		db.retrieveData(q);
 		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -65,44 +62,44 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 		lblAdoptionAgencyInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		northPanel_Center.add(lblAdoptionAgencyInfo);
 		
-		Panel panel_Center = new Panel();
-		contentPane.add(panel_Center, BorderLayout.CENTER);
-		panel_Center.setLayout(new GridLayout(0, 1, 0, 0));
+		Panel centerPanel = new Panel();
+		contentPane.add(centerPanel, BorderLayout.CENTER);
+		centerPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lblAgencyName = new JLabel("Agency Name:");
-		lblAgencyName.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel_Center.add(lblAgencyName);
+		JLabel agencyNameLabel = new JLabel("Agency Name:");
+		agencyNameLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		centerPanel.add(agencyNameLabel);
 		
-		JLabel AgencyName = new JLabel("");
-		panel_Center.add(AgencyName);
+		JLabel agencyName = new JLabel("");
+		centerPanel.add(agencyName);
 		
-		JLabel lblAgencyLocation = new JLabel("Agency Location:");
-		lblAgencyLocation.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel_Center.add(lblAgencyLocation);
+		JLabel agencyLocationLabel = new JLabel("Agency Location:");
+		agencyLocationLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		centerPanel.add(agencyLocationLabel);
 		
-		JLabel AgencyLocation = new JLabel("");
-		panel_Center.add(AgencyLocation);
+		JLabel agencyLocation = new JLabel("");
+		centerPanel.add(agencyLocation);
 		
-		JLabel lblAgencyWebsite = new JLabel("Agency Website:");
-		lblAgencyWebsite.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel_Center.add(lblAgencyWebsite);
+		JLabel agencyWebsiteLabel = new JLabel("Agency Website:");
+		agencyWebsiteLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		centerPanel.add(agencyWebsiteLabel);
 		
-		JLabel AgencyWebsite = new JLabel("");
-		panel_Center.add(AgencyWebsite);
+		JLabel agencyWebsite = new JLabel("");
+		centerPanel.add(agencyWebsite);
 		
-		JLabel lblAgencyPhoneNumber = new JLabel("Agency Phone Number:");
-		lblAgencyPhoneNumber.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel_Center.add(lblAgencyPhoneNumber);
+		JLabel agencyPhoneNumberLabel = new JLabel("Agency Phone Number:");
+		agencyPhoneNumberLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		centerPanel.add(agencyPhoneNumberLabel);
 		
-		JLabel Agencyphonenumber = new JLabel("");
-		panel_Center.add(Agencyphonenumber);
+		JLabel agencyphonenumber = new JLabel("");
+		centerPanel.add(agencyphonenumber);
 		
-		JLabel lblAgencyEmail = new JLabel("Agency Email:");
-		lblAgencyEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel_Center.add(lblAgencyEmail);
+		JLabel agencyEmailLabel = new JLabel("Agency Email:");
+		agencyEmailLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		centerPanel.add(agencyEmailLabel);
 		
-		JLabel AgencyEmail = new JLabel("");
-		panel_Center.add(AgencyEmail);
+		JLabel agencyEmail = new JLabel("");
+		centerPanel.add(agencyEmail);
 	}
 	public void close(){
 		this.setVisible(false);
