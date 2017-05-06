@@ -23,7 +23,9 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 	private User user;
 	private ActionListener backListener;
 	private Dog dog;
-	public ViewAdoptionAgencyInMainFrame(Dog d) {
+	private Shelter shelter;
+	
+	public ViewAdoptionAgencyInMainFrame(Dog d, User u) {
 		class createBackListener implements ActionListener{
 
 			public void actionPerformed(ActionEvent e){
@@ -36,10 +38,8 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 
 		backListener = new createBackListener();
 		dog = d;
-		UniversalDogDB db = new UniversalDogDB();
-		String q = "Select AGENCY_NAME from ADOPTION_AGENCY where ID = " + Integer.parseInt(dog.getShelter());
-		db.retrieveData(q);
-		ResultSet rs = db.getResultSet();
+		user = u;
+		shelter.setShelterInfo(Integer.parseInt(dog.getShelter()));
 		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,35 +70,35 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 		contentPane.add(centerPanel, BorderLayout.CENTER);
 		centerPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel agencyNameLabel = new JLabel("Agency Name:");
+		JLabel agencyNameLabel = new JLabel("Agency Name: " + shelter.getName());
 		agencyNameLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		centerPanel.add(agencyNameLabel);
 		
 		JLabel agencyName = new JLabel("");
 		centerPanel.add(agencyName);
 		
-		JLabel agencyLocationLabel = new JLabel("Agency Location:");
+		JLabel agencyLocationLabel = new JLabel("Agency Location: " + shelter.getAddress());
 		agencyLocationLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		centerPanel.add(agencyLocationLabel);
 		
 		JLabel agencyLocation = new JLabel("");
 		centerPanel.add(agencyLocation);
 		
-		JLabel agencyWebsiteLabel = new JLabel("Agency Website:");
+		JLabel agencyWebsiteLabel = new JLabel("Agency Website: " + shelter.getLink());
 		agencyWebsiteLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		centerPanel.add(agencyWebsiteLabel);
 		
 		JLabel agencyWebsite = new JLabel("");
 		centerPanel.add(agencyWebsite);
 		
-		JLabel agencyPhoneNumberLabel = new JLabel("Agency Phone Number:");
+		JLabel agencyPhoneNumberLabel = new JLabel("Agency Phone Number: " + shelter.getPhone());
 		agencyPhoneNumberLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		centerPanel.add(agencyPhoneNumberLabel);
 		
 		JLabel agencyphonenumber = new JLabel("");
 		centerPanel.add(agencyphonenumber);
 		
-		JLabel agencyEmailLabel = new JLabel("Agency Email:");
+		JLabel agencyEmailLabel = new JLabel("Agency Email: " + shelter.getEmail());
 		agencyEmailLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		centerPanel.add(agencyEmailLabel);
 		

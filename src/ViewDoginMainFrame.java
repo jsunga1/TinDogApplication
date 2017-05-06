@@ -93,7 +93,7 @@ public class ViewDoginMainFrame extends JFrame {
 			{
 				JFrame frameViewAdoptionAgencyInMainFrame;
 				try {
-					frameViewAdoptionAgencyInMainFrame = new ViewAdoptionAgencyInMainFrame(dog);
+					frameViewAdoptionAgencyInMainFrame = new ViewAdoptionAgencyInMainFrame(dog, sendUserData());
 					close();
 					frameViewAdoptionAgencyInMainFrame.setVisible(true);
 					frameViewAdoptionAgencyInMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
