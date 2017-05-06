@@ -21,18 +21,6 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 	private ActionListener backlistner;
 	
 	
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ViewAdoptionAgencyInDoggieBagFrame frame = new ViewAdoptionAgencyInDoggieBagFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 	public ViewAdoptionAgencyInMainFrame() {
 		class Back_Listener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -42,6 +30,8 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 				frameMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		}
+		backlistner= new Back_Listener();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
