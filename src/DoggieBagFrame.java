@@ -23,6 +23,7 @@ public class DoggieBagFrame extends JFrame {
 	private User user;
 	private DoggieBag dogBagTemp;
 	private ArrayList <Integer> dogTemp;
+	
 	public DoggieBagFrame(User u) {
 		user = u;
 		class Back_Listener implements ActionListener{

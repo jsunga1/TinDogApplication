@@ -20,15 +20,21 @@ public class ViewDoginMainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private ActionListener backbtnListener;
+	private User user;
+	private ActionListener xMarkListener;
+	private ActionListener checkListener;
+	private Dog dog;
+	private DogPile dp;
+	
 	/**
 	 * Create the frame.
 	 */
-	public ViewDoginMainFrame() {
+	public ViewDoginMainFrame(User u) {
 		class backListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				JFrame frameDogListFrame;
 				try {
-					frameDogListFrame = new DogListFrame();
+					frameDogListFrame = new DogListFrame(sendUserData());
 					frameDogListFrame.setVisible(true);
 					frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				} catch (IOException e1) {
@@ -39,6 +45,27 @@ public class ViewDoginMainFrame extends JFrame {
 				
 			}
 		}
+		
+		class createXMarkListener implements ActionListener{
+			public void actionPerformed(ActionEvent e)
+			{
+				
+			}
+		}
+		
+		class createCheckListener implements ActionListener{
+			public void actionPerformed(ActionEvent e)
+			{
+				
+			}
+		}
+		
+		int dogid = user.getDogPile().getHeadDog();
+		dog.setDogInfo(dogid);
+		
+		xMarkListener = new createXMarkListener();
+		checkListener = new createCheckListener();
+		
 		backbtnListener = new backListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -71,13 +98,13 @@ public class ViewDoginMainFrame extends JFrame {
 		JLabel lblNewLabel = new JLabel("");
 		panel_8.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Name" + "");
+		JLabel lblNewLabel_1 = new JLabel("Name: " +  dog.getName());
 		panel_8.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_3 = new JLabel("Breed" + "");
+		JLabel lblNewLabel_3 = new JLabel("Breed: " +  dog.getBreed());
 		panel_8.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_2 = new JLabel("Location" + "");
+		JLabel lblNewLabel_2 = new JLabel("Location: " + dog.getShelter());
 		panel_8.add(lblNewLabel_2);
 		
 		JPanel panel_1 = new JPanel();
@@ -118,6 +145,7 @@ public class ViewDoginMainFrame extends JFrame {
 		JButton btnNewButton = new JButton("✖");
 		panel_3.add(btnNewButton);
 		
+		
 		JPanel panel_5 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_5.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.RIGHT);
@@ -131,5 +159,8 @@ public class ViewDoginMainFrame extends JFrame {
 	}
 	public void close(){
 		this.setVisible(false);
+	}
+	private User sendUserData(){
+		return this.user;
 	}
 }

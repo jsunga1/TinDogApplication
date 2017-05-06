@@ -75,3 +75,8 @@
 /FilterFrame1.class
 /SettingsFrame$1createBackListener.class
 /DogListFrame$1createCheckListener.class
+/DoggieBagFrame$1createDogImageListener.class
+/HelpFrame$1createBackListener.class
+/ViewDogInDoggieBagFrame$1createBackListener.class
+/ViewDoginMainFrame$1createCheckListener.class
+/ViewDoginMainFrame$1createXMarkListener.class

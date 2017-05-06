@@ -27,8 +27,8 @@ public class StartFrame extends JFrame{
 	private JPanel panel_1;
 	private JLabel lblWelcomeToTindog;
 	private User user;
+
 	
-	private User user;
 	
 	public StartFrame(){
 		class CreateAccount_Listener implements ActionListener{
@@ -87,6 +87,7 @@ public class StartFrame extends JFrame{
 								
 								user = new User();
 								user.setUserInfo(Start_Username.getText());
+								
 								JFrame frameDogListFrame = new DogListFrame(sendUserData());
 								close();
 								frameDogListFrame.setVisible(true);
