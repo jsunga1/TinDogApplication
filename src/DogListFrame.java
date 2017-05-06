@@ -33,10 +33,10 @@ public class DogListFrame extends JFrame {
 	private ActionListener xMarkListener;
 	private URL dogPhoto;
 	private Image photo;
-  private Dog dog;
+	private Dog dog;
 	private DogPile dp;
 	private User user;
-  private ActionListener checkListener;
+	private ActionListener checkListener;
 	private JLabel lblDogImage;
   
 	public DogListFrame(User u) throws IOException {
@@ -51,7 +51,7 @@ public class DogListFrame extends JFrame {
 		}
 		class filterListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameFilterFrame = new FilterFrame();
+				JFrame frameFilterFrame = new FilterFrame(sendUserData());
 				close();
 				frameFilterFrame.setVisible(true);
 				frameFilterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,7 +59,7 @@ public class DogListFrame extends JFrame {
 		}
 		class viewInfoListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameViewDogInMainFrameFrame = new ViewDogInMainFrame();
+				JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame(sendUserData());
 				close();
 				frameViewDogInMainFrameFrame.setVisible(true);
 				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,7 +69,7 @@ public class DogListFrame extends JFrame {
 		class createXMarkListener implements ActionListener{
 			public void actionPerformed(ActionEvent e)
 			{
-				UniversalDogDB db = new UniversalDogDB();
+				
 				dp.removeHeadDog();
 				int d = dp.getHeadDog();
 				
@@ -81,7 +81,7 @@ public class DogListFrame extends JFrame {
 					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
 					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 					dogImageLabel.setIcon(new ImageIcon(photo));
-					dogNameLabel.setText("Friend"); //change this for next dog
+					dogNameLabel.setText(dog.getName()); //change this for next dog
 				} catch (MalformedURLException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
@@ -93,9 +93,8 @@ public class DogListFrame extends JFrame {
 		class createCheckListener implements ActionListener{
 			public void actionPerformed(ActionEvent e)
 			{
-				UniversalDogDB db = new UniversalDogDB();
 				
-				dog.addDogToDoggieBag(u.getEmail());
+				dog.addDogToDoggieBag(user.getEmail());
 				
 				dp.removeHeadDog();
 				int d = dp.getHeadDog();
@@ -108,6 +107,7 @@ public class DogListFrame extends JFrame {
 					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
 					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 					lblDogImage.setIcon(new ImageIcon(photo));
+					dogNameLabel.setText(dog.getName());
 				} catch (MalformedURLException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
@@ -116,14 +116,16 @@ public class DogListFrame extends JFrame {
 			}
 		}
 		
-		dp = new DogPile();
-		dp.generateDogPile();
-		int i = dp.getHeadDog();
-		dog = new Dog();
-		dog.setDogID(i);
-		dog.setDogInfo(i);
-		u = new User();
-		
+		dp = user.getDogPile();
+		if (dp.getDogPileArray().size()== 0)
+			dogNameLabel.setText("No Dogs Available!");
+		else
+		{
+			int i = dp.getHeadDog();
+			dog = new Dog();
+			dog.setDogID(i);
+			dog.setDogInfo(i);
+		}
 		xMarkListener = new createXMarkListener();
 		checkListener = new createCheckListener();
 		mainMenubtnListener = new mainMenuListener();
@@ -176,7 +178,7 @@ public class DogListFrame extends JFrame {
 		southPanel.add(southPanelPanel3);
 		
 		JButton button_checkmark = new JButton("✔");
-		panel_south_checkmark.add(button_checkmark);
+		southPanelPanel3.add(button_checkmark);
 		button_checkmark.addActionListener(checkListener);
 		
 		JPanel centerPanel = new JPanel();
@@ -197,7 +199,7 @@ public class DogListFrame extends JFrame {
 		JPanel centerCenterSouthPanel = new JPanel();
 		centerCenterPanel.add(centerCenterSouthPanel, BorderLayout.SOUTH);
 		
-		dogNameLabel = new JLabel("Buddy");
+		dogNameLabel = new JLabel(dog.getName());
 		centerCenterSouthPanel.add(dogNameLabel);
 		
 		JPanel centerSouthPanel = new JPanel();
