@@ -116,14 +116,18 @@ public class DogListFrame extends JFrame {
 			}
 		}
 		
-		dp = new DogPile();
-		dp.generateDogPile();
-		int i = dp.getHeadDog();
-		dog = new Dog();
-		dog.setDogID(i);
-		dog.setDogInfo(i);
-		u = new User();
-		
+		dp = user.getDogPile();
+		if (dp.getDogPileArray().size()== 0)
+			//dog.setDogID(66);
+			System.out.println("No Dog Available");
+		else
+		{
+			int i = dp.getHeadDog();
+			dog = new Dog();
+			dog.setDogID(i);
+			dog.setDogInfo(i);
+		}
+
 		xMarkListener = new createXMarkListener();
 		checkListener = new createCheckListener();
 		mainMenubtnListener = new mainMenuListener();
@@ -189,8 +193,9 @@ public class DogListFrame extends JFrame {
 		JPanel centerCenterPanel = new JPanel();
 		centerPanel.add(centerCenterPanel, BorderLayout.CENTER);
 		
-		
-		dogPhoto = new URL(dog.getPicture()); //change this for first dog
+
+		dogPhoto = new URL(dog.getPicture());
+
 		photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		centerCenterPanel.setLayout(new BorderLayout(0, 0));
 		
