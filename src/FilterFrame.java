@@ -75,7 +75,7 @@ public class FilterFrame extends JFrame {
 				}
 				
 				dp = user.getDogPile();
-				dp.generateDogPile();
+				dp.generateDogPile(user.getEmail());
 				
 				System.out.println(dp.getDogPileArray().size());
 				try {
