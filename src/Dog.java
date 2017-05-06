@@ -58,7 +58,7 @@ public class Dog
 	public void addDogToDoggieBag(String user)
 	{
 		db = new UniversalDogDB();
-		String q = "Insert into DOGGIEBAG Values(\"" + user + "\", " + dogID + ")";
+		String q = "Insert into DOGGIE_BAG Values(\"" + user + "\", " + dogID + ")";
 		db.sendData(q);
 	}
 	

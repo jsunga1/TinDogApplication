@@ -24,7 +24,7 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 	public ViewAdoptionAgencyInMainFrame() {
 		class Back_Listener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameMainFrame = new ViewDogInMainFrame(sendUserData());
+				JFrame frameMainFrame = new ViewDoginMainFrame(sendUserData());
 				close();
 				frameMainFrame.setVisible(true);
 				frameMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
