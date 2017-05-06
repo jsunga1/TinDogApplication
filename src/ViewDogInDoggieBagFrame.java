@@ -25,6 +25,7 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 	private JPanel contentPane;
 	private User user;
 	private ActionListener backListener;
+	
 	public ViewDogInDoggieBagFrame(User u) {
 		user = u;
 		class createBackListener implements ActionListener{

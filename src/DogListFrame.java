@@ -59,7 +59,9 @@ public class DogListFrame extends JFrame {
 		}
 		class viewInfoListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
+
 				JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame(user);
+
 				close();
 				frameViewDogInMainFrameFrame.setVisible(true);
 				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,11 +79,10 @@ public class DogListFrame extends JFrame {
 				dog.setDogInfo(d);
 				
 				try {
-					//dogPhoto = new URL(dog.getPicture());
-					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
+					dogPhoto = new URL(dog.getPicture());
 					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 					dogImageLabel.setIcon(new ImageIcon(photo));
-					dogNameLabel.setText("Friend"); //change this for next dog
+					dogNameLabel.setText(dog.getName()); //change this for next dog
 				} catch (MalformedURLException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
@@ -104,8 +105,7 @@ public class DogListFrame extends JFrame {
 				dog.setDogInfo(d);
 				
 				try {
-					//dogPhoto = new URL(dog.getPicture());
-					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
+					dogPhoto = new URL(dog.getPicture());
 					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 					lblDogImage.setIcon(new ImageIcon(photo));
 				} catch (MalformedURLException e1) {
@@ -190,7 +190,7 @@ public class DogListFrame extends JFrame {
 		centerPanel.add(centerCenterPanel, BorderLayout.CENTER);
 		
 		
-		dogPhoto = new URL("https://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/grumpy-dog-11.jpg"); //change this for first dog
+		dogPhoto = new URL(dog.getPicture()); //change this for first dog
 		photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		centerCenterPanel.setLayout(new BorderLayout(0, 0));
 		
@@ -200,7 +200,7 @@ public class DogListFrame extends JFrame {
 		JPanel centerCenterSouthPanel = new JPanel();
 		centerCenterPanel.add(centerCenterSouthPanel, BorderLayout.SOUTH);
 		
-		dogNameLabel = new JLabel("Buddy");
+		dogNameLabel = new JLabel(dog.getName());
 		centerCenterSouthPanel.add(dogNameLabel);
 		
 		JPanel centerSouthPanel = new JPanel();
