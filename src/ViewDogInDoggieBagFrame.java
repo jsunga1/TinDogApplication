@@ -88,7 +88,7 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 		Component glue_1 = Box.createGlue();
 		panel_4.add(glue_1);
 		
-		JLabel lblTindogLogo = new JLabel(new ImageIcon("C:\\Users\\jde674\\Documents\\GitHub\\Tindog\\TinDog Logo.png"));
+		JLabel lblTindogLogo = new JLabel(new ImageIcon("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic"));
 		panel_4.add(lblTindogLogo);
 		
 		JPanel panel_5 = new JPanel();

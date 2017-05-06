@@ -10,6 +10,7 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.Font;
@@ -99,6 +100,12 @@ public class ViewAdoptionAgencyInDoggieBagFrame extends JFrame {
 		
 		JLabel AgencyEmail = new JLabel("");
 		panel_Center.add(AgencyEmail);
+		
+		Panel southPanel = new Panel();
+		contentPane.add(southPanel, BorderLayout.SOUTH);
+		
+		JLabel tinDogLogLabel = new JLabel(new ImageIcon("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic"));//TinDog logo
+		southPanel.add(tinDogLogLabel);
 	}
 	public void close(){
 		this.setVisible(false);
