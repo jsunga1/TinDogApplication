@@ -48,35 +48,38 @@ public class DogPile
 		query = "Select DOG_ID from DOG";
 		
 		if(filter)
+		{
 			query = query + " Where ";
-		if(ageFilter1)
-			query = query + " DOG_Age > " + age1;
-		if(ageFilter2)
-		{
 			if(ageFilter1)
-				query = query + ", AND DOG_AGE < "+ age2;
-			else
-				query = query + "DOG_AGE < "+ age2;
-		}
-		if(breedFilter)
-		{
-			if(ageFilter1 || ageFilter2)
+				query = query + " DOG_Age > " + age1;
+			if(ageFilter2)
+			{
+				if(ageFilter1)
+				query = query + ", AND DOG_Age < "+ age2;
+				else
+				query = query + "DOG_Age < "+ age2;
+			}
+			if(breedFilter)
+			{
+				if(ageFilter1 || ageFilter2)
 				query = query + ", AND DOG_Breed = \"" + breed + "\"";
-			else
+				else
 				query = query + "DOG_Breed = \"" + breed + "\"";
-		}
-		if(genderFilter)
-		{
-			if(ageFilter1 || ageFilter2 || breedFilter)
+			}
+			if(genderFilter)
+			{
+				if(ageFilter1 || ageFilter2 || breedFilter)
 				query = query + ", AND DOG_Gender = " + gender;
-			else
+				else
 				query = query + "DOG_Gender = " + gender;
-		if(shelterFilter)
-		{
-			if(ageFilter1 || ageFilter2 || breedFilter || genderFilter)
-				query = query + ", AND DOG_Shelter = \"" + shelter + "\"";
-			else
-				query = query + "DOG_Shelter = \"" + shelter + "\"";
+			}
+			if(shelterFilter)
+			{
+				if(ageFilter1 || ageFilter2 || breedFilter || genderFilter)
+				query = query + ", AND DOG_Adoption_Agency = \"" + shelter + "\"";
+				else
+				query = query + "DOG_Adoption_Agency = \"" + shelter + "\"";
+			}
 		}
 		query = query + ";";	
 			
@@ -94,7 +97,6 @@ public class DogPile
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
 		}
 	}
 	
