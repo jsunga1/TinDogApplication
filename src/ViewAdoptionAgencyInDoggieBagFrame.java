@@ -10,6 +10,7 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.Font;
@@ -19,7 +20,13 @@ public class ViewAdoptionAgencyInDoggieBagFrame extends JFrame {
 	private JPanel contentPane;
 	private User user;
 
+	
+	private Dog dog;
+	
+
+
 	private ActionListener backListener;
+
 
 	public ViewAdoptionAgencyInDoggieBagFrame() {
 		class createBackListener implements ActionListener{
@@ -30,6 +37,15 @@ public class ViewAdoptionAgencyInDoggieBagFrame extends JFrame {
 				frameMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		}
+
+
+		
+		dog = d;
+		UniversalDogDB db = new UniversalDogDB();
+		String q = "";
+		db.retrieveData(q);
+		
+
 		backListener = new createBackListener();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,8 +105,18 @@ public class ViewAdoptionAgencyInDoggieBagFrame extends JFrame {
 		agencyEmailLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		centerPanel.add(agencyEmailLabel);
 		
+
+		
+		
+		Panel southPanel = new Panel();
+		contentPane.add(southPanel, BorderLayout.SOUTH);
+		
+		JLabel tinDogLogLabel = new JLabel(new ImageIcon("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic"));//TinDog logo
+		southPanel.add(tinDogLogLabel);
+
 		JLabel agencyEmail = new JLabel("");
 		centerPanel.add(agencyEmail);
+
 	}
 	public void close(){
 		this.setVisible(false);
