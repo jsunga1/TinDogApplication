@@ -43,74 +43,72 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_7 = new JPanel();
-		contentPane.add(panel_7, BorderLayout.CENTER);
-		panel_7.setLayout(new BorderLayout(0, 0));
+		JPanel centerPanel = new JPanel();
+		contentPane.add(centerPanel, BorderLayout.CENTER);
+		centerPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		panel_7.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel centerNorthPanel = new JPanel();
+		centerPanel.add(centerNorthPanel, BorderLayout.NORTH);
+		centerNorthPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel(""); /*Image file here*/
-		panel.add(lblNewLabel);
+		JLabel iamgeLabel = new JLabel(""); /*Image file here*/
+		centerNorthPanel.add(iamgeLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Name" + "");/*Name of Dog here*/
-		panel.add(lblNewLabel_1);
+		JLabel nameLabel = new JLabel("Name:");/*Name of Dog here*/
+		centerNorthPanel.add(nameLabel);
 		
-		JLabel lblNewLabel_3 = new JLabel("Breed" + "");/*Breed of Dog here*/
-		panel.add(lblNewLabel_3);
+		JLabel breedLabel = new JLabel("Breed:");/*Breed of Dog here*/
+		centerNorthPanel.add(breedLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Location" + "");/*Location of Dog here*/
-		panel.add(lblNewLabel_2);
+		JLabel locationLabel = new JLabel("Location:");/*Location of Dog here*/
+		centerNorthPanel.add(locationLabel);
 		
-		JPanel panel_1 = new JPanel();
-		panel_7.add(panel_1);
+		JLabel ageLabel = new JLabel("Age:"); /*Age of the dog goes here*/
+		centerNorthPanel.add(ageLabel);
+		
+		JPanel centerCenterPanel = new JPanel();
+		centerPanel.add(centerCenterPanel);
 		
 		JTextArea textArea = new JTextArea();/*Info of Dog here*/
-		panel_1.add(textArea);
+		centerCenterPanel.add(textArea);
 		
-		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, BorderLayout.SOUTH);
-		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
+		JPanel southPanel = new JPanel();
+		contentPane.add(southPanel, BorderLayout.SOUTH);
+		southPanel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3);
+		JPanel southPanelPanel1 = new JPanel();
+		southPanel.add(southPanelPanel1);
 		
-		Component glue = Box.createGlue();
-		panel_3.add(glue);
+		JButton deleteButton = new JButton("Delete");
+		southPanelPanel1.add(deleteButton);
 		
-		JButton btnNewButton = new JButton("Delete");
-		panel_3.add(btnNewButton);
-		
-		JPanel panel_4 = new JPanel();
-		panel_2.add(panel_4);
-		
-		Component glue_1 = Box.createGlue();
-		panel_4.add(glue_1);
-		
+
 		JLabel lblTindogLogo = new JLabel(new ImageIcon("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic"));
-		panel_4.add(lblTindogLogo);
+		panel_4.add(lblTindogLogo);//FIX THIS JOE
+		JPanel southPanelPanel2 = new JPanel();
+		southPanel.add(southPanelPanel2);
+
 		
-		JPanel panel_5 = new JPanel();
-		panel_2.add(panel_5);
+		JLabel tindogImageLabel = new JLabel(new ImageIcon("C:\\Users\\jde674\\Documents\\GitHub\\Tindog\\TinDog Logo.png"));
+		southPanelPanel2.add(tindogImageLabel);
 		
-		Component glue_2 = Box.createGlue();
-		panel_5.add(glue_2);
+		JPanel southPanelPanel3 = new JPanel();
+		southPanel.add(southPanelPanel3);
 		
-		JButton btnNewButton_1 = new JButton("View Adoption Information");
-		panel_5.add(btnNewButton_1);
+		JButton viewAdoptionInformationButton = new JButton("View Adoption Information");
+		southPanelPanel3.add(viewAdoptionInformationButton);
 		
-		JPanel panel_6 = new JPanel();
-		contentPane.add(panel_6, BorderLayout.NORTH);
-		panel_6.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel northPanel = new JPanel();
+		contentPane.add(northPanel, BorderLayout.NORTH);
+		northPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel panel_8 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_8.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		panel_6.add(panel_8);
+		JPanel northPanelPanel1 = new JPanel();
+		FlowLayout fl_northPanelPanel1 = (FlowLayout) northPanelPanel1.getLayout();
+		fl_northPanelPanel1.setAlignment(FlowLayout.LEFT);
+		northPanel.add(northPanelPanel1);
 		
 		JButton backButton = new JButton("<--");
-		panel_8.add(backButton);
+		northPanelPanel1.add(backButton);
 		backButton.addActionListener(backListener);
 	}
 	public void close() {
