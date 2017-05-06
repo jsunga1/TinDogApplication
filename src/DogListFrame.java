@@ -59,7 +59,7 @@ public class DogListFrame extends JFrame {
 		}
 		class viewInfoListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame(sendUserData());
+				JFrame frameViewDogInMainFrameFrame = new ViewDogInMainFrame(sendUserData());
 				close();
 				frameViewDogInMainFrameFrame.setVisible(true);
 				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
