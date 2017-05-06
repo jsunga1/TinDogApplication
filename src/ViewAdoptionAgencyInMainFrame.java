@@ -6,13 +6,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+
 import java.awt.GridLayout;
 import java.awt.Font;
+import java.sql.ResultSet;
 
 public class ViewAdoptionAgencyInMainFrame extends JFrame {
 
@@ -47,8 +50,9 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 		dog = d;
 		
 		UniversalDogDB db = new UniversalDogDB();
-		String q = "";
+		String q = "Select AGENCY_NAME from ADOPTION_AGENCY where ID = " + Integer.parseInt(dog.getShelter());
 		db.retrieveData(q);
+		ResultSet rs = db.getResultSet();
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
