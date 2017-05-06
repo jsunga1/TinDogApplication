@@ -157,7 +157,7 @@ public class FilterFrame extends JFrame {
 
 		breedComboBox = new JComboBox();
 		centerCenterPanel2panel1.add(breedComboBox);
-
+		
 		JPanel centerCenterPanel3 = new JPanel();
 		centerCenterPanel.add(centerCenterPanel3);
 		centerCenterPanel3.setLayout(new GridLayout(0, 2, 0, 0));
