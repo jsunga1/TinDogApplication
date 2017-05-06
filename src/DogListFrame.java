@@ -77,8 +77,7 @@ public class DogListFrame extends JFrame {
 				dog.setDogInfo(d);
 				
 				try {
-					//dogPhoto = new URL(dog.getPicture());
-					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
+					dogPhoto = new URL(dog.getPicture());
 					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 					dogImageLabel.setIcon(new ImageIcon(photo));
 					dogNameLabel.setText(dog.getName()); //change this for next dog
@@ -103,8 +102,7 @@ public class DogListFrame extends JFrame {
 				dog.setDogInfo(d);
 				
 				try {
-					//dogPhoto = new URL(dog.getPicture());
-					dogPhoto = new URL("https://images-na.ssl-images-amazon.com/images/I/51iY2FEmF9L._SL256_.jpg");
+					dogPhoto = new URL(dog.getPicture());
 					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 					lblDogImage.setIcon(new ImageIcon(photo));
 					dogNameLabel.setText(dog.getName());
@@ -118,7 +116,8 @@ public class DogListFrame extends JFrame {
 		
 		dp = user.getDogPile();
 		if (dp.getDogPileArray().size()== 0)
-			dogNameLabel.setText("No Dogs Available!");
+			//dog.setDogID(66);
+			System.out.println("No Dog Available");
 		else
 		{
 			int i = dp.getHeadDog();
@@ -188,8 +187,7 @@ public class DogListFrame extends JFrame {
 		JPanel centerCenterPanel = new JPanel();
 		centerPanel.add(centerCenterPanel, BorderLayout.CENTER);
 		
-		
-		dogPhoto = new URL("https://barkpost-assets.s3.amazonaws.com/wp-content/uploads/2013/11/grumpy-dog-11.jpg"); //change this for first dog
+		dogPhoto = new URL(dog.getPicture());
 		photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		centerCenterPanel.setLayout(new BorderLayout(0, 0));
 		
