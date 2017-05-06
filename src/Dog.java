@@ -46,7 +46,7 @@ public class Dog
 				gender = rs.getInt("DOG_Gender");
 				dogShelter = rs.getString("DOG_Adoption_Agency");
 				dogDescription = rs.getString("DOG_Description");
-				//dogPic = rs.getString("DOG_Picture");
+				dogPic = rs.getString("DOG_Photo_Link");
 			}
 			
 		}catch(Exception dogFail)
@@ -58,7 +58,7 @@ public class Dog
 	public void addDogToDoggieBag(String user)
 	{
 		db = new UniversalDogDB();
-		String q = "Insert into DOGGIEBAG Values(\"" + user + "\", " + dogID + ")";
+		String q = "Insert into DOGGIE_BAG Values(\"" + user + "\", " + dogID + ")";
 		db.sendData(q);
 	}
 	

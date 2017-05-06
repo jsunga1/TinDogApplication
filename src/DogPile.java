@@ -34,6 +34,7 @@ public class DogPile
 	
 	public void generateDogPile()
 	{
+		dogPile.clear();
 		//connection to db
 		//grab ids
 		//save to arraylist
@@ -45,44 +46,50 @@ public class DogPile
 		
 		
 		checkFilter();
-		query = "Select DOG_ID from DOG";
+		query = "Select DOG_ID from DOG_2";
 		
 		if(filter)
 		{
-			query = query + " Where ";
+			if(shelterFilter)
+			{
+				query = query + " JOIN ADOPTION_AGENCY ON DOG_Adoption_Agency = AGENCY_ID ";
+			}
+			query = query + " where ";
+			System.out.println(dogPile.size());
 			if(ageFilter1)
-				query = query + " DOG_Age > " + age1;
+				query = query + "DOG_Age >= " + age1;
+			
 			if(ageFilter2)
 			{
 				if(ageFilter1)
-				query = query + ", AND DOG_Age < "+ age2;
+					query = query + " AND DOG_Age <= "+ age2;
 				else
-				query = query + "DOG_Age < "+ age2;
+					query = query + "DOG_Age <= " + age2;
 			}
 			if(breedFilter)
 			{
 				if(ageFilter1 || ageFilter2)
-				query = query + ", AND DOG_Breed = \"" + breed + "\"";
+					query = query + " AND DOG_Breed = \"" + breed + "\"";
 				else
-				query = query + "DOG_Breed = \"" + breed + "\"";
+					query = query + "DOG_Breed = \"" + breed + "\"";
 			}
 			if(genderFilter)
 			{
 				if(ageFilter1 || ageFilter2 || breedFilter)
-				query = query + ", AND DOG_Gender = " + gender;
+				query = query + " AND DOG_Gender = " + gender;
 				else
 				query = query + "DOG_Gender = " + gender;
 			}
 			if(shelterFilter)
 			{
 				if(ageFilter1 || ageFilter2 || breedFilter || genderFilter)
-				query = query + ", AND DOG_Adoption_Agency = \"" + shelter + "\"";
+					query = query + " AND Agency_Name = \"" + shelter + "\"";
 				else
-				query = query + "DOG_Adoption_Agency = \"" + shelter + "\"";
+					query = query + "Agency_Name = \"" + shelter + "\"";
 			}
 		}
 		query = query + ";";	
-			
+		System.out.println(query);
 		db.retrieveData(query);
 		ResultSet rs = db.getResultSet();
 		
@@ -100,6 +107,20 @@ public class DogPile
 		}
 	}
 	
+	public void clearFilter()
+	{
+		age1 = 0;
+		age2 = 100;
+		breed = "";
+		gender = 2;
+		shelter = "";
+		ageFilter1 = false;
+		ageFilter2 = false;
+		breedFilter = false;
+		genderFilter = false;
+		shelterFilter = false;
+		filter = false;
+	}
 	public int getHeadDog()
 	{
 		return dogPile.get(0);
@@ -122,7 +143,7 @@ public class DogPile
 			ageFilter2 = true;
 			filter = true;
 		}
-		if(!breed.isEmpty())
+		if(!breed.equals(""))
 		{
 		
 			breedFilter = true;
@@ -133,7 +154,7 @@ public class DogPile
 			genderFilter = true;
 			filter = true;
 		}
-		if(!shelter.isEmpty())
+		if(!shelter.equals(""))
 		{
 			shelterFilter = true;
 			filter = true;
@@ -159,5 +180,9 @@ public class DogPile
 	public void setShelter(String s)
 	{
 		shelter = s;
+	}
+	public ArrayList <Integer> getDogPileArray()
+	{
+		return dogPile;
 	}
 }
