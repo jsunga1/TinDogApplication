@@ -49,6 +49,13 @@ public class MainFrame extends JFrame {
 				frameDoggieBagFrame.setVisible(true);
 			}
 		}
+		class createHelpListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				JFrame frameHelpFrame = new HelpFrame(sendUserData());
+				close();
+				frameHelpFrame.setVisible(true);
+			}
+		}
 		backListener = new createBackListener();
 		settingsListener = new createSettingsListener();
 		doggieBagListener = new createDoggieBagListener();

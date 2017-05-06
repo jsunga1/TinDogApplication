@@ -261,7 +261,7 @@ public class DogListFrame extends JFrame {
 		JPanel southPanelPanel2 = new JPanel();
 		southPanel.add(southPanelPanel2);
 		
-		JLabel tinDogLogLabel = new JLabel(new ImageIcon("C:\\Users\\jde674\\Documents\\GitHub\\Tindog\\TinDog Logo.png"));//TinDog logo
+		JLabel tinDogLogLabel = new JLabel(new ImageIcon("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic"));//TinDog logo
 		southPanelPanel2.add(tinDogLogLabel);
 		
 		JPanel southPanelPanel3 = new JPanel();
