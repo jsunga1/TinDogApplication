@@ -34,24 +34,9 @@ public class DoggieBagFrame extends JFrame {
 				frameMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		}
-		createDogImages();
-		class createDogImageListener implements ActionListener{
-			public void actionPerformed(ActionEvent e){
-				/*for(Integer i: dogTemp){
-					if(i.toString().equals(e.getActionCommand())){
-						JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame();
-					}
-				}*/
-				//rs.get(e.getActionCommand())
-				//JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame();
-				//^^ send the integer to view dog in doggie frame
-				//then open doggie frame
-				
-			}
-		}
 
 		backlistener = new Back_Listener();
-		dogImageListener = new createDogImageListener();
+		
 		for(Integer i: dogTemp){
 			
 		}
@@ -92,20 +77,37 @@ public class DoggieBagFrame extends JFrame {
 		northPanel_south.add(btnFilter);
 
 		panel_center = new JPanel();
-		panel_center.add(dogPanel);
+		panel_center.setLayout(new GridLayout(0, 3, 0, 0));
+		createDogImages();
+		class createDogImageListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				/*for(Integer i: dogTemp){
+					if(i.toString().equals(e.getActionCommand())){
+						JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame();
+					}
+				}*/
+				//rs.get(e.getActionCommand())
+				//JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame();
+				//^^ send the integer to view dog in doggie frame
+				//then open doggie frame
+				
+			}
+		}
+		dogImageListener = new createDogImageListener();
 		contentPane.add(panel_center, BorderLayout.CENTER);
 	}
 	public void createDogImages(){
 		dogBagTemp = new DoggieBag(user.getEmail());
 		dogTemp = dogBagTemp.getDoggieBag();
+		dogPanel = new JPanel();
 		for(Integer i: dogTemp){
-			dogPanel = new JPanel();
 			dogPanel.setLayout(new GridLayout(0,0,2,0));
 			JButton dogImage = new JButton();//dog image
 			dogImage.setActionCommand(i.toString());
 			JLabel dogName = new JLabel();//dog name
 			dogPanel.add(dogImage);
 			dogPanel.add(dogName);
+			panel_center.add(dogPanel);
 		}
 	}
 
