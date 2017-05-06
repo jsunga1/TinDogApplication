@@ -41,6 +41,8 @@ public class DogListFrame extends JFrame {
   
 	public DogListFrame(User u) throws IOException {
 		user = u;
+		dogImageLabel = new JLabel();
+		dogNameLabel = new JLabel();
 		class mainMenuListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				JFrame frameMainMenuFrame = new MainFrame(sendUserData());
@@ -72,21 +74,58 @@ public class DogListFrame extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				UniversalDogDB db = new UniversalDogDB();
-				dp.removeHeadDog();
-				int d = dp.getHeadDog();
 				
-				dog.setDogID(d);
-				dog.setDogInfo(d);
-				
-				try {
-					dogPhoto = new URL(dog.getPicture());
-					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-					dogImageLabel.setIcon(new ImageIcon(photo));
-					dogNameLabel.setText(dog.getName()); //change this for next dog
-				} catch (MalformedURLException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+				if (dp.getDogPileArray().isEmpty())
+				{
+					dog.setDogName("Sorry, No More Dogs are available");
+					dog.setPhotoLink("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=10d25d7e04315415a8caca5f855b7403e&authkey=AVAO6rh74CPhzTMZY5WLaTQ");
+					try {
+						dogPhoto = new URL(dog.getPicture());
+						photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+						dogImageLabel.setIcon(new ImageIcon(photo));
+						dogNameLabel.setText(dog.getName());
+					} catch (MalformedURLException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+				else
+				{
+					dp.removeHeadDog();
+					if (dp.getDogPileArray().isEmpty())
+					{
+						dog.setDogName("Sorry, No More Dogs are available");
+						dog.setPhotoLink("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=10d25d7e04315415a8caca5f855b7403e&authkey=AVAO6rh74CPhzTMZY5WLaTQ");
+						try {
+							dogPhoto = new URL(dog.getPicture());
+							photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+							dogImageLabel.setIcon(new ImageIcon(photo));
+							dogNameLabel.setText(dog.getName());
+						} catch (MalformedURLException e1) {
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+					else
+					{
+						int d = dp.getHeadDog();
+						
+						dog.setDogID(d);
+						dog.setDogInfo(d);
+						
+						try {
+							dogPhoto = new URL(dog.getPicture());
+							photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+							dogImageLabel.setIcon(new ImageIcon(photo));
+							dogNameLabel.setText(dog.getName()); //change this for next dog
+						} catch (MalformedURLException e1) {
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
 				}
 				
 			}
@@ -96,34 +135,83 @@ public class DogListFrame extends JFrame {
 			{
 				UniversalDogDB db = new UniversalDogDB();
 				
-				dog.addDogToDoggieBag(user.getEmail());
-				
-				dp.removeHeadDog();
-				int d = dp.getHeadDog();
-				
-				dog.setDogID(d);
-				dog.setDogInfo(d);
-				
-				try {
-					dogPhoto = new URL(dog.getPicture());
-					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-					lblDogImage.setIcon(new ImageIcon(photo));
-				} catch (MalformedURLException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+				if (dp.getDogPileArray().isEmpty())
+				{
+					dog.setDogName("Sorry, No More Dogs are available");
+					dog.setPhotoLink("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=10d25d7e04315415a8caca5f855b7403e&authkey=AVAO6rh74CPhzTMZY5WLaTQ");
+					try {
+						dogPhoto = new URL(dog.getPicture());
+						photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+						dogImageLabel.setIcon(new ImageIcon(photo));
+						dogNameLabel.setText(dog.getName());
+					} catch (MalformedURLException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+				else
+				{
+					dog.addDogToDoggieBag(user.getEmail());
+					
+					dp.removeHeadDog();
+					if (dp.getDogPileArray().isEmpty())
+					{
+						dog.setDogName("Sorry, No More Dogs are available");
+						dog.setPhotoLink("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=10d25d7e04315415a8caca5f855b7403e&authkey=AVAO6rh74CPhzTMZY5WLaTQ");
+						try {
+							dogPhoto = new URL(dog.getPicture());
+							photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+							dogImageLabel.setIcon(new ImageIcon(photo));
+							dogNameLabel.setText(dog.getName());
+						} catch (MalformedURLException e1) {
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+					else
+					{	
+						int d = dp.getHeadDog();
+						
+						dog.setDogID(d);
+						dog.setDogInfo(d);
+						
+						try {
+							dogPhoto = new URL(dog.getPicture());
+							photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+							dogImageLabel.setIcon(new ImageIcon(photo));
+							dogNameLabel.setText(dog.getName());
+						} catch (MalformedURLException e1) {
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
 				}
 			}
 		}
 		
+		dog = new Dog();
 		dp = user.getDogPile();
-		if (dp.getDogPileArray().size()== 0)
-			//dog.setDogID(66);
-			System.out.println("No Dog Available");
+		if (dp.getDogPileArray().isEmpty())
+		{
+			dog.setDogName("Sorry, No More Dogs are available");
+			dog.setPhotoLink("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=10d25d7e04315415a8caca5f855b7403e&authkey=AVAO6rh74CPhzTMZY5WLaTQ");
+			try {
+				dogPhoto = new URL(dog.getPicture());
+				photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+				dogImageLabel.setIcon(new ImageIcon(photo));
+				dogNameLabel.setText(dog.getName());
+			} catch (MalformedURLException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 		else
 		{
 			int i = dp.getHeadDog();
-			dog = new Dog();
 			dog.setDogID(i);
 			dog.setDogInfo(i);
 		}
@@ -173,7 +261,7 @@ public class DogListFrame extends JFrame {
 		JPanel southPanelPanel2 = new JPanel();
 		southPanel.add(southPanelPanel2);
 		
-		JLabel tinDogLogLabel = new JLabel(new ImageIcon("C:\\Users\\jde674\\Documents\\GitHub\\Tindog\\TinDog Logo.png"));//TinDog logo
+		JLabel tinDogLogLabel = new JLabel(new ImageIcon("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic"));//TinDog logo
 		southPanelPanel2.add(tinDogLogLabel);
 		
 		JPanel southPanelPanel3 = new JPanel();
@@ -199,13 +287,17 @@ public class DogListFrame extends JFrame {
 		photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 		centerCenterPanel.setLayout(new BorderLayout(0, 0));
 		
-		dogImageLabel = new JLabel(new ImageIcon(photo));
-		centerCenterPanel.add(dogImageLabel);
+		JPanel panel = new JPanel();
+		centerCenterPanel.add(panel, BorderLayout.CENTER);
+		dogImageLabel.setIcon(new ImageIcon(photo));
+		panel.add(dogImageLabel);
+		
+		dogImageLabel.setIcon(new ImageIcon(photo));
 		
 		JPanel centerCenterSouthPanel = new JPanel();
 		centerCenterPanel.add(centerCenterSouthPanel, BorderLayout.SOUTH);
 		
-		dogNameLabel = new JLabel(dog.getName());
+		dogNameLabel.setText(dog.getName());
 		centerCenterSouthPanel.add(dogNameLabel);
 		
 		JPanel centerSouthPanel = new JPanel();

@@ -50,13 +50,10 @@ public class DoggieBagFrame extends JFrame {
 		JPanel northPanel = new JPanel();
 		contentPane.add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(new BorderLayout(0, 0));
-
-		JPanel northPanel_west = new JPanel();
-		northPanel.add(northPanel_west, BorderLayout.WEST);
-
-		JButton button_Back = new JButton("<--");
-		northPanel_west.add(button_Back);
-		button_Back.addActionListener(backlistener);
+		
+				JButton button_Back = new JButton("<--");
+				northPanel.add(button_Back, BorderLayout.WEST);
+				button_Back.addActionListener(backlistener);
 
 		JPanel northPanel_center = new JPanel();
 		northPanel.add(northPanel_center, BorderLayout.CENTER);
