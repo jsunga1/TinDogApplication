@@ -12,16 +12,19 @@ public class User
 	private String phone;
 	private String password;
 	private UniversalDogDB udb;
+	private DogPile dp;
 	
 	public User()
 	{
 		db = new DoggieBag();
-
+		
 		firstName = "User";
 		lastName = "User";
 		email = "User";
 		phone = "User";
 		password = "User";
+		dp = new DogPile();
+		dp.generateDogPile();
 		
 	}
 	
@@ -75,4 +78,9 @@ public class User
 	{
 		return password;
 	}
+	public DogPile getDogPile()
+	{
+		return dp;
+	}
+	
 }

@@ -16,6 +16,7 @@ import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
+import java.sql.*;
 
 public class FilterFrame extends JFrame {
 
@@ -27,6 +28,11 @@ public class FilterFrame extends JFrame {
 	private JRadioButton maleButton;
 	private JRadioButton femaleButton;
 	private User user;
+	private ActionListener backListener;
+	private ActionListener submitListener;
+	private UniversalDogDB db;
+	private UniversalDogDB db2;
+	private DogPile dp;
 	public FilterFrame(User u) {
 		user = u;
 		class createBackListener implements ActionListener{
@@ -43,19 +49,34 @@ public class FilterFrame extends JFrame {
 		}
 		class createSubmitListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				bAgeField.getText();//bottom age
-				tAgeField.getText();//top age 
-				breedComboBox.getSelectedItem();//get breed
-				shelterComboBox.getSelectedItem();//get shelter
-				if(maleButton.isSelected()){//male is selected
-
+				
+				user.getDogPile().clearFilter();
+				
+				if (!bAgeField.getText().equals(""))
+					user.getDogPile().setAge1(Integer.parseInt(bAgeField.getText()));//bottom age
+				if (!tAgeField.getText().equals(""))
+					user.getDogPile().setAge2(Integer.parseInt(tAgeField.getText()));
+				
+				user.getDogPile().setBreed((String) breedComboBox.getSelectedItem());//get breed
+				user.getDogPile().setShelter((String)shelterComboBox.getSelectedItem());//get shelter
+				
+				if(maleButton.isSelected())
+				{//male is selected
+					user.getDogPile().setGender(1);
 				}
-				else if(femaleButton.isSelected()){//female is selected
-
+				else if(femaleButton.isSelected())
+				{//female is selected
+					user.getDogPile().setGender(0);
 				}
-				else if(maleButton.isSelected() && femaleButton.isSelected()){//both are selected
-
+				else if(maleButton.isSelected() && femaleButton.isSelected())
+				{//both are selected
+					user.getDogPile().setGender(2);
 				}
+				
+				dp = user.getDogPile();
+				dp.generateDogPile();
+				
+				System.out.println(dp.getDogPileArray().size());
 				try {
 					JFrame frameDogListFrame = new DogListFrame(sendUserData());
 					close();
@@ -66,8 +87,8 @@ public class FilterFrame extends JFrame {
 				}
 			}
 		}
-
-
+		backListener = new createBackListener();
+		submitListener = new createSubmitListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -81,7 +102,7 @@ public class FilterFrame extends JFrame {
 
 		JButton backButton = new JButton("<--");
 		northPanel.add(backButton, BorderLayout.WEST);
-
+		backButton.addActionListener(backListener);
 		JPanel northCenterPanel = new JPanel();
 		northPanel.add(northCenterPanel, BorderLayout.CENTER);
 
@@ -155,8 +176,24 @@ public class FilterFrame extends JFrame {
 		JPanel centerCenterPanel2panel1 = new JPanel();
 		centerCenterPanel2.add(centerCenterPanel2panel1);
 
+		
 		breedComboBox = new JComboBox();
+		db = new UniversalDogDB();
+		String q = "Select Distinct DOG_Breed from DOG_2;";
+		db.retrieveData(q);
+		ResultSet rs = db.getResultSet();
+		breedComboBox.addItem("");
+		try{
+			while (rs.next())
+			{
+				breedComboBox.addItem(rs.getString("DOG_Breed"));
+			}
+		}catch (Exception breedFailed)
+		{
+			System.out.println(breedFailed);
+		}
 		centerCenterPanel2panel1.add(breedComboBox);
+	
 
 		JPanel centerCenterPanel3 = new JPanel();
 		centerCenterPanel.add(centerCenterPanel3);
@@ -181,6 +218,21 @@ public class FilterFrame extends JFrame {
 		centerCenterPanel4.add(centerCenterPanel4panel1);
 
 		shelterComboBox = new JComboBox();
+		db2 = new UniversalDogDB();
+		String q2 = "Select * from ADOPTION_AGENCY;";
+		db2.retrieveData(q2);
+		ResultSet rs2 = db2.getResultSet();
+		shelterComboBox.addItem("");
+		try{
+			while (rs2.next())
+			{
+				shelterComboBox.addItem(rs2.getString("AGENCY_Name"));
+			}
+		}catch (Exception agencyFailed)
+		{
+			System.out.println(agencyFailed);
+		}
+		
 		centerCenterPanel4panel1.add(shelterComboBox);
 
 		JPanel southPanel = new JPanel();
@@ -188,6 +240,7 @@ public class FilterFrame extends JFrame {
 
 		JButton submitButton = new JButton("Submit");
 		southPanel.add(submitButton);
+		submitButton.addActionListener(submitListener);
 	}
 	public void close() {
 		this.setVisible(false);

@@ -1,5 +1,6 @@
-import java.sql.*;
-import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DogPile
 {
@@ -9,6 +10,11 @@ public class DogPile
 	private String breed;
 	private int gender;
 	private String shelter;
+	private boolean ageFilter1;
+	private boolean ageFilter2;
+	private boolean breedFilter;
+	private boolean genderFilter;
+	private boolean shelterFilter;
 	private boolean filter;
 	
 	public DogPile()
@@ -19,65 +25,91 @@ public class DogPile
 		breed = "";
 		gender = 2;
 		shelter = "";
+		ageFilter1 = false;
+		ageFilter2 = false;
+		breedFilter = false;
+		genderFilter = false;
+		shelterFilter = false;
 		filter = false;
+		
 	}
-	
-	public ArrayList<Integer> createPile()
-	{
-		for(int i = 0; i < 50; i++)
-		{
-			checkFilter();
-			
-			int dogID = (int)Math.random();
-			Dog d = new Dog();
-			
-			if(filter)
-			{
-				if(d.getAge() < age1 || d.getAge() > age2)
-					dogPile.remove(d);
-				else if(!d.getBreed().equals(breed))
-					dogPile.remove(d);
-				else if(d.getGender() != gender)
-					dogPile.remove(d);
-				else if(!d.getShelter().equals(shelter))
-					dogPile.remove(d);
-			}
-			
-		}
-		return dogPile;
-	}
+
 	
 	public void generateDogPile()
 	{
-		//connection to db
-		//grab ids
-		//save to arraylist
-		//needs to added to filterframe
-		//create with start frame w/user
-		
+		dogPile.clear();
 		String query;
 		UniversalDogDB db = new UniversalDogDB();
-		checkFilter();
-		if(filter)
-			query = "Select DOG_ID from DOG Where DOG_Age > " + age1 +" AND DOG_AGE < "+ age2 + 
-			", DOG_Breed = \"" + breed + "\", DOG_Gender = " + gender;
-		else
-			query = "Select DOG_ID from DOG";
-			
-		db.retrieveData(query);
-		ResultSet rs = db.getResultSet();
 		
-		try {
+		
+		checkFilter();
+		query = "Select DOG_ID from DOG_2";
+		
+		if(filter)
+		{
+			if(shelterFilter)
+			{
+				query = query + " JOIN ADOPTION_AGENCY ON DOG_Adoption_Agency = AGENCY_ID ";
+			}
+			query = query + " where ";
+			//System.out.println(dogPile.size());
+			
+			if(ageFilter1)
+				query = query + " DOG_Age >= " + age1;
+			
+			if(ageFilter2)
+			{
+				if(ageFilter1)
+					query = query + " AND DOG_Age <= " + age2;
+				else
+					query = query + "DOG_Age <= " + age2;
+			}
+			
+			if(breedFilter)
+			{
+				if(ageFilter1 && ageFilter2)
+					query = query + " AND DOG_Breed = \"" + breed + "\"";
+				else
+					query = query + "DOG_Breed = \"" + breed + "\"";
+			}
+			
+			if(genderFilter)
+			{
+				if(ageFilter1 || ageFilter2 || breedFilter)
+					query = query + " AND DOG_Gender = " + gender;
+				else
+					query = query + "DOG_Gender = " + gender;
+			}
+			
+			if(shelterFilter)
+			{
+				if(ageFilter1 || ageFilter2 || breedFilter || genderFilter)
+					query = query + " AND Agency_Name = \"" + shelter + "\"";
+				else
+					query = query + "Agency_Name = \"" + shelter + "\"";
+			}
+		}
+		
+			query = query + ";";		
+			System.out.println(query);
+			db.retrieveData(query);
+			ResultSet rs = db.getResultSet();
+			
+		try
+		{
 			while(rs.next())
 			{
 				dogPile.add(rs.getInt("DOG_ID"));
 			}
-		} catch (SQLException e) {
+			
+		} 
+		catch (SQLException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
 	}
+
 	
 	public int getHeadDog()
 	{
@@ -92,17 +124,49 @@ public class DogPile
 	public void checkFilter()
 	{
 		if(age1 != 0)
+		{
+			ageFilter1 = true;
 			filter = true;
-		else if(age2 != 100)
+		}
+		if(age2 != 100)
+		{
+			
+			ageFilter2 = true;
 			filter = true;
-		else if(!breed.isEmpty())
+		
+		}
+		if(!breed.equals(""))
+		{
+			
+			breedFilter = true;
 			filter = true;
-		else if(gender != 2)
+		}
+		if(gender != 2)
+		{
+			genderFilter = true;
 			filter = true;
-		else if(!shelter.isEmpty())
+		}
+		if(!shelter.equals(""))
+		{
+			shelterFilter = true;
 			filter = true;
+		}
 	}
 	
+	public void clearFilter()
+	{
+		age1 = 0;
+		age2 = 100;
+		breed = "";
+		gender = 2;
+		shelter = "";
+		ageFilter1 = false;
+		ageFilter2 = false;
+		breedFilter = false;
+		genderFilter = false;
+		shelterFilter = false;
+		filter = false;
+	}
 	public void setAge1(int a)
 	{
 		age1 = a;
@@ -123,4 +187,9 @@ public class DogPile
 	{
 		shelter = s;
 	}
+	public ArrayList <Integer> getDogPileArray()
+	{
+		return dogPile;
+	}
+	
 }

@@ -1,3 +1,4 @@
+import java.awt.Image;
 import java.sql.*;
 public class Dog
 {
@@ -22,7 +23,7 @@ public class Dog
 		dogShelter = "dog";
 		dogStatus = true;
 		dogDescription = "dog";
-		dogPic = "dog";
+		dogPic = "" ;
 	}
 	public void setDogID(int id)
 	{
@@ -43,7 +44,7 @@ public class Dog
 				dogAge = rs.getInt("DOG_Age");
 				dogBreed = rs.getString("DOG_Breed");
 				gender = rs.getInt("DOG_Gender");
-				dogShelter = rs.getString("DOG_Shelter");
+				dogShelter = rs.getString("DOG_Adoption_Agency");
 				dogDescription = rs.getString("DOG_Description");
 				//dogPic = rs.getString("DOG_Picture");
 			}
