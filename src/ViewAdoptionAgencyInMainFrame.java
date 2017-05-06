@@ -19,8 +19,10 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 	private JPanel contentPane;
 	private User user;
 	private ActionListener backListener;
-	public ViewAdoptionAgencyInMainFrame() {
+	private Dog dog;
+	public ViewAdoptionAgencyInMainFrame(Dog d) {
 		class createBackListener implements ActionListener{
+
 			public void actionPerformed(ActionEvent e){
 				JFrame frameMainFrame = new ViewDoginMainFrame(sendUserData());
 				close();
@@ -28,7 +30,14 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 				frameMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		}
+
 		backListener = new createBackListener();
+		dog = d;
+		UniversalDogDB db = new UniversalDogDB();
+		String q = "";
+		db.retrieveData(q);
+		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

@@ -18,7 +18,9 @@ public class ViewAdoptionAgencyInDoggieBagFrame extends JFrame {
 
 	private JPanel contentPane;
 	private User user;
+
 	private ActionListener backListener;
+
 	public ViewAdoptionAgencyInDoggieBagFrame() {
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -29,6 +31,7 @@ public class ViewAdoptionAgencyInDoggieBagFrame extends JFrame {
 			}
 		}
 		backListener = new createBackListener();
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
