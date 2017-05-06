@@ -22,18 +22,7 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 	private Dog dog;
 	
 	
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ViewAdoptionAgencyInDoggieBagFrame frame = new ViewAdoptionAgencyInDoggieBagFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+
 	public ViewAdoptionAgencyInMainFrame(Dog d) {
 		class Back_Listener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -43,13 +32,14 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 				frameMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		}
+
+		backlistner= new Back_Listener();
+
 		
 		dog = d;
-		
 		UniversalDogDB db = new UniversalDogDB();
 		String q = "";
 		db.retrieveData(q);
-		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
