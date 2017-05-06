@@ -23,13 +23,15 @@ public class ViewDoginMainFrame extends JFrame {
 	private User user;
 	private ActionListener xMarkListener;
 	private ActionListener checkListener;
+	private ActionListener adoptionListener;
 	private Dog dog;
 	private DogPile dp;
 	
 	/**
 	 * Create the frame.
 	 */
-	public ViewDoginMainFrame(User u) {
+	public ViewDoginMainFrame(User u)
+	{
 		class backListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				JFrame frameDogListFrame;
@@ -65,7 +67,8 @@ public class ViewDoginMainFrame extends JFrame {
 			}
 		}
 		
-		class createCheckListener implements ActionListener{
+		class createCheckListener implements ActionListener
+		{
 			public void actionPerformed(ActionEvent e)
 			{
 				dog.addDogToDoggieBag(user.getEmail());
@@ -80,8 +83,26 @@ public class ViewDoginMainFrame extends JFrame {
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				}	
+			}
+		}
+		
+		class createViewAdoptionListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				JFrame frameViewAdoptionAgencyInMainFrame;
+				try {
+					frameViewAdoptionAgencyInMainFrame = new ViewAdoptionAgencyInMainFrame(dog);
+					close();
+					frameViewAdoptionAgencyInMainFrame.setVisible(true);
+					frameViewAdoptionAgencyInMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				}
-					
+				catch(Exception e1)
+				{
+					e1.printStackTrace();
+				}
+				
 			}
 		}
 		
@@ -92,6 +113,7 @@ public class ViewDoginMainFrame extends JFrame {
 		
 		xMarkListener = new createXMarkListener();
 		checkListener = new createCheckListener();
+		adoptionListener = new createViewAdoptionListener();
 		
 		backbtnListener = new backListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -168,6 +190,7 @@ public class ViewDoginMainFrame extends JFrame {
 		
 		JButton btnViewAdoptionInformation = new JButton("View Adoption Information");
 		panel_4.add(btnViewAdoptionInformation);
+		btnViewAdoptionInformation.addActionListener(adoptionListener);
 		
 		JPanel panel_6 = new JPanel();
 		panel_2.add(panel_6);
