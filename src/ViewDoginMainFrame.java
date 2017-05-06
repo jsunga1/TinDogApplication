@@ -74,88 +74,79 @@ public class ViewDoginMainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel northPanel = new JPanel();
+		contentPane.add(northPanel, BorderLayout.NORTH);
+		northPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel panel_7 = new JPanel();
-		panel.add(panel_7);
-		FlowLayout flowLayout_2 = (FlowLayout) panel_7.getLayout();
-		flowLayout_2.setAlignment(FlowLayout.LEFT);
+		JPanel northPanelPanel1 = new JPanel();
+		northPanel.add(northPanelPanel1);
+		FlowLayout fl_northPanelPanel1 = (FlowLayout) northPanelPanel1.getLayout();
+		fl_northPanelPanel1.setAlignment(FlowLayout.LEFT);
 		
-		JButton button = new JButton("<--");
-		panel_7.add(button);
-		button.addActionListener(backbtnListener);
+		JButton backButton = new JButton("<--");
+		northPanelPanel1.add(backButton);
+		backButton.addActionListener(backbtnListener);
 		
-		JPanel panel_10 = new JPanel();
-		contentPane.add(panel_10, BorderLayout.CENTER);
-		panel_10.setLayout(new BorderLayout(0, 0));
+		JPanel centerPanel = new JPanel();
+		contentPane.add(centerPanel, BorderLayout.CENTER);
+		centerPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_8 = new JPanel();
-		panel_10.add(panel_8, BorderLayout.NORTH);
-		panel_8.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel centerNorthPanel = new JPanel();
+		centerPanel.add(centerNorthPanel, BorderLayout.NORTH);
+		centerNorthPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel("");
-		panel_8.add(lblNewLabel);
+		JLabel imageLabel = new JLabel("");
+		centerNorthPanel.add(imageLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Name: " +  dog.getName());
-		panel_8.add(lblNewLabel_1);
+		JLabel nameLabel = new JLabel("Name: " +  dog.getName());
+		centerNorthPanel.add(nameLabel);
 		
-		JLabel lblNewLabel_3 = new JLabel("Breed: " +  dog.getBreed());
-		panel_8.add(lblNewLabel_3);
+		JLabel breedLabel = new JLabel("Breed: " +  dog.getBreed());
+		centerNorthPanel.add(breedLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Location: " + dog.getShelter());
-		panel_8.add(lblNewLabel_2);
+		JLabel locationLabel = new JLabel("Location: " + dog.getShelter());
+		centerNorthPanel.add(locationLabel);
 		
-		JPanel panel_1 = new JPanel();
-		panel_10.add(panel_1);
+		JLabel ageLabel = new JLabel("Age: " + dog.getAge());
+		centerNorthPanel.add(ageLabel);
+		
+		JPanel centerCenterPanel = new JPanel();
+		centerPanel.add(centerCenterPanel);
 		
 		JTextArea textArea = new JTextArea();
-		panel_1.add(textArea);
+		centerCenterPanel.add(textArea);
 		
-		JPanel panel_9 = new JPanel();
-		contentPane.add(panel_9, BorderLayout.SOUTH);
-		panel_9.setLayout(new BorderLayout(0, 0));
+		JPanel southPanel = new JPanel();
+		contentPane.add(southPanel, BorderLayout.SOUTH);
+		southPanel.setLayout(new GridLayout(2, 0, 0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		panel_9.add(panel_2, BorderLayout.SOUTH);
-		panel_2.setLayout(new GridLayout(2, 0, 0, 0));
+		JPanel southPanelPanel1 = new JPanel();
+		southPanel.add(southPanelPanel1);
 		
-		JPanel panel_4 = new JPanel();
-		panel_2.add(panel_4);
+		JButton viewAdoptionInformationButton = new JButton("View Adoption Information");
+		southPanelPanel1.add(viewAdoptionInformationButton);
 		
-		Component glue_1 = Box.createGlue();
-		panel_4.add(glue_1);
+		JPanel southPanelPanel2 = new JPanel();
+		southPanel.add(southPanelPanel2);
+		southPanelPanel2.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JButton btnViewAdoptionInformation = new JButton("View Adoption Information");
-		panel_4.add(btnViewAdoptionInformation);
+		JPanel southPanelPanel2Panel1 = new JPanel();
+		southPanelPanel2.add(southPanelPanel2Panel1);
+		FlowLayout fl_southPanelPanel2Panel1 = (FlowLayout) southPanelPanel2Panel1.getLayout();
+		fl_southPanelPanel2Panel1.setAlignment(FlowLayout.LEFT);
 		
-		JPanel panel_6 = new JPanel();
-		panel_2.add(panel_6);
-		panel_6.setLayout(new GridLayout(0, 2, 0, 0));
+		JButton XButton = new JButton("✖");
+		southPanelPanel2Panel1.add(XButton);
+		XButton.addActionListener(xMarkListener);
 		
-		JPanel panel_3 = new JPanel();
-		panel_6.add(panel_3);
-		FlowLayout flowLayout = (FlowLayout) panel_3.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
+		JPanel SouthPanelPanel2Panel2 = new JPanel();
+		FlowLayout fl_SouthPanelPanel2Panel2 = (FlowLayout) SouthPanelPanel2Panel2.getLayout();
+		fl_SouthPanelPanel2Panel2.setAlignment(FlowLayout.RIGHT);
+		southPanelPanel2.add(SouthPanelPanel2Panel2);
 		
-		Component glue = Box.createGlue();
-		panel_3.add(glue);
-		
-		JButton btnNewButton = new JButton("✖");
-		panel_3.add(btnNewButton);
-		
-		
-		JPanel panel_5 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_5.getLayout();
-		flowLayout_1.setAlignment(FlowLayout.RIGHT);
-		panel_6.add(panel_5);
-		
-		Component glue_2 = Box.createGlue();
-		panel_5.add(glue_2);
-		
-		JButton btnNewButton_1 = new JButton("✔");
-		panel_5.add(btnNewButton_1);
+		JButton checkButton = new JButton("✔");
+		SouthPanelPanel2Panel2.add(checkButton);
+		checkButton.addActionListener(checkListener);
 	}
 	public void close(){
 		this.setVisible(false);
