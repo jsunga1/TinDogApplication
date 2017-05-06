@@ -29,6 +29,14 @@ public class Dog
 	{
 		dogID = id;
 	}
+	public void setDogName(String n)
+	{
+		dogName = n;
+	}
+	public void setPhotoLink(String p)
+	{
+		dogPic = p;
+	}
 	public void setDogInfo(int id)
 	{
 		try{
@@ -103,7 +111,8 @@ public class Dog
 	{
 		return dogStatus;
 	}
-	public int getDogID(){
+	public int getDogID()
+	{
 		return dogID;
 	}
 }
