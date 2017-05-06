@@ -1,19 +1,48 @@
+import java.sql.ResultSet;
 
 public class Shelter
 {
+	private int shelterID;
 	private String name;
 	private String address;
 	private String phone;
 	private String email;
 	private String link;
+	private UniversalDogDB db;
+	private Dog dog;
 	
 	public Shelter()
 	{
+		shelterID= 0;
 		name = "";
 		address = "";
 		phone = "";
 		email = "";
 		link = "";
+	}
+	
+	public void setShelterID(){
+		shelterID = Integer.parseInt(dog.getShelter());
+	}
+	
+	public void setShelterInfo(int id){
+		try{
+			db = new UniversalDogDB();
+			String q = "select * from ADOPTION_AGENCY where AGENCY_ID = " + id;
+			db.retrieveData(q);
+			ResultSet rs = db.getResultSet();
+			
+			if(rs.next()){
+				shelterID = rs.getInt("AGENCY_ID");
+				name = rs.getString("AGENCY_Name");
+				address = rs.getString("AGENCY_Location");
+				link = rs.getString("AGENCY_Website");
+				phone = rs.getString("AGENCY_Phone_Number");
+				email = rs.getString("AGENCY_Email");
+			}
+		}catch(Exception shelterFail){
+			System.out.println(shelterFail);
+		}
 	}
 	
 	public void setName(String name)
@@ -59,5 +88,8 @@ public class Shelter
 	public String getLink()
 	{
 		return link;
+	}
+	public int getShelterID(){
+		return shelterID;
 	}
 }
