@@ -115,6 +115,7 @@ public class DogPile
 				if(test == 0)
 					dogPile.add(di);
 			}
+			getHeadDog();
 		} 
 		catch (SQLException e)
 		{
@@ -137,10 +138,14 @@ public class DogPile
 		shelterFilter = false;
 		filter = false;
 	}
-	public int getHeadDog()
+	public void getHeadDog()
 	{
 		Random r = new Random();
 		position = r.nextInt(dogPile.size());
+	}
+	public int getCurrentPosition()
+	{
+		
 		return dogPile.get(position);
 	}
 	
