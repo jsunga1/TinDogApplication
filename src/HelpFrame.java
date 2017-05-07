@@ -5,9 +5,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.Font;
 
 public class HelpFrame extends JFrame {
 
@@ -47,8 +49,9 @@ public class HelpFrame extends JFrame {
 		JPanel centerPanel = new JPanel();
 		contentPane.add(centerPanel, BorderLayout.CENTER);
 		
-		JLabel helpTextLabel = new JLabel("New label");
-		centerPanel.add(helpTextLabel);
+		JTextArea helpTextBox = new JTextArea("To use Tindog simply select\ncheck-mark or X-mark to choose a dog you would want to adopt.\nYou can view the dog in your doggie bag by\ngoing to the main menu and selecting doggiebag\nIf you want more information about a dog\nyou can click view more information in the search menu\nor the doggiebag.\n\nYou can filter dogs in the search menu or\ndoggie bag by clicking the filter button.\n\nIf you want to change your personal information\nor delete your account you can do that in\nthe settings frame located in the main menu");
+		helpTextBox.setFont(new Font("Monospaced", Font.PLAIN, 10));
+		centerPanel.add(helpTextBox);
 	}
 	public void close() {
 		this.setVisible(false);
