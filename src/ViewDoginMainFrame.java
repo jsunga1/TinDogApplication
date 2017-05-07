@@ -32,6 +32,7 @@ public class ViewDoginMainFrame extends JFrame {
 	 */
 	public ViewDoginMainFrame(User u)
 	{
+		user = u;
 		class backListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				JFrame frameDogListFrame;
@@ -93,7 +94,8 @@ public class ViewDoginMainFrame extends JFrame {
 			{
 				JFrame frameViewAdoptionAgencyInMainFrame;
 				try {
-					frameViewAdoptionAgencyInMainFrame = new ViewAdoptionAgencyInMainFrame(dog, sendUserData());
+
+					frameViewAdoptionAgencyInMainFrame = new ViewAdoptionAgencyInMainFrame(dog,sendUserData());
 					close();
 					frameViewAdoptionAgencyInMainFrame.setVisible(true);
 					frameViewAdoptionAgencyInMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,6 +109,7 @@ public class ViewDoginMainFrame extends JFrame {
 		}
 		
 		int dogid = user.getDogPile().getHeadDog();
+		dog = new Dog();
 		dog.setDogInfo(dogid);
 		
 		dp = user.getDogPile();
@@ -166,13 +169,8 @@ public class ViewDoginMainFrame extends JFrame {
 			sex = "Female";
 		else
 			sex = "Male";
-		JLabel lblNewLabel_5 = new JLabel("Gender: " + sex);
-		panel_8.add(lblNewLabel_5);
-		
-		
-		
-		JPanel panel_1 = new JPanel();
-		panel_10.add(panel_1);
+		JLabel genderLabel = new JLabel("Gender: " + sex);
+		centerNorthPanel.add(genderLabel);
 
 		
 		JPanel centerCenterPanel = new JPanel();
@@ -183,10 +181,7 @@ public class ViewDoginMainFrame extends JFrame {
 		centerCenterPanel.add(textArea);
 
 		
-		
-		JButton btnViewAdoptionInformation = new JButton("View Adoption Information");
-		panel_4.add(btnViewAdoptionInformation);
-		btnViewAdoptionInformation.addActionListener(adoptionListener);
+
 
 		
 		JPanel southPanel = new JPanel();
@@ -198,7 +193,7 @@ public class ViewDoginMainFrame extends JFrame {
 		
 		JButton viewAdoptionInformationButton = new JButton("View Adoption Information");
 		southPanelPanel1.add(viewAdoptionInformationButton);
-		
+		viewAdoptionInformationButton.addActionListener(adoptionListener);
 
 		JPanel southPanelPanel2 = new JPanel();
 		southPanel.add(southPanelPanel2);
