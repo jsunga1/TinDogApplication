@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import java.util.Scanner;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,7 +34,7 @@ public class DoggieBagFrame extends JFrame
 	private ArrayList <Integer> dogTemp;
 	private JComboBox box;
 
-	private Dog dog;
+	
 
 	
 	public DoggieBagFrame(User u)
@@ -54,6 +56,11 @@ public class DoggieBagFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				String boxInfo, boxInfoTemp0;
+				boxInfo = (String)box.getSelectedItem();//needs to find which do it is from dog name
+				Scanner input = new Scanner(boxInfo);
+				input.next();
+				dog.setDogID(input.nextInt()); 
 				JFrame frameVDIDBF = new ViewDogInDoggieBagFrame(sendUserData(), dog);
 				close();
 				frameVDIDBF.setVisible(true);
@@ -63,8 +70,6 @@ public class DoggieBagFrame extends JFrame
 
 		backlistener = new Back_Listener();
 		dogListener = new createDogListener();
-		
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -112,30 +117,7 @@ public class DoggieBagFrame extends JFrame
 		contentPane.add(panel_center, BorderLayout.CENTER);
 	}
 	
-	public void createDogImages()
-	{
-		dogBagTemp = new DoggieBag(user.getEmail());
-		dogTemp = dogBagTemp.getDoggieBag();
-		dogPanel = new JPanel();
 
-		for(Integer i: dogTemp)
-		{
-			dogPanel.setLayout(new GridLayout(0,0,2,0));
-			JButton dogImage = new JButton();//dog image
-			dogImage.setActionCommand(i.toString());
-			JLabel dogName = new JLabel();//dog name
-			dogPanel.add(dogImage);
-			dogPanel.add(dogName);
-			panel_center.add(dogPanel);
-
-		}
-		for(int j = 0; j < dogB.size(); j++)
-		{
-			dogPanel.add(dogB.get(j));
-		}
-		panel_center.add(scroller, BorderLayout.CENTER);
-
-	}
 
 	public JComboBox createBox()
 	{
@@ -145,8 +127,8 @@ public class DoggieBagFrame extends JFrame
 		
 		for(Integer i: dogTemp)
 		{
-			box.addItem(dogTemp.get(i));
-			JLabel dogName = new JLabel(dog.getName());	
+			dog.setDogInfo(dogTemp.get(i));
+			box.addItem("ID: " + dog.getDogID() + " Name: " +  dog.getName());
 		}
 		return box;
 	}
@@ -157,4 +139,5 @@ public class DoggieBagFrame extends JFrame
 	public User sendUserData(){
 		return this.user;
 	}
+
 }

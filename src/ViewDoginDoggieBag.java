@@ -14,14 +14,17 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 
-public class ViewDoginDoggieBag extends JFrame {
-
+public class ViewDoginDoggieBag extends JFrame
+{
+	private User user;
+	private Dog dog;
 	private JPanel contentPane;
-	/**
-	 * Create the frame.
-	 */
-	public ViewDoginDoggieBag()
+	
+	public ViewDoginDoggieBag(User u, Dog d)
 	{
+		user = u;
+		dog = d;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -40,19 +43,19 @@ public class ViewDoginDoggieBag extends JFrame {
 		JLabel lblNewLabel = new JLabel(""); /*Image file here*/
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Name" + "");/*Name of Dog here*/
+		JLabel lblNewLabel_1 = new JLabel("Name: " + dog.getName());/*Name of Dog here*/
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_3 = new JLabel("Breed" + "");/*Breed of Dog here*/
+		JLabel lblNewLabel_3 = new JLabel("Breed: " + dog.getBreed());/*Breed of Dog here*/
 		panel.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_2 = new JLabel("Location" + "");/*Location of Dog here*/
+		JLabel lblNewLabel_2 = new JLabel("Location: " + dog.getShelter());/*Location of Dog here*/
 		panel.add(lblNewLabel_2);
 		
 		JPanel panel_1 = new JPanel();
 		panel_7.add(panel_1);
 		
-		JTextArea textArea = new JTextArea();/*Info of Dog here*/
+		JTextArea textArea = new JTextArea(dog.getDescription());
 		panel_1.add(textArea);
 		
 		JPanel panel_2 = new JPanel();
