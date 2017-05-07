@@ -34,10 +34,7 @@ public class DoggieBagFrame extends JFrame
 	private ArrayList <Integer> dogTemp;
 	private JComboBox box;
 
-<<<<<<< HEAD
-=======
-	
->>>>>>> refs/remotes/origin/master
+
 
 	
 	public DoggieBagFrame(User u)
@@ -120,10 +117,7 @@ public class DoggieBagFrame extends JFrame
 		contentPane.add(panel_center, BorderLayout.CENTER);
 	}
 	
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/master
 
 	public JComboBox createBox()
 	{
