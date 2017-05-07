@@ -24,6 +24,7 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 
 	private JPanel contentPane;
 	private User user;
+	private Dog dog;
 	private ActionListener backListener;
 	private Dog dog;
 	
