@@ -84,8 +84,8 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 		
 
 		JLabel lblTindogLogo = new JLabel(new ImageIcon("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic"));
-		panel_4.add(lblTindogLogo);//FIX THIS JOE
 		JPanel southPanelPanel2 = new JPanel();
+		southPanelPanel2.add(lblTindogLogo);//FIX THIS JOE
 		southPanel.add(southPanelPanel2);
 
 		

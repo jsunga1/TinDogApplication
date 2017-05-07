@@ -21,11 +21,13 @@ public class Shelter
 		link = "";
 	}
 	
-	public void setShelterID(){
+	public void setShelterID(int id){
+		dog.setDogID(id);
+		dog.setDogInfo(id);
 		shelterID = Integer.parseInt(dog.getShelter());
 	}
 	
-	public void setShelterInfo(int id){
+	public void setShelterInfo(long id){
 		try{
 			db = new UniversalDogDB();
 			String q = "select * from ADOPTION_AGENCY where AGENCY_ID = " + id;

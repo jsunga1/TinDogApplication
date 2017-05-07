@@ -85,3 +85,10 @@
 /ViewAdoptionAgencyInMainFrame$1Back_Listener.class
 /ViewAdoptionAgencyInMainFrame.class
 /ViewDoginMainFrame$1createViewAdoptionListener.class
+/MainFrame$1createHelpListener.class
+/SettingsFrame$1createAboutListener.class
+/SettingsFrame$1createDeleteListener.class
+/SettingsFrame$1createEditAccountListener.class
+/SettingsFrame$1createLogoutListener.class
+/ViewAdoptionAgencyInMainFrame$1createBackListener.class
+/ViewAdoptionAgencyInDoggieBagFrame$1createBackListener.class
