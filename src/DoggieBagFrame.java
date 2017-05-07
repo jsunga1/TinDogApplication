@@ -32,7 +32,6 @@ public class DoggieBagFrame extends JFrame
 	private ArrayList <Integer> dogTemp;
 	private JComboBox box;
 
-	private Dog dog;
 
 	
 	public DoggieBagFrame(User u)
@@ -112,30 +111,6 @@ public class DoggieBagFrame extends JFrame
 		contentPane.add(panel_center, BorderLayout.CENTER);
 	}
 	
-	public void createDogImages()
-	{
-		dogBagTemp = new DoggieBag(user.getEmail());
-		dogTemp = dogBagTemp.getDoggieBag();
-		dogPanel = new JPanel();
-
-		for(Integer i: dogTemp)
-		{
-			dogPanel.setLayout(new GridLayout(0,0,2,0));
-			JButton dogImage = new JButton();//dog image
-			dogImage.setActionCommand(i.toString());
-			JLabel dogName = new JLabel();//dog name
-			dogPanel.add(dogImage);
-			dogPanel.add(dogName);
-			panel_center.add(dogPanel);
-
-		}
-		for(int j = 0; j < dogB.size(); j++)
-		{
-			dogPanel.add(dogB.get(j));
-		}
-		panel_center.add(scroller, BorderLayout.CENTER);
-
-	}
 
 	public JComboBox createBox()
 	{
