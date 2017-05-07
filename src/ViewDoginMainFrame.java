@@ -108,7 +108,7 @@ public class ViewDoginMainFrame extends JFrame {
 			}
 		}
 		
-		int dogid = user.getDogPile().getHeadDog();
+		int dogid = user.getDogPile().getCurrentPosition();
 		dog = new Dog();
 		dog.setDogInfo(dogid);
 		

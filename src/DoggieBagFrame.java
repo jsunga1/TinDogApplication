@@ -4,7 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -20,20 +22,27 @@ public class DoggieBagFrame extends JFrame
 	private JPanel dogPanel;
 	private ActionListener backlistener;
 	private ActionListener dogImageListener;
+
 	private ActionListener dogListener;
+
+
 	private User user;
 	private Dog dog;
 	private DoggieBag dogBagTemp;
 	private ArrayList <Integer> dogTemp;
 	private JComboBox box;
+
+	private Dog dog;
+
 	
 	public DoggieBagFrame(User u)
 	{
 		user = u;
-		class Back_Listener implements ActionListener
-		{
-			public void actionPerformed(ActionEvent e)
-			{
+
+		dog = new Dog();
+		class Back_Listener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+
 				JFrame frameMainFrame = new MainFrame(sendUserData());
 				close();
 				frameMainFrame.setVisible(true);
@@ -55,9 +64,7 @@ public class DoggieBagFrame extends JFrame
 		backlistener = new Back_Listener();
 		dogListener = new createDogListener();
 		
-		for(Integer i: dogTemp){
-			
-		}
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -91,8 +98,7 @@ public class DoggieBagFrame extends JFrame
 		JButton btnFilter = new JButton("Filter");
 		northPanel_south.add(btnFilter);
 
-		JButton vdidbfButton = new JButton("View Dog");
-		vdidbfButton.addActionListener(dogListener);
+
 		
 		panel_center = new JPanel();//add combobox here
 		panel_center.setLayout(new BorderLayout());
@@ -102,23 +108,7 @@ public class DoggieBagFrame extends JFrame
 		submitButton.addActionListener(dogListener);
 		panel_center.add(submitButton, BorderLayout.SOUTH);
 		
-//		panel_center.setLayout(new GridLayout(0, 3, 0, 0));
-//		createDogImages();
-//		class createDogImageListener implements ActionListener{
-//			public void actionPerformed(ActionEvent e){
-//				/*for(Integer i: dogTemp){
-//					if(i.toString().equals(e.getActionCommand())){
-//						JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame();
-//					}
-//				}*/
-//				//rs.get(e.getActionCommand())
-//				//JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame();
-//				//^^ send the integer to view dog in doggie frame
-//				//then open doggie frame
-//				
-//			}
-//		}
-//		dogImageListener = new createDogImageListener();
+
 		contentPane.add(panel_center, BorderLayout.CENTER);
 	}
 	
@@ -127,6 +117,7 @@ public class DoggieBagFrame extends JFrame
 		dogBagTemp = new DoggieBag(user.getEmail());
 		dogTemp = dogBagTemp.getDoggieBag();
 		dogPanel = new JPanel();
+
 		for(Integer i: dogTemp)
 		{
 			dogPanel.setLayout(new GridLayout(0,0,2,0));
@@ -136,7 +127,14 @@ public class DoggieBagFrame extends JFrame
 			dogPanel.add(dogImage);
 			dogPanel.add(dogName);
 			panel_center.add(dogPanel);
+
 		}
+		for(int j = 0; j < dogB.size(); j++)
+		{
+			dogPanel.add(dogB.get(j));
+		}
+		panel_center.add(scroller, BorderLayout.CENTER);
+
 	}
 
 	public JComboBox createBox()

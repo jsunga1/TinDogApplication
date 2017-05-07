@@ -26,9 +26,11 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 	private User user;
 	private Dog dog;
 	private ActionListener backListener;
+	private Dog dog;
 	
 	public ViewDogInDoggieBagFrame(User u, Dog d) {
 		user = u;
+		dog = d;
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				JFrame frameDoggieBagFrame = new DoggieBagFrame(sendUserData());
@@ -52,25 +54,25 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 		centerPanel.add(centerNorthPanel, BorderLayout.NORTH);
 		centerNorthPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel iamgeLabel = new JLabel(""); /*Image file here*/
+		JLabel iamgeLabel = new JLabel(d.getPicture()); /*Image file here*/
 		centerNorthPanel.add(iamgeLabel);
 		
-		JLabel nameLabel = new JLabel("Name:");/*Name of Dog here*/
+		JLabel nameLabel = new JLabel("Name:" + dog.getName());/*Name of Dog here*/
 		centerNorthPanel.add(nameLabel);
 		
-		JLabel breedLabel = new JLabel("Breed:");/*Breed of Dog here*/
+		JLabel breedLabel = new JLabel("Breed:" + dog.getBreed());/*Breed of Dog here*/
 		centerNorthPanel.add(breedLabel);
 		
 		JLabel locationLabel = new JLabel("Location:");/*Location of Dog here*/
 		centerNorthPanel.add(locationLabel);
 		
-		JLabel ageLabel = new JLabel("Age:"); /*Age of the dog goes here*/
+		JLabel ageLabel = new JLabel("Age:" + dog.getAge()); /*Age of the dog goes here*/
 		centerNorthPanel.add(ageLabel);
 		
 		JPanel centerCenterPanel = new JPanel();
 		centerPanel.add(centerCenterPanel);
 		
-		JTextArea textArea = new JTextArea();/*Info of Dog here*/
+		JTextArea textArea = new JTextArea(dog.getDescription());/*Info of Dog here*/
 		centerCenterPanel.add(textArea);
 		
 		JPanel southPanel = new JPanel();

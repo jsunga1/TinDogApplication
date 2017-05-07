@@ -13,9 +13,11 @@ public class DoggieBag
 	public DoggieBag(String user)
 	{
 		UniversalDogDB db = new UniversalDogDB();
-		String q = "Select DOG_Id from DOGGIEBAG where USER_Email = \"" + user + "\"";
+		String q = "Select DOG_Id from DOGGIE_BAG where USER_Email = \"" + user + "\";";
+		System.out.println(q);
 		db.retrieveData(q);
 		ResultSet rs = db.getResultSet();
+		DogBag = new ArrayList <Integer>();
 		
 		try {
 			while(rs.next())
