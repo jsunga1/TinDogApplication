@@ -20,6 +20,7 @@ public class EditUserFrame extends JFrame{
 	private User user;
 	private ActionListener cancelButtonListener;
 	private ActionListener submitButtonListener;
+	private ActionListener backButtonListener;
 	
 	private JPanel panel;
 	private JPanel southPanel;
@@ -40,17 +41,21 @@ public class EditUserFrame extends JFrame{
 	private JLabel lblLastName;
 	private JTextField lastNameField;
 	
-	public EditUserFrame(User u){
-		
-		class cancelListener implements ActionListener{
-			public void actionPerformed(ActionEvent e){
+	public EditUserFrame(User u)
+	{
+		class cancelListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				JFrame frameSettingsFrame = new SettingsFrame(sendUserData());
 				frameSettingsFrame.setVisible(true);
 			}
 		}
-		class submitListener implements ActionListener{ //needs to take data
-			public void actionPerformed(ActionEvent e){
-				
+		
+		class submitListener implements ActionListener
+		{ 
+			public void actionPerformed(ActionEvent e)
+			{
 				UniversalDogDB userlogin = new UniversalDogDB();
 				String fname = firstNameField.getText();
 				String lname = lastNameField.getText();
@@ -59,12 +64,15 @@ public class EditUserFrame extends JFrame{
 				String phone = phoneField.getText();
 				String email = user.getEmail();
 				
-				if(password.equals(passconf)){
-					//Jack, update query here if the passwords match
-					String query = " ";
+				if(password.equals(passconf))
+				{
+					String query = "UPDATE USER SET USER_FirstName = \"" + fname + "\", USER_LastName = \"" + lname +
+							"\", USER_Password = \"" + password + "\", USER_Phone = \"" + phone + 
+							"\" Where USER_Email = \"" + email + "\";";
 					userlogin.sendData(query);
 				}
-				else if(!password.equals(passconf)){
+				else if(!password.equals(passconf))
+				{
 					lblPassword.setText("Your passwords did not match! Please try again!");
 					lblRetypePassword.setText("Your passwords did not match! Please try again!");
 				}
@@ -78,14 +86,19 @@ public class EditUserFrame extends JFrame{
 		cancelButton.addActionListener(cancelButtonListener);
 		submitButtonListener = new submitListener();
 		submitButton.addActionListener(submitButtonListener);
+		backButtonListener = new cancelListener();
 		createPanel();
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 	}
-	public void createComponents(){
+	
+	public void createComponents()
+	{
 		cancelButton = new JButton("Cancel");
 		submitButton = new JButton("Submit");
 	}
-	public void createPanel(){
+	
+	public void createPanel()
+	{
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		southPanel = new JPanel();
@@ -108,10 +121,8 @@ public class EditUserFrame extends JFrame{
 		northPanel_center.add(lblEditAccount);
 		
 		button_back = new JButton("<--");
-		button_back.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		button_back.addActionListener(backButtonListener);
+		
 		northPanel.add(button_back, BorderLayout.WEST);
 		
 		centerPanel = new JPanel();
