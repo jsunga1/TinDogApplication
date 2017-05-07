@@ -94,6 +94,7 @@ public class ViewDoginMainFrame extends JFrame {
 			{
 				JFrame frameViewAdoptionAgencyInMainFrame;
 				try {
+
 					frameViewAdoptionAgencyInMainFrame = new ViewAdoptionAgencyInMainFrame(dog,sendUserData());
 					close();
 					frameViewAdoptionAgencyInMainFrame.setVisible(true);

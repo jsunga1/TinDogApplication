@@ -24,8 +24,7 @@ public class User
 		phone = "User";
 		password = "User";
 		dp = new DogPile();
-		dp.generateDogPile();
-		
+			
 	}
 	
 	public void setUserInfo(String UserName)
@@ -46,6 +45,7 @@ public class User
 				phone = rs.getString("USER_Phone_Number");
 				password = rs.getString("USER_Password");
 
+				dp.generateDogPile(email);
 			}
 			
 		}catch(Exception userFail)
