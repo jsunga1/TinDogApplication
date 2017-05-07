@@ -34,14 +34,11 @@ public class DoggieBag
 	{
 		return DogBag;
 	}
-	/*
-	public void addDog(Dog d)
+
+	public void deleteDog(User u, int i)
 	{
-		DogBag.add(d);
-	}
-	*/
-	public void deleteDog(int i)
-	{
-		
+		UniversalDogDB db = new UniversalDogDB();
+		String q = "DELETE from DOGGIE_BAG where DOG_ID = " + i + " AND USER_Email = \"" + u.getEmail() + "\";";
+		db.sendData(q);
 	}
 }
