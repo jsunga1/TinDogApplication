@@ -36,15 +36,8 @@ public class DogPile
 	public void generateDogPile(String email)
 	{
 		dogPile.clear();
-		//connection to db
-		//grab ids
-		//save to arraylist
-		//needs to added to filterframe
-		//create with start frame w/user
-		
 		String query;
 		UniversalDogDB db = new UniversalDogDB();
-		
 		
 		checkFilter();
 		query = "Select DOG_ID from DOG_2";

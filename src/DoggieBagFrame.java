@@ -123,8 +123,9 @@ public class DoggieBagFrame extends JFrame
 	{
 		box = new JComboBox();
 		dogBagTemp = new DoggieBag(user.getEmail());
+		dogBagTemp.generateDogBag();
 		dogTemp = dogBagTemp.getDoggieBag();
-		
+
 		for(int i = 0; i < dogTemp.size();i++)
 		{
 			dog.setDogInfo(dogTemp.get(i));
