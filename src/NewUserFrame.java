@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class NewUserFrame extends JFrame{
 	private static final int FRAME_WIDTH = 400;
@@ -112,7 +114,8 @@ public class NewUserFrame extends JFrame{
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-
+				boolean unique = true;
+				
 				if(textFieldFirstName.getText().equals("") || textFieldEmail.getText().equals("") || textFieldPassword.getText().equals("") ||
 						textFieldPasswordConfirmation.getText().equals("") || textFieldPhoneNumber.getText().equals("") || textFieldLastName.getText().equals(""))
 				{
@@ -130,25 +133,50 @@ public class NewUserFrame extends JFrame{
 						lblLastName.setText("You need to enter this");
 
 				}
-				else
-				{
 
-				try
-				{
-					UniversalDogDB db = new UniversalDogDB();
-					String query = "INSERT INTO USER(USER_First_Name, USER_Last_Name,USER_Email, USER_Password,USER_Phone_Number) VALUES(\"" + textFieldFirstName.getText() +"\",\""+ textFieldLastName.getText() +"\", \""+ textFieldEmail.getText() +"\", \""+ textFieldPassword.getText() +"\", "+ Long.parseLong(textFieldPhoneNumber.getText())+ ")";
-					db.sendData(query);
-          newUser = new User();
-					newUser.setUserInfo(textFieldEmail.getText());
-					JFrame frameDogListFrame = new DogListFrame(sendUserData());
-					close();
-					frameDogListFrame.setVisible(true);
-					frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				else if(!textFieldEmail.getText().equals("")){ //NS
+					
+					UniversalDogDB connection = new UniversalDogDB();
+					String query = "Select * from USER where USER_Email = ;";
+					connection.retrieveData(query);
+					ResultSet rs = connection.getResultSet();
+					try {
+						if (!rs.isBeforeFirst()){
+								unique = true;
+						}
+						else{
+							unique = false;
+							lblEmail.setText("That email already exists, try another:");
+							textFieldEmail.setText("");
+							textFieldFirstName.setText("");
+							textFieldLastName.setText("");
+							textFieldPassword.setText("");
+							textFieldPasswordConfirmation.setText("");
+							textFieldPhoneNumber.setText("");
+						}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
 				}
-				catch (Exception newUserFailed)
-				{
-					System.out.println(newUserFailed);
-				}
+				if(unique = true){
+
+					try{
+						UniversalDogDB db = new UniversalDogDB();
+						String query = "INSERT INTO USER(USER_First_Name, USER_Last_Name,USER_Email, USER_Password,USER_Phone_Number) VALUES(\"" + textFieldFirstName.getText() +"\",\""+ textFieldLastName.getText() +"\", \""+ textFieldEmail.getText() +"\", \""+ textFieldPassword.getText() +"\", "+ Long.parseLong(textFieldPhoneNumber.getText())+ ")";
+						db.sendData(query);
+						newUser = new User();
+						newUser.setUserInfo(textFieldEmail.getText());
+						JFrame frameDogListFrame = new DogListFrame(sendUserData());
+						close();
+						frameDogListFrame.setVisible(true);
+						frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					}
+					catch (Exception newUserFailed)
+					{
+						System.out.println(newUserFailed);
+					}
 				}
 			}
 		}

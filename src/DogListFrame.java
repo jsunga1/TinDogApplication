@@ -63,7 +63,6 @@ public class DogListFrame extends JFrame {
 			public void actionPerformed(ActionEvent e){
 
 				JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame(user);
-
 				close();
 				frameViewDogInMainFrameFrame.setVisible(true);
 				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,7 +109,8 @@ public class DogListFrame extends JFrame {
 					}
 					else
 					{
-						int d = dp.getHeadDog();
+						dp.getHeadDog();
+						int d = dp.getCurrentPosition();
 						
 						dog.setDogID(d);
 						dog.setDogInfo(d);
@@ -172,7 +172,8 @@ public class DogListFrame extends JFrame {
 					}
 					else
 					{	
-						int d = dp.getHeadDog();
+						dp.getHeadDog();
+						int d = dp.getCurrentPosition();
 						
 						dog.setDogID(d);
 						dog.setDogInfo(d);
@@ -211,7 +212,7 @@ public class DogListFrame extends JFrame {
 		}
 		else
 		{
-			int i = dp.getHeadDog();
+			int i = dp.getCurrentPosition();
 			dog.setDogID(i);
 			dog.setDogInfo(i);
 		}

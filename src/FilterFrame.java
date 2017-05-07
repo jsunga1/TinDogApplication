@@ -51,31 +51,51 @@ public class FilterFrame extends JFrame {
 		class createSubmitListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				
+				boolean isChanged = false;
+				
 				user.getDogPile().clearFilter();
 				
 				if (!bAgeField.getText().equals(""))
+				{
 					user.getDogPile().setAge1(Integer.parseInt(bAgeField.getText()));//bottom age
+					isChanged = true;
+				}
 				if (!tAgeField.getText().equals(""))
+				{
 					user.getDogPile().setAge2(Integer.parseInt(tAgeField.getText()));
-				
-				user.getDogPile().setBreed((String) breedComboBox.getSelectedItem());//get breed
-				user.getDogPile().setShelter((String)shelterComboBox.getSelectedItem());//get shelter
-				
+					isChanged = true;
+				}
+				if(!breedComboBox.getSelectedItem().equals(""))
+				{
+					user.getDogPile().setBreed((String) breedComboBox.getSelectedItem());//get breed
+					isChanged = true;
+				}
+				if(!shelterComboBox.getSelectedItem().equals(""))
+				{
+					user.getDogPile().setShelter((String)shelterComboBox.getSelectedItem());//get shelter
+					isChanged = true;
+				}
 				if(maleButton.isSelected())
 				{//male is selected
 					user.getDogPile().setGender(1);
+					isChanged = true;
 				}
 				else if(femaleButton.isSelected())
 				{//female is selected
 					user.getDogPile().setGender(0);
+					isChanged = true;
 				}
 				else if(maleButton.isSelected() && femaleButton.isSelected())
 				{//both are selected
 					user.getDogPile().setGender(2);
+					isChanged = true;
 				}
 				
-				dp = user.getDogPile();
-				dp.generateDogPile();
+				if (isChanged = true)
+				{
+					dp = user.getDogPile();
+					dp.generateDogPile(user.getEmail());
+				}
 				
 				System.out.println(dp.getDogPileArray().size());
 				try {

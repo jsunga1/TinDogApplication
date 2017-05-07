@@ -94,6 +94,7 @@ public class ViewDoginMainFrame extends JFrame {
 			{
 				JFrame frameViewAdoptionAgencyInMainFrame;
 				try {
+
 					frameViewAdoptionAgencyInMainFrame = new ViewAdoptionAgencyInMainFrame(dog,sendUserData());
 					close();
 					frameViewAdoptionAgencyInMainFrame.setVisible(true);
@@ -107,7 +108,7 @@ public class ViewDoginMainFrame extends JFrame {
 			}
 		}
 		
-		int dogid = user.getDogPile().getHeadDog();
+		int dogid = user.getDogPile().getCurrentPosition();
 		dog = new Dog();
 		dog.setDogInfo(dogid);
 		
