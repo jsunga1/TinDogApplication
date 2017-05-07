@@ -137,15 +137,40 @@ public class NewUserFrame extends JFrame{
 				else if(!textFieldEmail.getText().equals("")){ //NS
 					
 					UniversalDogDB connection = new UniversalDogDB();
-					String query = "Select * from USER where USER_Email = ;";
+					String query = "Select * from USER where USER_Email = \"" + textFieldEmail.getText() + "\";";
 					connection.retrieveData(query);
 					ResultSet rs = connection.getResultSet();
 					try {
 						if (!rs.isBeforeFirst()){
-								unique = true;
+							try{
+								
+								if(textFieldPassword.getText().equals(textFieldPasswordConfirmation.getText()))
+								{
+									UniversalDogDB db = new UniversalDogDB();
+									query = "INSERT INTO USER(USER_First_Name, USER_Last_Name,USER_Email, USER_Password,USER_Phone_Number) VALUES(\"" + textFieldFirstName.getText() +"\",\""+ textFieldLastName.getText() +"\", \""+ textFieldEmail.getText() +"\", \""+ textFieldPassword.getText() +"\", "+ textFieldPhoneNumber.getText()+ ")";
+									db.sendData(query);
+									newUser = new User();
+									newUser.setUserInfo(textFieldEmail.getText());
+									JFrame frameDogListFrame = new DogListFrame(sendUserData());
+									close();
+									frameDogListFrame.setVisible(true);
+									frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+								}
+								else
+								{
+									lblPassword.setText("Passwords do not Match");
+									lblPasswordConfirmation.setText("Passwords do not Match");
+									textFieldPassword.setText("");
+									textFieldPasswordConfirmation.setText("");
+								}
+							}
+							catch (Exception newUserFailed)
+							{
+								System.out.println(newUserFailed);
+							}
 						}
 						else{
-							unique = false;
+
 							lblEmail.setText("That email already exists, try another:");
 							textFieldEmail.setText("");
 							textFieldFirstName.setText("");
@@ -160,24 +185,7 @@ public class NewUserFrame extends JFrame{
 					}
 
 				}
-				if(unique = true){
-
-					try{
-						UniversalDogDB db = new UniversalDogDB();
-						String query = "INSERT INTO USER(USER_First_Name, USER_Last_Name,USER_Email, USER_Password,USER_Phone_Number) VALUES(\"" + textFieldFirstName.getText() +"\",\""+ textFieldLastName.getText() +"\", \""+ textFieldEmail.getText() +"\", \""+ textFieldPassword.getText() +"\", "+ Long.parseLong(textFieldPhoneNumber.getText())+ ")";
-						db.sendData(query);
-						newUser = new User();
-						newUser.setUserInfo(textFieldEmail.getText());
-						JFrame frameDogListFrame = new DogListFrame(sendUserData());
-						close();
-						frameDogListFrame.setVisible(true);
-						frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					}
-					catch (Exception newUserFailed)
-					{
-						System.out.println(newUserFailed);
-					}
-				}
+				
 			}
 		}
 		cancelButtonListener = new cancelListener();
