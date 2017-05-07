@@ -125,7 +125,7 @@ public class DoggieBagFrame extends JFrame
 		dogBagTemp = new DoggieBag(user.getEmail());
 		dogTemp = dogBagTemp.getDoggieBag();
 		
-		for(Integer i: dogTemp)
+		for(int i = 0; i < dogTemp.size();i++)
 		{
 			dog.setDogInfo(dogTemp.get(i));
 			box.addItem("ID: " + dog.getDogID() + " Name: " +  dog.getName());
