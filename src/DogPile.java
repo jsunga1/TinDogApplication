@@ -15,6 +15,7 @@ public class DogPile
 	private boolean genderFilter;
 	private boolean shelterFilter;
 	private boolean filter;
+	private int position;
 	
 	public DogPile()
 	{
@@ -32,7 +33,7 @@ public class DogPile
 	}
 
 	
-	public void generateDogPile()
+	public void generateDogPile(String email)
 	{
 		dogPile.clear();
 		//connection to db
@@ -93,11 +94,26 @@ public class DogPile
 		db.retrieveData(query);
 		ResultSet rs = db.getResultSet();
 		
+		
 		try
 		{
 			while(rs.next())
 			{
-				dogPile.add(rs.getInt("DOG_ID"));
+				String q2 = "Select DOG_Id from DOGGIE_BAG where USER_Email = \"" + email + "\";";
+				UniversalDogDB db2 = new UniversalDogDB();
+				db2.retrieveData(q2);
+				ResultSet rs2 = db2.getResultSet();
+				int test = 0;
+				int di = rs.getInt("DOG_Id"); 
+				
+				while(rs2.next())
+				{
+					int i = rs2.getInt("DOG_Id");
+					if(di == i)
+						test++;
+				}
+				if(test == 0)
+					dogPile.add(di);
 			}
 		} 
 		catch (SQLException e)
@@ -123,12 +139,14 @@ public class DogPile
 	}
 	public int getHeadDog()
 	{
-		return dogPile.get(0);
+		Random r = new Random();
+		position = r.nextInt(dogPile.size());
+		return dogPile.get(position);
 	}
 	
 	public void removeHeadDog()
 	{
-		dogPile.remove(0);
+		dogPile.remove(position);
 	}
 	
 	public void checkFilter()
