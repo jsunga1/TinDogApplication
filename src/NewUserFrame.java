@@ -133,6 +133,7 @@ public class NewUserFrame extends JFrame{
 						lblLastName.setText("You need to enter this");
 
 				}
+
 				else if(!textFieldEmail.getText().equals("")){ //NS
 					
 					UniversalDogDB connection = new UniversalDogDB();
@@ -157,6 +158,7 @@ public class NewUserFrame extends JFrame{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+
 				}
 				if(unique = true){
 

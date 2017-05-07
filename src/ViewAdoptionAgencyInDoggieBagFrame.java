@@ -32,7 +32,7 @@ public class ViewAdoptionAgencyInDoggieBagFrame extends JFrame {
 		user = u;
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				JFrame frameMainFrame = new ViewDogInDoggieBagFrame(sendUserData());
+				JFrame frameMainFrame = new ViewDogInDoggieBagFrame(sendUserData(), dog);
 				close();
 				frameMainFrame.setVisible(true);
 				frameMainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

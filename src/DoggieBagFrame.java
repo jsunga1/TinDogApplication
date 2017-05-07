@@ -3,7 +3,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
@@ -20,12 +22,16 @@ public class DoggieBagFrame extends JFrame {
 	private ActionListener backlistener;
 	private ActionListener dogImageListener;
 	private JPanel dogPanel;
+	private JScrollPane scroller;
+	private ArrayList <JButton> dogB;
 	private User user;
 	private DoggieBag dogBagTemp;
 	private ArrayList <Integer> dogTemp;
+	private Dog dog;
 	
 	public DoggieBagFrame(User u) {
 		user = u;
+		dog = new Dog();
 		class Back_Listener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 				JFrame frameMainFrame = new MainFrame(sendUserData());
@@ -37,9 +43,7 @@ public class DoggieBagFrame extends JFrame {
 
 		backlistener = new Back_Listener();
 		
-		for(Integer i: dogTemp){
-			
-		}
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -78,17 +82,28 @@ public class DoggieBagFrame extends JFrame {
 		createDogImages();
 		class createDogImageListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				/*for(Integer i: dogTemp){
-					if(i.toString().equals(e.getActionCommand())){
-						JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame();
+				
+					for (int i = 0; i < dogB.size();i++)
+					{
+						if (e.getSource() == dogB.get(i))
+						{
+							dog.setDogID(dogTemp.get(i));
+							dog.setDogInfo(dog.getDogID());	
+							System.out.println("Action Listener is activiated");
+							JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame(sendUserData(), dog);
+							close();
+							frameViewDogInDoggieBagFrame.setVisible(true);
+						}
 					}
-				}*/
+					
+					}
+				
 				//rs.get(e.getActionCommand())
 				//JFrame frameViewDogInDoggieBagFrame = new ViewDogInDoggieBagFrame();
 				//^^ send the integer to view dog in doggie frame
 				//then open doggie frame
 				
-			}
+			
 		}
 		dogImageListener = new createDogImageListener();
 		contentPane.add(panel_center, BorderLayout.CENTER);
@@ -97,15 +112,26 @@ public class DoggieBagFrame extends JFrame {
 		dogBagTemp = new DoggieBag(user.getEmail());
 		dogTemp = dogBagTemp.getDoggieBag();
 		dogPanel = new JPanel();
-		for(Integer i: dogTemp){
-			dogPanel.setLayout(new GridLayout(0,0,2,0));
-			JButton dogImage = new JButton();//dog image
-			dogImage.setActionCommand(i.toString());
-			JLabel dogName = new JLabel();//dog name
-			dogPanel.add(dogImage);
-			dogPanel.add(dogName);
-			panel_center.add(dogPanel);
+		dogB = new ArrayList <JButton> ();
+		dogPanel.setLayout(new GridLayout(0,3));
+		scroller = new JScrollPane(dogPanel);
+		//scroller.setLayout(new BorderLayout());
+		for(int i = 0; i < dogTemp.size(); i++){
+			dog.setDogID(dogTemp.get(i));
+			dog.setDogInfo(dogTemp.get(i));
+			System.out.println(dog.getName());
+			JButton dogImage = new JButton(dog.getName());//dog image
+			//dogImage.setActionCommand(dogTemp.get(i).toString());
+			dogImage.addActionListener(dogImageListener);
+			System.out.println(dogTemp.get(i).toString());
+			dogB.add(dogImage);
 		}
+		for(int j = 0; j < dogB.size(); j++)
+		{
+			dogPanel.add(dogB.get(j));
+		}
+		panel_center.add(scroller, BorderLayout.CENTER);
+
 	}
 
 
