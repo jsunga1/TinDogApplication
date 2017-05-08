@@ -34,7 +34,9 @@ public class FilterFrame extends JFrame {
 	private UniversalDogDB db;
 	private UniversalDogDB db2;
 	private DogPile dp;
-	public FilterFrame(User u) {
+	
+	public FilterFrame(User u)
+	{
 		user = u;
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
@@ -76,17 +78,17 @@ public class FilterFrame extends JFrame {
 					isChanged = true;
 				}
 				if(maleButton.isSelected())
-				{//male is selected
+				{
 					user.getDogPile().setGender(1);
 					isChanged = true;
 				}
 				else if(femaleButton.isSelected())
-				{//female is selected
+				{
 					user.getDogPile().setGender(0);
 					isChanged = true;
 				}
 				else if(maleButton.isSelected() && femaleButton.isSelected())
-				{//both are selected
+				{
 					user.getDogPile().setGender(2);
 					isChanged = true;
 				}

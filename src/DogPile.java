@@ -38,7 +38,6 @@ public class DogPile
 		dogPile.clear();
 		String query;
 		UniversalDogDB db = new UniversalDogDB();
-		
 		checkFilter();
 		query = "Select DOG_ID from DOG_2";
 		
@@ -49,7 +48,6 @@ public class DogPile
 				query = query + " JOIN ADOPTION_AGENCY ON DOG_Adoption_Agency = AGENCY_ID ";
 			}
 			query = query + " where ";
-			System.out.println(dogPile.size());
 			if(ageFilter1)
 				query = query + "DOG_Age >= " + age1;
 			
@@ -82,12 +80,11 @@ public class DogPile
 					query = query + "Agency_Name = \"" + shelter + "\"";
 			}
 		}
-		query = query + ";";	
-		System.out.println(query);
+		query = query + ";";
 		db.retrieveData(query);
 		ResultSet rs = db.getResultSet();
-		
-		
+	
+			
 		try
 		{
 			while(rs.next())
@@ -116,7 +113,24 @@ public class DogPile
 			e.printStackTrace();
 		}
 	}
+	public void getHeadDog()
+	{
+		if (!dogPile.isEmpty())
+		{
+			Random r = new Random();
+			position = r.nextInt(dogPile.size());
+		}
+	}
+	public int getCurrentPosition()
+	{
+		
+		return dogPile.get(position);
+	}
 	
+	public void removeHeadDog()
+	{
+		dogPile.remove(position);
+	}
 	public void clearFilter()
 	{
 		age1 = 0;
@@ -131,22 +145,6 @@ public class DogPile
 		shelterFilter = false;
 		filter = false;
 	}
-	public void getHeadDog()
-	{
-		Random r = new Random();
-		position = r.nextInt(dogPile.size());
-	}
-	public int getCurrentPosition()
-	{
-		
-		return dogPile.get(position);
-	}
-	
-	public void removeHeadDog()
-	{
-		dogPile.remove(position);
-	}
-	
 	public void checkFilter()
 	{
 		if(age1 != 0)

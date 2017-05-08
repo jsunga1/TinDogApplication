@@ -1,11 +1,9 @@
-
-
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -17,6 +15,8 @@ import java.net.URL;
 
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.Component;
 
 import javax.imageio.ImageIO;
@@ -26,38 +26,56 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 
-public class ViewDogInDoggieBagFrame extends JFrame {
-
+public class ViewDogInDoggieBagFrame extends JFrame
+{
 	private JPanel contentPane;
 	private User user;
 	private Dog dog;
 	private ActionListener backListener;
 	private ActionListener adoptionListener;
+	private ActionListener deleteListener;
 	private URL dogPhoto;
 	private Image photo;
 	private URL tinDogPhoto;
 	private Image photo2;
 	
-	public ViewDogInDoggieBagFrame(User u, Dog d) {
+	
+	public ViewDogInDoggieBagFrame(User u, Dog d)
+	{
 		user = u;
 		dog = d;
 		System.out.println(dog.getDogID() + dog.getName());
-		class createBackListener implements ActionListener{
-			public void actionPerformed(ActionEvent e) {
+		class createBackListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				JFrame frameDoggieBagFrame = new DoggieBagFrame(sendUserData());
 				close();
 				frameDoggieBagFrame.setVisible(true);
 			}
 		}
-		class createAdoptionListener implements ActionListener{
-			public void actionPerformed(ActionEvent e){
+		class createAdoptionListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				JFrame frameVAAIDBF = new ViewAdoptionAgencyInDoggieBagFrame(dog, sendUserData());
 				close();
 				frameVAAIDBF.setVisible(true);
 			}
 		}
+		class createDeleteListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				user.getDoggieBag().deleteDog(user, dog.getDogID());
+				JFrame frameDoggieBagFrame = new DoggieBagFrame(sendUserData());
+				close();
+				frameDoggieBagFrame.setVisible(true);
+			}
+		}
 		adoptionListener = new createAdoptionListener();
 		backListener = new createBackListener();
+		deleteListener = new createDeleteListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
 		contentPane = new JPanel();
@@ -73,34 +91,41 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 		centerPanel.add(centerNorthPanel, BorderLayout.NORTH);
 		centerNorthPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		try{
+		try
+		{
 			dogPhoto = new URL(dog.getPicture());
 			photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 			JLabel iamgeLabel = new JLabel(new ImageIcon(photo)); /*Image file here*/
 			centerNorthPanel.add(iamgeLabel);
-		}catch (MalformedURLException e1) {
+		}
+		catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		
-		JLabel nameLabel = new JLabel("Name:" + dog.getName());/*Name of Dog here*/
+		JLabel nameLabel = new JLabel("Name:" + dog.getName());
 		centerNorthPanel.add(nameLabel);
 		
-		JLabel breedLabel = new JLabel("Breed:" + dog.getBreed());/*Breed of Dog here*/
+		JLabel breedLabel = new JLabel("Breed:" + dog.getBreed());
 		centerNorthPanel.add(breedLabel);
 		
-		JLabel locationLabel = new JLabel("Location:");/*Location of Dog here*/
-		centerNorthPanel.add(locationLabel);
+		/*JLabel locationLabel = new JLabel(dog.getDescription());
+		centerNorthPanel.add(locationLabel);*/
 		
-		JLabel ageLabel = new JLabel("Age:" + dog.getAge()); /*Age of the dog goes here*/
+		JLabel ageLabel = new JLabel("Age:" + dog.getAge()); 
 		centerNorthPanel.add(ageLabel);
 		
 		JPanel centerCenterPanel = new JPanel();
 		centerPanel.add(centerCenterPanel);
 		
-		JTextArea textArea = new JTextArea(dog.getDescription());/*Info of Dog here*/
-		centerCenterPanel.add(textArea);
+		JTextArea textArea = new JTextArea(50,50);
+		textArea.setText(dog.getDescription());
+		textArea.setLineWrap(true);
+		textArea.setEditable(false);
+		JScrollPane scroller = new JScrollPane(textArea);
+		scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		centerCenterPanel.add(scroller);
 		
 		JPanel southPanel = new JPanel();
 		contentPane.add(southPanel, BorderLayout.SOUTH);
@@ -110,30 +135,9 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 		southPanel.add(southPanelPanel1);
 		
 		JButton deleteButton = new JButton("Delete");
+		deleteButton.addActionListener(deleteListener);
 		southPanelPanel1.add(deleteButton);
 		
-		
-		/*try{
-			tinDogPhoto = new URL("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic");
-			photo2 = ImageIO.read(tinDogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-			JLabel lblTinDogLogo = new JLabel(new ImageIcon(photo2)); Image file here
-			JPanel southPanelPanel2 = new JPanel();
-			southPanelPanel2.add(lblTinDogLogo);//FIX THIS JOE
-			southPanel.add(southPanelPanel2);
-
-		}catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}*/
-		/*JLabel lblTindogLogo = new JLabel(new ImageIcon("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic"));
-		JPanel southPanelPanel2 = new JPanel();
-		southPanelPanel2.add(lblTindogLogo);//FIX THIS JOE
-		southPanel.add(southPanelPanel2);*/
-
-		
-		/*JLabel tindogImageLabel = new JLabel(new ImageIcon("C:\\Users\\jde674\\Documents\\GitHub\\Tindog\\TinDog Logo.png"));
-		southPanelPanel2.add(tindogImageLabel);*/
 		
 		JPanel southPanelPanel3 = new JPanel();
 		southPanel.add(southPanelPanel3);

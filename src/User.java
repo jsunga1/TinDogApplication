@@ -7,7 +7,6 @@ public class User
 	private DoggieBag db;
 	private String firstName;
 	private String lastName;
-
 	private String email;
 	private String phone;
 	private String password;
@@ -17,19 +16,18 @@ public class User
 	public User()
 	{
 		db = new DoggieBag();
-		
 		firstName = "User";
 		lastName = "User";
 		email = "User";
 		phone = "User";
 		password = "User";
-		dp = new DogPile();
-			
+		dp = new DogPile();	
 	}
 	
 	public void setUserInfo(String UserName)
 	{
-		try{
+		try
+		{
 			udb = new UniversalDogDB();
 			String q = "select * from USER where USER_Email = \"" + UserName + "\";";
 
@@ -48,13 +46,27 @@ public class User
 				dp.generateDogPile(email);
 			}
 			
-		}catch(Exception userFail)
+		}
+		catch(Exception userFail)
 		{
 			System.out.println(userFail);
 		}
 	}
 	
-
+	public void deleteUser()
+	{
+		String query = "DELETE FROM USER where User_Email = \"" + email + "\";";
+		String query2 = "DELETE FROM DOGGIE_BAG where User_Email = \"" + email + "\";";
+		try
+		{
+			udb.sendData(query);
+			udb.sendData(query2);
+		}
+		catch (Exception deleteFail)
+		{
+			deleteFail.printStackTrace();
+		}
+	}
 	public String getFirstName()
 	{
 		return firstName;

@@ -25,12 +25,13 @@ public class ViewAdoptionAgencyInMainFrame extends JFrame {
 	private Dog dog;
 	private Shelter shelter;
 
-	public ViewAdoptionAgencyInMainFrame(Dog d, User u) {
+	public ViewAdoptionAgencyInMainFrame(Dog d, User u)
+	{
 		user = u;
-
-		class createBackListener implements ActionListener{
-
-			public void actionPerformed(ActionEvent e){
+		class createBackListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				JFrame frameMainFrame = new ViewDoginMainFrame(sendUserData());
 				close();
 				frameMainFrame.setVisible(true);

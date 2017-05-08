@@ -23,7 +23,6 @@ public class AboutFrame extends JFrame{
 	private JTextArea aboutInfoTextBox;
 	
 	
-	
 	public AboutFrame(User u){
 		user = u;
 		class Back_Listener implements ActionListener{
@@ -32,17 +31,14 @@ public class AboutFrame extends JFrame{
 				close();
 				frameSettingsFrame.setVisible(true);
 				frameSettingsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			
 			}
 		}
 
 		backlistener = new Back_Listener();
 
-		
 		createcosa();
-		backButton.addActionListener(backlistener);
-		
 		createpanel();
+		backButton.addActionListener(backlistener);
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		
 	}

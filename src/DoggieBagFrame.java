@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.util.Scanner;
 
@@ -21,6 +22,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+
+
 
 public class DoggieBagFrame extends JFrame
 {
@@ -38,12 +41,8 @@ public class DoggieBagFrame extends JFrame
 	private DoggieBag dogBagTemp;
 	private ArrayList <Integer> dogTemp;
 	private JComboBox box;
-
 	private URL dogPhoto;
 	public Image photo;
-	
-
-
 	
 	public DoggieBagFrame(User u)
 	{
@@ -63,41 +62,56 @@ public class DoggieBagFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				String boxInfo;
-				boxInfo = (String)box.getSelectedItem();//needs to find which do it is from dog name
-				Scanner input = new Scanner(boxInfo);
-				input.next();
-				int temp = input.nextInt();
-				System.out.println(temp);
-				dog.setDogID(temp); 
-				dog.setDogInfo(temp);
-				JFrame frameVDIDBF = new ViewDogInDoggieBagFrame(sendUserData(), dog);
-				close();
-				frameVDIDBF.setVisible(true);
-				frameVDIDBF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				if (dogBagTemp.getDoggieBag().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null, "Sorry, there are no dogs to view!");
+
+				}
+				else
+				{
+					String boxInfo;
+					boxInfo = (String)box.getSelectedItem();//needs to find which do it is from dog name
+					Scanner input = new Scanner(boxInfo);
+					input.next();
+					int temp = input.nextInt();
+					System.out.println(temp);
+					dog.setDogID(temp); 
+					dog.setDogInfo(temp);
+					JFrame frameVDIDBF = new ViewDogInDoggieBagFrame(sendUserData(), dog);
+					close();
+					frameVDIDBF.setVisible(true);
+					frameVDIDBF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				}
 			}
 		}
 		class createBoxListener implements ActionListener{
 			
 
 			public void actionPerformed(ActionEvent e){
-				String boxInfo;
-				boxInfo = (String)box.getSelectedItem();//needs to find which do it is from dog name
-				Scanner input = new Scanner(boxInfo);
-				input.next();
-				int temp = input.nextInt();
-				System.out.println(temp);
-				dog1.setDogID(temp); 
-				dog1.setDogInfo(temp);
-				try{
-					dogPhoto = new URL(dog1.getPicture());
-					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-					dogImageLabel.setIcon(new ImageIcon(photo));
-					
-				}catch (MalformedURLException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+				if (dogBagTemp.getDoggieBag().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null, "Sorry, there are no dogs to view!");
+				}
+				else
+				{
+					String boxInfo;
+					boxInfo = (String)box.getSelectedItem();//needs to find which do it is from dog name
+					Scanner input = new Scanner(boxInfo);
+					input.next();
+					int temp = input.nextInt();
+					System.out.println(temp);
+					dog1.setDogID(temp); 
+					dog1.setDogInfo(temp);
+					try{
+						dogPhoto = new URL(dog1.getPicture());
+						photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+						dogImageLabel.setIcon(new ImageIcon(photo));
+						
+					}catch (MalformedURLException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		}
@@ -142,7 +156,11 @@ public class DoggieBagFrame extends JFrame
 		selectionPanel.add(box);
 		box.addActionListener(boxListener);
 		dog1 = new Dog();
-		dog1.setDogInfo(dogBagTemp.getDoggieBag().get(0));
+		if (dogBagTemp.getDoggieBag().isEmpty())
+			dog1 = dog;
+		else
+			dog1.setDogInfo(dogBagTemp.getDoggieBag().get(0));
+		
 		try {
 			dogPhoto = new URL(dog1.getPicture());
 			photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
@@ -171,14 +189,24 @@ public class DoggieBagFrame extends JFrame
 
 	public void createBox()
 	{
-		dogBagTemp = new DoggieBag(user.getEmail());
-		dogBagTemp.generateDogBag();
+		dogBagTemp = new DoggieBag();
+		dogBagTemp.generateDoggieBag(user.getEmail());
 		dogTemp = dogBagTemp.getDoggieBag();
 		box = new JComboBox();
-		for(int i = 0; i < dogTemp.size();i++)
+		if (dogTemp.isEmpty())
+		{	
+			dog.setDogName("There are no dogs in your DoggieBag!");
+			dog.setPhotoLink("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=10d25d7e04315415a8caca5f855b7403e&authkey=AVAO6rh74CPhzTMZY5WLaTQ");
+			box.addItem(dog.getName());
+		}
+		else
 		{
-			dog.setDogInfo(dogTemp.get(i));
-			box.addItem("ID: " + dog.getDogID() + " Name: " +  dog.getName());
+			
+			for(int i = 0; i < dogTemp.size();i++)
+			{
+				dog.setDogInfo(dogTemp.get(i));
+				box.addItem("ID: " + dog.getDogID() + " Name: " +  dog.getName());
+			}
 		}
 		
 	}
