@@ -83,8 +83,7 @@ public class DogPile
 		query = query + ";";
 		db.retrieveData(query);
 		ResultSet rs = db.getResultSet();
-		
-		
+			
 		try
 		{
 			while(rs.next())
