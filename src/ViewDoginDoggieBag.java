@@ -49,9 +49,6 @@ public class ViewDoginDoggieBag extends JFrame
 		JLabel lblNewLabel_3 = new JLabel("Breed: " + dog.getBreed());
 		panel.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_2 = new JLabel("Location: " + dog.getShelter());
-		panel.add(lblNewLabel_2);
-		
 		JPanel panel_1 = new JPanel();
 		panel_7.add(panel_1);
 		

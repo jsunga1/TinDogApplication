@@ -49,7 +49,7 @@ public class DoggieBag
 	public void deleteDog(User u, int i)
 	{
 		UniversalDogDB db = new UniversalDogDB();
-		String q = "DELETE from DOGGIE_BAG where DOG_ID = " + i + " AND USER_Email = \"" + u.getEmail() + "\";";
+		String q = "DELETE from DOGGIE_BAG where DOG_Id = " + i + " AND USER_Email = \"" + u.getEmail() + "\";";
 		db.sendData(q);
 	}
 
