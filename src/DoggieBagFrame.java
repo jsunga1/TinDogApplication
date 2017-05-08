@@ -38,9 +38,11 @@ public class DoggieBagFrame extends JFrame
 	private DoggieBag dogBagTemp;
 	private ArrayList <Integer> dogTemp;
 	private JComboBox box;
+
 	private URL dogPhoto;
 	public Image photo;
 	
+
 
 	
 	public DoggieBagFrame(User u)
