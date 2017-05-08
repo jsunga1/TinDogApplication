@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class SettingsFrame extends JFrame {
 
@@ -18,9 +19,11 @@ public class SettingsFrame extends JFrame {
 	private ActionListener logoutListener;
 	private ActionListener deleteListener;
 	private User user;
+
 	
 	public SettingsFrame(User u)
 	{
+
 		user = u;
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -58,10 +61,16 @@ public class SettingsFrame extends JFrame {
 		class createDeleteListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 
-				JFrame frameStartFrame = new StartFrame();
-				close();
-				frameStartFrame.setVisible(true);
-				frameStartFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				String response = JOptionPane.showInputDialog("Are you sure you want to delete your account?\nEnter Yes or No");
+				if (response.equalsIgnoreCase("yes"))
+				{
+					user.deleteUser();
+					JFrame frameStartFrame = new StartFrame();
+					close();
+					frameStartFrame.setVisible(true);
+					frameStartFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				}
+				
 			}
 		}
 		backListener = new createBackListener();
