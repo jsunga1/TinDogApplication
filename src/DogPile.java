@@ -81,8 +81,10 @@ public class DogPile
 			}
 		}
 		query = query + ";";
+		System.out.println(query);
 		db.retrieveData(query);
 		ResultSet rs = db.getResultSet();
+	
 			
 		try
 		{
@@ -114,8 +116,11 @@ public class DogPile
 	}
 	public void getHeadDog()
 	{
-		Random r = new Random();
-		position = r.nextInt(dogPile.size());
+		if (!dogPile.isEmpty())
+		{
+			Random r = new Random();
+			position = r.nextInt(dogPile.size());
+		}
 	}
 	public int getCurrentPosition()
 	{

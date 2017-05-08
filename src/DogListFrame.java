@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.sql.*;
 
@@ -61,11 +62,17 @@ public class DogListFrame extends JFrame {
 		}
 		class viewInfoListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-
-				JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame(user);
-				close();
-				frameViewDogInMainFrameFrame.setVisible(true);
-				frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				if (dp.getDogPileArray().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null, "Dog Information is not available");
+				}
+				else
+				{
+					JFrame frameViewDogInMainFrameFrame = new ViewDoginMainFrame(user);
+					close();
+					frameViewDogInMainFrameFrame.setVisible(true);
+					frameViewDogInMainFrameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				}
 			}
 		}
 
