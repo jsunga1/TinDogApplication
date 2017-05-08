@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,34 +14,38 @@ import javax.swing.JLabel;
 import java.util.Scanner;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class DoggieBagFrame extends JFrame
 {
 	private JPanel contentPane;
-	private JPanel panel_center;
+	private JPanel centerPanel;
 	private JPanel dogPanel;
+	private JLabel dogImageLabel;
 	private ActionListener backlistener;
-	private ActionListener dogImageListener;
-
 	private ActionListener dogListener;
-
+	private ActionListener boxListener;
 
 	private User user;
 	private Dog dog;
+	private Dog dog1;
 	private DoggieBag dogBagTemp;
 	private ArrayList <Integer> dogTemp;
 	private JComboBox box;
-
+	private URL dogPhoto;
+	public Image photo;
 	
 
 	
 	public DoggieBagFrame(User u)
 	{
 		user = u;
-
 		dog = new Dog();
 		class Back_Listener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -56,22 +61,50 @@ public class DoggieBagFrame extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				String boxInfo, boxInfoTemp0;
+				String boxInfo;
 				boxInfo = (String)box.getSelectedItem();//needs to find which do it is from dog name
 				Scanner input = new Scanner(boxInfo);
 				input.next();
-				dog.setDogID(input.nextInt()); 
+				int temp = input.nextInt();
+				System.out.println(temp);
+				dog.setDogID(temp); 
+				dog.setDogInfo(temp);
 				JFrame frameVDIDBF = new ViewDogInDoggieBagFrame(sendUserData(), dog);
 				close();
 				frameVDIDBF.setVisible(true);
 				frameVDIDBF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		}
+		class createBoxListener implements ActionListener{
+			
 
+			public void actionPerformed(ActionEvent e){
+				String boxInfo;
+				boxInfo = (String)box.getSelectedItem();//needs to find which do it is from dog name
+				Scanner input = new Scanner(boxInfo);
+				input.next();
+				int temp = input.nextInt();
+				System.out.println(temp);
+				dog1.setDogID(temp); 
+				dog1.setDogInfo(temp);
+				try{
+					dogPhoto = new URL(dog1.getPicture());
+					photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+					dogImageLabel.setIcon(new ImageIcon(photo));
+					
+				}catch (MalformedURLException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+		
 		backlistener = new Back_Listener();
 		dogListener = new createDogListener();
+		boxListener = new createBoxListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 900, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -94,44 +127,58 @@ public class DoggieBagFrame extends JFrame
 		JPanel northPanel_east = new JPanel();
 		northPanel.add(northPanel_east, BorderLayout.EAST);
 
-		JLabel lblNewLabel = new JLabel("New label");
-		northPanel_east.add(lblNewLabel);
-
 		JPanel northPanel_south = new JPanel();
 		northPanel.add(northPanel_south, BorderLayout.SOUTH);
 
-		JButton btnFilter = new JButton("Filter");
-		northPanel_south.add(btnFilter);
-
+		
+		centerPanel = new JPanel();//add combobox here
+		centerPanel.setLayout(new BorderLayout());
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(0,1));
+		createBox();
+		panel.add(box);
+		box.addActionListener(boxListener);
+		dog1 = new Dog();
+		dog1.setDogInfo(dogBagTemp.getDoggieBag().get(0));
+		try {
+			dogPhoto = new URL(dog1.getPicture());
+			photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+			dogImageLabel = new JLabel(new ImageIcon(photo));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		
-		panel_center = new JPanel();//add combobox here
-		panel_center.setLayout(new BorderLayout());
-		panel_center.add(createBox(), BorderLayout.CENTER);
+		
+		panel.add(dogImageLabel);
 		
 		JButton submitButton = new JButton("Submit");
 		submitButton.addActionListener(dogListener);
-		panel_center.add(submitButton, BorderLayout.SOUTH);
-		
+		centerPanel.add(submitButton, BorderLayout.SOUTH);
+		centerPanel.add(panel, BorderLayout.CENTER);
 
-		contentPane.add(panel_center, BorderLayout.CENTER);
+		contentPane.add(centerPanel, BorderLayout.CENTER);
 	}
 	
 
 
-	public JComboBox createBox()
+	public void createBox()
 	{
-		box = new JComboBox();
 		dogBagTemp = new DoggieBag(user.getEmail());
 		dogBagTemp.generateDogBag();
 		dogTemp = dogBagTemp.getDoggieBag();
-
+		box = new JComboBox();
 		for(int i = 0; i < dogTemp.size();i++)
 		{
 			dog.setDogInfo(dogTemp.get(i));
 			box.addItem("ID: " + dog.getDogID() + " Name: " +  dog.getName());
 		}
-		return box;
+		
 	}
 	
 	public void close(){

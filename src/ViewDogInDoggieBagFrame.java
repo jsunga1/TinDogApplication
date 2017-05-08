@@ -32,6 +32,7 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 	private User user;
 	private Dog dog;
 	private ActionListener backListener;
+	private ActionListener adoptionListener;
 	private URL dogPhoto;
 	private Image photo;
 	private URL tinDogPhoto;
@@ -40,6 +41,7 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 	public ViewDogInDoggieBagFrame(User u, Dog d) {
 		user = u;
 		dog = d;
+		System.out.println(dog.getDogID() + dog.getName());
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				JFrame frameDoggieBagFrame = new DoggieBagFrame(sendUserData());
@@ -47,6 +49,14 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 				frameDoggieBagFrame.setVisible(true);
 			}
 		}
+		class createAdoptionListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				JFrame frameVAAIDBF = new ViewAdoptionAgencyInDoggieBagFrame(dog, sendUserData());
+				close();
+				frameVAAIDBF.setVisible(true);
+			}
+		}
+		adoptionListener = new createAdoptionListener();
 		backListener = new createBackListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
@@ -130,7 +140,7 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 		
 		JButton viewAdoptionInformationButton = new JButton("View Adoption Information");
 		southPanelPanel3.add(viewAdoptionInformationButton);
-		
+		viewAdoptionInformationButton.addActionListener(adoptionListener);
 		JPanel northPanel = new JPanel();
 		contentPane.add(northPanel, BorderLayout.NORTH);
 		northPanel.setLayout(new GridLayout(0, 1, 0, 0));
