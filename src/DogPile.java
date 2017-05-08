@@ -36,16 +36,8 @@ public class DogPile
 	public void generateDogPile(String email)
 	{
 		dogPile.clear();
-		//connection to db
-		//grab ids
-		//save to arraylist
-		//needs to added to filterframe
-		//create with start frame w/user
-		
 		String query;
 		UniversalDogDB db = new UniversalDogDB();
-		
-		
 		checkFilter();
 		query = "Select DOG_ID from DOG_2";
 		
@@ -56,7 +48,6 @@ public class DogPile
 				query = query + " JOIN ADOPTION_AGENCY ON DOG_Adoption_Agency = AGENCY_ID ";
 			}
 			query = query + " where ";
-			System.out.println(dogPile.size());
 			if(ageFilter1)
 				query = query + "DOG_Age >= " + age1;
 			
@@ -89,8 +80,7 @@ public class DogPile
 					query = query + "Agency_Name = \"" + shelter + "\"";
 			}
 		}
-		query = query + ";";	
-		System.out.println(query);
+		query = query + ";";
 		db.retrieveData(query);
 		ResultSet rs = db.getResultSet();
 		
@@ -123,21 +113,6 @@ public class DogPile
 			e.printStackTrace();
 		}
 	}
-	
-	public void clearFilter()
-	{
-		age1 = 0;
-		age2 = 100;
-		breed = "";
-		gender = 2;
-		shelter = "";
-		ageFilter1 = false;
-		ageFilter2 = false;
-		breedFilter = false;
-		genderFilter = false;
-		shelterFilter = false;
-		filter = false;
-	}
 	public void getHeadDog()
 	{
 		Random r = new Random();
@@ -153,7 +128,20 @@ public class DogPile
 	{
 		dogPile.remove(position);
 	}
-	
+	public void clearFilter()
+	{
+		age1 = 0;
+		age2 = 100;
+		breed = "";
+		gender = 2;
+		shelter = "";
+		ageFilter1 = false;
+		ageFilter2 = false;
+		breedFilter = false;
+		genderFilter = false;
+		shelterFilter = false;
+		filter = false;
+	}
 	public void checkFilter()
 	{
 		if(age1 != 0)
