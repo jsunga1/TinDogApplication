@@ -30,7 +30,8 @@ public class Shelter
 	public void setShelterInfo(long id){
 		try{
 			db = new UniversalDogDB();
-			String q = "select * from ADOPTION_AGENCY where AGENCY_ID = " + id;
+			String q = "select * from ADOPTION_AGENCY where AGENCY_ID = " + id +";";
+			System.out.println(q);
 			db.retrieveData(q);
 			ResultSet rs = db.getResultSet();
 			

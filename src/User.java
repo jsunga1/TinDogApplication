@@ -82,5 +82,9 @@ public class User
 	{
 		return dp;
 	}
+	public DoggieBag getDoggieBag()
+	{
+		return db;
+	}
 
 }
