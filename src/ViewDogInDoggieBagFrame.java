@@ -1,6 +1,3 @@
-
-
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -26,8 +23,8 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 
-public class ViewDogInDoggieBagFrame extends JFrame {
-
+public class ViewDogInDoggieBagFrame extends JFrame
+{
 	private JPanel contentPane;
 	private User user;
 	private Dog dog;
@@ -38,19 +35,24 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 	private URL tinDogPhoto;
 	private Image photo2;
 	
-	public ViewDogInDoggieBagFrame(User u, Dog d) {
+	public ViewDogInDoggieBagFrame(User u, Dog d)
+	{
 		user = u;
 		dog = d;
 		System.out.println(dog.getDogID() + dog.getName());
-		class createBackListener implements ActionListener{
-			public void actionPerformed(ActionEvent e) {
+		class createBackListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
 				JFrame frameDoggieBagFrame = new DoggieBagFrame(sendUserData());
 				close();
 				frameDoggieBagFrame.setVisible(true);
 			}
 		}
-		class createAdoptionListener implements ActionListener{
-			public void actionPerformed(ActionEvent e){
+		class createAdoptionListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				JFrame frameVAAIDBF = new ViewAdoptionAgencyInDoggieBagFrame(dog, sendUserData());
 				close();
 				frameVAAIDBF.setVisible(true);
@@ -73,33 +75,35 @@ public class ViewDogInDoggieBagFrame extends JFrame {
 		centerPanel.add(centerNorthPanel, BorderLayout.NORTH);
 		centerNorthPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		try{
+		try
+		{
 			dogPhoto = new URL(dog.getPicture());
 			photo = ImageIO.read(dogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 			JLabel iamgeLabel = new JLabel(new ImageIcon(photo)); /*Image file here*/
 			centerNorthPanel.add(iamgeLabel);
-		}catch (MalformedURLException e1) {
+		}
+		catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 		
-		JLabel nameLabel = new JLabel("Name:" + dog.getName());/*Name of Dog here*/
+		JLabel nameLabel = new JLabel("Name:" + dog.getName());
 		centerNorthPanel.add(nameLabel);
 		
-		JLabel breedLabel = new JLabel("Breed:" + dog.getBreed());/*Breed of Dog here*/
+		JLabel breedLabel = new JLabel("Breed:" + dog.getBreed());
 		centerNorthPanel.add(breedLabel);
 		
-		JLabel locationLabel = new JLabel("Location:");/*Location of Dog here*/
+		JLabel locationLabel = new JLabel("Location:");
 		centerNorthPanel.add(locationLabel);
 		
-		JLabel ageLabel = new JLabel("Age:" + dog.getAge()); /*Age of the dog goes here*/
+		JLabel ageLabel = new JLabel("Age:" + dog.getAge()); 
 		centerNorthPanel.add(ageLabel);
 		
 		JPanel centerCenterPanel = new JPanel();
 		centerPanel.add(centerCenterPanel);
 		
-		JTextArea textArea = new JTextArea(dog.getDescription());/*Info of Dog here*/
+		JTextArea textArea = new JTextArea(dog.getDescription());
 		centerCenterPanel.add(textArea);
 		
 		JPanel southPanel = new JPanel();

@@ -20,7 +20,10 @@ public class SettingsFrame extends JFrame {
 	private ActionListener deleteListener;
 	private User user;
 
-	public SettingsFrame(User u) {
+	
+	public SettingsFrame(User u)
+	{
+
 		user = u;
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -57,7 +60,7 @@ public class SettingsFrame extends JFrame {
 		}
 		class createDeleteListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				
+
 				String response = JOptionPane.showInputDialog("Are you sure you want to delete your account?\nEnter Yes or No");
 				if (response.equalsIgnoreCase("yes"))
 				{

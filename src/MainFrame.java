@@ -19,7 +19,9 @@ public class MainFrame extends JFrame {
 	private ActionListener doggieBagListener;
 	private ActionListener helpListener;
 	private User user;
-	public MainFrame(User u) {
+	
+	public MainFrame(User u)
+	{
 		user = u;
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
