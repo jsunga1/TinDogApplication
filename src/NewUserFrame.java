@@ -28,12 +28,10 @@ public class NewUserFrame extends JFrame{
 	private ActionListener cancelButtonListener;
 	private ActionListener submitButtonListener;
 
-	
 	private User newUser;
 	
-
-	public NewUserFrame(){
-
+	public NewUserFrame()
+	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -134,15 +132,19 @@ public class NewUserFrame extends JFrame{
 
 				}
 
-				else if(!textFieldEmail.getText().equals("")){ //NS
+				else if(!textFieldEmail.getText().equals(""))
+				{
 					
 					UniversalDogDB connection = new UniversalDogDB();
 					String query = "Select * from USER where USER_Email = \"" + textFieldEmail.getText() + "\";";
 					connection.retrieveData(query);
 					ResultSet rs = connection.getResultSet();
-					try {
-						if (!rs.isBeforeFirst()){
-							try{
+					try 
+					{
+						if (!rs.isBeforeFirst())
+						{
+							try
+							{
 								
 								if(textFieldPassword.getText().equals(textFieldPasswordConfirmation.getText()))
 								{
@@ -169,7 +171,8 @@ public class NewUserFrame extends JFrame{
 								System.out.println(newUserFailed);
 							}
 						}
-						else{
+						else
+						{
 
 							lblEmail.setText("That email already exists, try another:");
 							textFieldEmail.setText("");
@@ -179,13 +182,13 @@ public class NewUserFrame extends JFrame{
 							textFieldPasswordConfirmation.setText("");
 							textFieldPhoneNumber.setText("");
 						}
-					} catch (SQLException e1) {
+					}
+					catch (SQLException e1) 
+					{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-
 				}
-				
 			}
 		}
 		cancelButtonListener = new cancelListener();

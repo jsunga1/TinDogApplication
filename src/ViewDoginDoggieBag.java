@@ -40,16 +40,16 @@ public class ViewDoginDoggieBag extends JFrame
 		panel_7.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel(""); /*Image file here*/
+		JLabel lblNewLabel = new JLabel("");
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Name: " + dog.getName());/*Name of Dog here*/
+		JLabel lblNewLabel_1 = new JLabel("Name: " + dog.getName());
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_3 = new JLabel("Breed: " + dog.getBreed());/*Breed of Dog here*/
+		JLabel lblNewLabel_3 = new JLabel("Breed: " + dog.getBreed());
 		panel.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_2 = new JLabel("Location: " + dog.getShelter());/*Location of Dog here*/
+		JLabel lblNewLabel_2 = new JLabel("Location: " + dog.getShelter());
 		panel.add(lblNewLabel_2);
 		
 		JPanel panel_1 = new JPanel();
