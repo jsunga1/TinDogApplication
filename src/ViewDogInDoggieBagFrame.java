@@ -77,7 +77,7 @@ public class ViewDogInDoggieBagFrame extends JFrame
 		backListener = new createBackListener();
 		deleteListener = new createDeleteListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 600);
+		setBounds(100, 100, 1350, 900);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -119,13 +119,13 @@ public class ViewDogInDoggieBagFrame extends JFrame
 		JPanel centerCenterPanel = new JPanel();
 		centerPanel.add(centerCenterPanel);
 		
-		JTextArea textArea = new JTextArea(50,50);
+		JTextArea textArea = new JTextArea(10,50);
 		textArea.setText(dog.getDescription());
 		textArea.setLineWrap(true);
 		textArea.setEditable(false);
 		JScrollPane scroller = new JScrollPane(textArea);
-		scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		centerCenterPanel.add(scroller);
+		scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		JPanel southPanel = new JPanel();
 		contentPane.add(southPanel, BorderLayout.SOUTH);
