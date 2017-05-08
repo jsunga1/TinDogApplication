@@ -32,41 +32,42 @@ public class ViewDoginMainFrame extends JFrame {
 	private DogPile dp;
 	private URL dogPhoto;
 	private Image photo;
-	/**
-	 * Create the frame.
-	 */
+	
 	public ViewDoginMainFrame(User u)
 	{
 		user = u;
-		class backListener implements ActionListener{
-			public void actionPerformed(ActionEvent e){
+		class backListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				JFrame frameDogListFrame;
-				try {
+				try
+				{
 					frameDogListFrame = new DogListFrame(sendUserData());
 					close();
 					frameDogListFrame.setVisible(true);
 					frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+				} 
+				catch (IOException e1)
+				{
 					e1.printStackTrace();
 				}
-				
-				
 			}
 		}
 		
-		class createXMarkListener implements ActionListener{
+		class createXMarkListener implements ActionListener
+		{
 			public void actionPerformed(ActionEvent e)
 			{
 				dp.removeHeadDog();
 				JFrame frameDogListFrame;
-				try {
+				try
+				{
 					frameDogListFrame = new DogListFrame(sendUserData());
 					close();
 					frameDogListFrame.setVisible(true);
 					frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
@@ -81,13 +82,15 @@ public class ViewDoginMainFrame extends JFrame {
 				dp.removeHeadDog();
 				
 				JFrame frameDogListFrame;
-				try {
+				try
+				{
 					frameDogListFrame = new DogListFrame(sendUserData());
 					close();
 					frameDogListFrame.setVisible(true);
 					frameDogListFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+				} 
+				catch (IOException e1)
+				{
 					e1.printStackTrace();
 				}	
 			}
@@ -98,8 +101,8 @@ public class ViewDoginMainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				JFrame frameViewAdoptionAgencyInMainFrame;
-				try {
-
+				try 
+				{
 					frameViewAdoptionAgencyInMainFrame = new ViewAdoptionAgencyInMainFrame(dog,sendUserData());
 					close();
 					frameViewAdoptionAgencyInMainFrame.setVisible(true);
@@ -108,8 +111,7 @@ public class ViewDoginMainFrame extends JFrame {
 				catch(Exception e1)
 				{
 					e1.printStackTrace();
-				}
-				
+				}	
 			}
 		}
 		
@@ -160,6 +162,7 @@ public class ViewDoginMainFrame extends JFrame {
 		{
 			imageFail.printStackTrace();
 		}*/
+		
 		JLabel nameLabel = new JLabel("Name: " +  dog.getName());
 		centerNorthPanel.add(nameLabel);
 		
@@ -181,11 +184,9 @@ public class ViewDoginMainFrame extends JFrame {
 			sex = "Male";
 		JLabel genderLabel = new JLabel("Gender: " + sex);
 		centerNorthPanel.add(genderLabel);
-
 		
 		JPanel centerCenterPanel = new JPanel();
 		centerPanel.add(centerCenterPanel);
-		
 
 		JTextArea textArea = new JTextArea();
 		centerCenterPanel.add(textArea);
@@ -209,7 +210,6 @@ public class ViewDoginMainFrame extends JFrame {
 		southPanelPanel2.add(southPanelPanel2Panel1);
 		FlowLayout fl_southPanelPanel2Panel1 = (FlowLayout) southPanelPanel2Panel1.getLayout();
 		fl_southPanelPanel2Panel1.setAlignment(FlowLayout.LEFT);
-
 		
 		JButton XButton = new JButton("✖");
 		southPanelPanel2Panel1.add(XButton);
@@ -220,7 +220,6 @@ public class ViewDoginMainFrame extends JFrame {
 		fl_SouthPanelPanel2Panel2.setAlignment(FlowLayout.RIGHT);
 		southPanelPanel2.add(SouthPanelPanel2Panel2);
 		
-
 		JButton checkButton = new JButton("✔");
 		SouthPanelPanel2Panel2.add(checkButton);
 		checkButton.addActionListener(checkListener);

@@ -23,7 +23,8 @@ public class ViewAdoptionAgencyInDoggieBagFrame extends JFrame {
 	private Shelter shelter;
 	private ActionListener backListener;
 
-	public ViewAdoptionAgencyInDoggieBagFrame(Dog d, User u) {
+	public ViewAdoptionAgencyInDoggieBagFrame(Dog d, User u)
+	{
 		user = u;
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -101,9 +102,6 @@ public class ViewAdoptionAgencyInDoggieBagFrame extends JFrame {
 		JLabel agencyEmailLabel = new JLabel("Agency Email: " + shelter.getEmail());
 		agencyEmailLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		centerPanel.add(agencyEmailLabel);
-		
-
-		
 		
 		Panel southPanel = new Panel();
 		contentPane.add(southPanel, BorderLayout.SOUTH);

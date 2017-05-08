@@ -42,9 +42,6 @@ public class DoggieBagFrame extends JFrame
 	private URL dogPhoto;
 	public Image photo;
 	
-
-
-	
 	public DoggieBagFrame(User u)
 	{
 		user = u;
@@ -171,8 +168,8 @@ public class DoggieBagFrame extends JFrame
 
 	public void createBox()
 	{
-		dogBagTemp = new DoggieBag(user.getEmail());
-		dogBagTemp.generateDogBag();
+		dogBagTemp = new DoggieBag();
+		dogBagTemp.generateDoggieBag(user.getEmail());
 		dogTemp = dogBagTemp.getDoggieBag();
 		box = new JComboBox();
 		for(int i = 0; i < dogTemp.size();i++)

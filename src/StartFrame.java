@@ -28,8 +28,6 @@ public class StartFrame extends JFrame{
 	private JLabel lblWelcomeToTindog;
 	private User user;
 
-	
-	
 	public StartFrame(){
 		class CreateAccount_Listener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -75,16 +73,11 @@ public class StartFrame extends JFrame{
 						{
 							lblUserName.setText("Username does not exist.");
 							lblPassword.setText("Password: ");
-						
 						}
 						else
-						{
-						
-								
+						{	
 							if(rs.next() && rs.getString("USER_Password").equals(Start_Password.getText()))
 							{
-
-								
 								user = new User();
 								user.setUserInfo(Start_Username.getText());
 								
@@ -127,6 +120,7 @@ public class StartFrame extends JFrame{
 		Start_NUCA = new JButton("New User? Create Account");
 		Start_Login = new JButton("Login");
 	}
+	
 	public void createpanel(){
 	
 		panel = new JPanel();

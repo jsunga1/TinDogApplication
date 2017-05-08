@@ -18,7 +18,9 @@ public class SettingsFrame extends JFrame {
 	private ActionListener logoutListener;
 	private ActionListener deleteListener;
 	private User user;
-	public SettingsFrame(User u) {
+	
+	public SettingsFrame(User u)
+	{
 		user = u;
 		class createBackListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -55,7 +57,7 @@ public class SettingsFrame extends JFrame {
 		}
 		class createDeleteListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				//delete the user info here
+
 				JFrame frameStartFrame = new StartFrame();
 				close();
 				frameStartFrame.setVisible(true);
