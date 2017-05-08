@@ -136,10 +136,10 @@ public class DoggieBagFrame extends JFrame
 		centerPanel = new JPanel();//add combobox here
 		centerPanel.setLayout(new BorderLayout());
 		
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0,1));
+		JPanel selectionPanel = new JPanel();
+		selectionPanel.setLayout(new GridLayout(0,1));
 		createBox();
-		panel.add(box);
+		selectionPanel.add(box);
 		box.addActionListener(boxListener);
 		dog1 = new Dog();
 		dog1.setDogInfo(dogBagTemp.getDoggieBag().get(0));
@@ -157,12 +157,12 @@ public class DoggieBagFrame extends JFrame
 
 		
 		
-		panel.add(dogImageLabel);
+		selectionPanel.add(dogImageLabel);
 		
 		JButton submitButton = new JButton("Submit");
 		submitButton.addActionListener(dogListener);
 		centerPanel.add(submitButton, BorderLayout.SOUTH);
-		centerPanel.add(panel, BorderLayout.CENTER);
+		centerPanel.add(selectionPanel, BorderLayout.CENTER);
 
 		contentPane.add(centerPanel, BorderLayout.CENTER);
 	}
