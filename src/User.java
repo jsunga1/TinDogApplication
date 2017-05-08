@@ -54,7 +54,20 @@ public class User
 		}
 	}
 	
-
+	public void deleteUser()
+	{
+		String query = "DELETE FROM USER where User_Email = \"" + email + "\";";
+		String query2 = "DELETE FROM DOGGIE_BAG where User_Email = \"" + email + "\";";
+		try
+		{
+			udb.sendData(query);
+			udb.sendData(query2);
+		}
+		catch (Exception deleteFail)
+		{
+			deleteFail.printStackTrace();
+		}
+	}
 	public String getFirstName()
 	{
 		return firstName;
