@@ -40,9 +40,10 @@ public class AboutFrame extends JFrame{
 
 		
 		createcosa();
-		backButton.addActionListener(backlistener);
+
 		
 		createpanel();
+		backButton.addActionListener(backlistener);
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		
 	}
