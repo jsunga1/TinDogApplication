@@ -139,7 +139,6 @@ public class FilterFrame extends JFrame {
 		centerWestPanel.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel centerWestPanel1 = new JPanel();
-		FlowLayout fl_centerWestPanel1 = (FlowLayout) centerWestPanel1.getLayout();
 		centerWestPanel.add(centerWestPanel1);
 
 		JLabel ageLabel = new JLabel("Age:");

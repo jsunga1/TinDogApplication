@@ -17,6 +17,7 @@ public class MainFrame extends JFrame {
 	private ActionListener backListener;
 	private ActionListener settingsListener;
 	private ActionListener doggieBagListener;
+	private ActionListener helpListener;
 	private User user;
 	public MainFrame(User u) {
 		user = u;
@@ -59,6 +60,7 @@ public class MainFrame extends JFrame {
 		backListener = new createBackListener();
 		settingsListener = new createSettingsListener();
 		doggieBagListener = new createDoggieBagListener();
+		helpListener = new createHelpListener();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -91,6 +93,7 @@ public class MainFrame extends JFrame {
 		btnSettings.addActionListener(settingsListener);
 		JButton btnHelp = new JButton("Help");
 		panelCenter.add(btnHelp);
+		btnHelp.addActionListener(helpListener);
 	}
 	public void close(){
 		this.setVisible(false);
