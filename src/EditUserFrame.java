@@ -28,7 +28,7 @@ public class EditUserFrame extends JFrame{
 	private JPanel northPanel_center;
 	private Component glue;
 	private JLabel lblEditAccount;
-	private JButton button_back;
+	private JButton backButton;
 	private JPanel centerPanel;
 	private JLabel lblFirstName;
 	private JTextField firstNameField;
@@ -114,16 +114,13 @@ public class EditUserFrame extends JFrame{
 		northPanel_center = new JPanel();
 		northPanel.add(northPanel_center, BorderLayout.CENTER);
 		
-		glue = Box.createGlue();
-		northPanel_center.add(glue);
-		
 		lblEditAccount = new JLabel("Edit Account");
 		northPanel_center.add(lblEditAccount);
 		
-		button_back = new JButton("<--");
-		button_back.addActionListener(backButtonListener);
+		backButton = new JButton("<--");
+		backButton.addActionListener(backButtonListener);
 		
-		northPanel.add(button_back, BorderLayout.WEST);
+		northPanel.add(backButton, BorderLayout.WEST);
 		
 		centerPanel = new JPanel();
 		panel.add(centerPanel, BorderLayout.CENTER);
