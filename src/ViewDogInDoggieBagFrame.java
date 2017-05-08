@@ -139,28 +139,6 @@ public class ViewDogInDoggieBagFrame extends JFrame
 		southPanelPanel1.add(deleteButton);
 		
 		
-		/*try{
-			tinDogPhoto = new URL("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic");
-			photo2 = ImageIO.read(tinDogPhoto).getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-			JLabel lblTinDogLogo = new JLabel(new ImageIcon(photo2)); Image file here
-			JPanel southPanelPanel2 = new JPanel();
-			southPanelPanel2.add(lblTinDogLogo);//FIX THIS JOE
-			southPanel.add(southPanelPanel2);
-
-		}catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}*/
-		/*JLabel lblTindogLogo = new JLabel(new ImageIcon("https://mystjohns-my.sharepoint.com/personal/skrotzkn_stjohns_edu/_layouts/15/guestaccess.aspx?docid=119b16a04c6ce43d084d5663bd04b7cb7&authkey=AbKFbF4aT252NwtJ6CCQ2ic"));
-		JPanel southPanelPanel2 = new JPanel();
-		southPanelPanel2.add(lblTindogLogo);//FIX THIS JOE
-		southPanel.add(southPanelPanel2);*/
-
-		
-		/*JLabel tindogImageLabel = new JLabel(new ImageIcon("C:\\Users\\jde674\\Documents\\GitHub\\Tindog\\TinDog Logo.png"));
-		southPanelPanel2.add(tindogImageLabel);*/
-		
 		JPanel southPanelPanel3 = new JPanel();
 		southPanel.add(southPanelPanel3);
 		
