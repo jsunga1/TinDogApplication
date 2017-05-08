@@ -81,7 +81,6 @@ public class DogPile
 			}
 		}
 		query = query + ";";
-		System.out.println(query);
 		db.retrieveData(query);
 		ResultSet rs = db.getResultSet();
 	
